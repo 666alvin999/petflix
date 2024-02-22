@@ -2,7 +2,7 @@ package com.petflix.domain.usecase;
 
 import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.port.PresentationVideoAdapter;
+import com.petflix.domain.port.PresentationVideoPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -19,7 +18,7 @@ class SubmitPresentationVideoTest {
 	private SubmitPresentationVideo submitPresentationVideo;
 
 	@Mock
-	private PresentationVideoAdapter videoAdapter;
+	private PresentationVideoPort videoAdapter;
 
 	@BeforeEach
 	public void setUp() {

@@ -2,18 +2,18 @@ package com.petflix.domain.usecase;
 
 import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.port.PresentationVideoAdapter;
+import com.petflix.domain.port.PresentationVideoPort;
 
 public class SubmitPresentationVideo {
 
-	private PresentationVideoAdapter presentationVideoAdapter;
+	private PresentationVideoPort presentationVideoPort;
 
-	public SubmitPresentationVideo(PresentationVideoAdapter presentationVideoAdapter) {
-		this.presentationVideoAdapter = presentationVideoAdapter;
+	public SubmitPresentationVideo(PresentationVideoPort presentationVideoPort) {
+		this.presentationVideoPort = presentationVideoPort;
 	}
 
 	public ActionSuccess execute(PresentationVideo presentationVideo) {
-		return this.presentationVideoAdapter.submitPresentationVideo(presentationVideo);
+		return this.presentationVideoPort.submitPresentationVideo(presentationVideo);
 	}
 
 }

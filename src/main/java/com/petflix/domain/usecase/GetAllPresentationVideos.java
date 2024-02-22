@@ -1,20 +1,20 @@
 package com.petflix.domain.usecase;
 
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.port.PresentationVideoAdapter;
+import com.petflix.domain.port.PresentationVideoPort;
 
 import java.util.List;
 
 public class GetAllPresentationVideos {
 
-	private PresentationVideoAdapter presentationVideoAdapter;
+	private PresentationVideoPort presentationVideoPort;
 
-	public GetAllPresentationVideos(PresentationVideoAdapter presentationVideoAdapter) {
-		this.presentationVideoAdapter = presentationVideoAdapter;
+	public GetAllPresentationVideos(PresentationVideoPort presentationVideoPort) {
+		this.presentationVideoPort = presentationVideoPort;
 	}
 
 	public List<PresentationVideo> execute() {
-		return this.presentationVideoAdapter.getAllPresentationVideos();
+		return this.presentationVideoPort.getAllPresentationVideos();
 	}
 
 }

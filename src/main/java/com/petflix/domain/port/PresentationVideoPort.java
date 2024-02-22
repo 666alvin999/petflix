@@ -5,7 +5,7 @@ import com.petflix.domain.bean.PresentationVideo;
 
 import java.util.List;
 
-public interface PresentationVideoAdapter {
+public interface PresentationVideoPort {
 
 	List<PresentationVideo> getAllPresentationVideos();
 
