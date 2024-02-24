@@ -40,4 +40,5 @@ class GetAllAnimalTypesTest {
 
 		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
 	}
+
 }
