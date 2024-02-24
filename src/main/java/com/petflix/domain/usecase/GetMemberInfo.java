@@ -5,7 +5,7 @@ import com.petflix.domain.port.MemberPort;
 
 public class GetMemberInfo {
 
-	private MemberPort memberPort;
+	private final MemberPort memberPort;
 
 	public GetMemberInfo(MemberPort memberPort) {
 		this.memberPort = memberPort;
