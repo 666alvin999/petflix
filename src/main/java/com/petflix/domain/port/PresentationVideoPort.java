@@ -11,4 +11,5 @@ public interface PresentationVideoPort {
 
 	ActionSuccess submitPresentationVideo(PresentationVideo presentationVideo);
 
+	List<PresentationVideo> getPresentationVideosWithFilter(String animalType, String city);
 }

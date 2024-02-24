@@ -21,7 +21,7 @@ class GetAllCitiesTest {
 	private MemberPort memberPort;
 
 	@BeforeEach
-	void setUp() {
+	public void setUp() {
 		this.getAllCities = new GetAllCities(memberPort);
 	}
 
