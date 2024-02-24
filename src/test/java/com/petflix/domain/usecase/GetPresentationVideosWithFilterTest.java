@@ -14,16 +14,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetVideosWithFilterTest {
+class GetPresentationVideosWithFilterTest {
 
-	private GetVideosWithFilter getVideosWithFilter;
+	private GetPresentationVideosWithFilter getPresentationVideosWithFilter;
 
 	@Mock
 	private PresentationVideoPort presentationVideoPort;
 
 	@BeforeEach
 	public void setUp() {
-		this.getVideosWithFilter = new GetVideosWithFilter(presentationVideoPort);
+		this.getPresentationVideosWithFilter = new GetPresentationVideosWithFilter(presentationVideoPort);
 	}
 
 	@Test
@@ -34,7 +34,7 @@ class GetVideosWithFilterTest {
 		when(this.presentationVideoPort.getPresentationVideosWithFilter("dog", "paris")).thenReturn(videos);
 
 		//Act
-		List<PresentationVideo> actualVideos = this.getVideosWithFilter.execute("dog", "paris");
+		List<PresentationVideo> actualVideos = this.getPresentationVideosWithFilter.execute("dog", "paris");
 
 		//Assert
 		List<PresentationVideo> expectedVideos = List.of(new PresentationVideo(1, "http://www.url1.com", "title1", "description1"));

@@ -5,11 +5,11 @@ import com.petflix.domain.port.PresentationVideoPort;
 
 import java.util.List;
 
-public class GetVideosWithFilter {
+public class GetPresentationVideosWithFilter {
 
 	private final PresentationVideoPort presentationVideoPort;
 
-	public GetVideosWithFilter(PresentationVideoPort presentationVideoPort) {
+	public GetPresentationVideosWithFilter(PresentationVideoPort presentationVideoPort) {
 		this.presentationVideoPort = presentationVideoPort;
 	}
 
