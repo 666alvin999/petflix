@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GetAllPresentationVideos {
 
-	private PresentationVideoPort presentationVideoPort;
+	private final PresentationVideoPort presentationVideoPort;
 
 	public GetAllPresentationVideos(PresentationVideoPort presentationVideoPort) {
 		this.presentationVideoPort = presentationVideoPort;

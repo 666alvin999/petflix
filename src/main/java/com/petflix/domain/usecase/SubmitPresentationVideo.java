@@ -6,7 +6,7 @@ import com.petflix.domain.port.PresentationVideoPort;
 
 public class SubmitPresentationVideo {
 
-	private PresentationVideoPort presentationVideoPort;
+	private final PresentationVideoPort presentationVideoPort;
 
 	public SubmitPresentationVideo(PresentationVideoPort presentationVideoPort) {
 		this.presentationVideoPort = presentationVideoPort;

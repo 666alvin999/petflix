@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GetAllCities {
 
-	private MemberPort memberPort;
+	private final MemberPort memberPort;
 
 	public GetAllCities(MemberPort memberPort) {
 		this.memberPort = memberPort;

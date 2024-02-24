@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GetAllAnimalTypes {
 
-	private AnimalPort animalPort;
+	private final AnimalPort animalPort;
 
 	public GetAllAnimalTypes(AnimalPort animalPort) {
 		this.animalPort = animalPort;
