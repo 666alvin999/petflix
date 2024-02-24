@@ -1,4 +1,4 @@
 package com.petflix.domain.bean;
 
-public record Adopter(int id, String firffstName, String lastName, String address, String mail) {
+public record Adopter(int id, String firstName, String lastName, String address, String mail) {
 }
