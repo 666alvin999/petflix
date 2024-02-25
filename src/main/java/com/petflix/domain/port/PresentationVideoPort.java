@@ -10,4 +10,6 @@ public interface PresentationVideoPort {
 	List<PresentationVideo> getAllPresentationVideos();
 	ActionSuccess submitPresentationVideo(PresentationVideo presentationVideo);
 	List<PresentationVideo> getPresentationVideosWithFilter(String animalType, String city);
+	PresentationVideo getPresentationVideoById(int id);
+
 }
