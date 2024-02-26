@@ -7,5 +7,6 @@ import java.util.List;
 public interface MemberPort {
 
 	List<String> getAllMembersCity();
+
 	Member getMemberById(int id);
 }

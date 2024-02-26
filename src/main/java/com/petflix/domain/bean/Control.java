@@ -1,4 +1,4 @@
 package com.petflix.domain.bean;
 
-public record Control(Adopter adopter, Animal animal, Member managing) {
+public record Control(Adopter adopter, Animal animal, Member managing, String date) {
 }
