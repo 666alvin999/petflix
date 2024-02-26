@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,10 +31,10 @@ class GetAllPresentationVideosTest {
 	public void shouldReturnPresentationVideos() {
 	    //Arrange
 		List<PresentationVideo> presentationVideos = List.of(
-			new PresentationVideo(1, "https://www.url1.com", "title1", "description1"),
-			new PresentationVideo(2, "https://www.url2.com", "title2", "description2"),
-			new PresentationVideo(3, "https://www.url3.com", "title3", "description3"),
-			new PresentationVideo(4, "https://www.url4.com", "title4", "description4")
+			new PresentationVideo(1, "https://www.url1.com", "title1", "description1", "26-02-2024"),
+			new PresentationVideo(2, "https://www.url2.com", "title2", "description2", "26-02-2024"),
+			new PresentationVideo(3, "https://www.url3.com", "title3", "description3", "26-02-2024"),
+			new PresentationVideo(4, "https://www.url4.com", "title4", "description4", "26-02-2024")
 		);
 
 		when(videoAdapter.getAllPresentationVideos()).thenReturn(presentationVideos);
@@ -43,10 +44,10 @@ class GetAllPresentationVideosTest {
 
 	    //Assert
 		List<PresentationVideo> expectedPresentationVideos = List.of(
-			new PresentationVideo(1, "https://www.url1.com", "title1", "description1"),
-			new PresentationVideo(2, "https://www.url2.com", "title2", "description2"),
-			new PresentationVideo(3, "https://www.url3.com", "title3", "description3"),
-			new PresentationVideo(4, "https://www.url4.com", "title4", "description4")
+			new PresentationVideo(1, "https://www.url1.com", "title1", "description1", "26-02-2024"),
+			new PresentationVideo(2, "https://www.url2.com", "title2", "description2", "26-02-2024"),
+			new PresentationVideo(3, "https://www.url3.com", "title3", "description3", "26-02-2024"),
+			new PresentationVideo(4, "https://www.url4.com", "title4", "description4", "26-02-2024")
 		);
 
 		assertThat(actualPresentationVideos).isEqualTo(expectedPresentationVideos);

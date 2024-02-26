@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +30,7 @@ class GetPresentationVideosWithFilterTest {
 	@Test
 	public void shouldReturnPresentationVideos_whenTypeIsDogAndCityIsParis() {
 		//Arrange
-		List<PresentationVideo> videos = List.of(new PresentationVideo(1, "http://www.url1.com", "title1", "description1"));
+		List<PresentationVideo> videos = List.of(new PresentationVideo(1, "http://www.url1.com", "title1", "description1", "26-02-2024"));
 
 		when(this.presentationVideoPort.getPresentationVideosWithFilter("dog", "paris")).thenReturn(videos);
 
@@ -37,7 +38,7 @@ class GetPresentationVideosWithFilterTest {
 		List<PresentationVideo> actualVideos = this.getPresentationVideosWithFilter.execute("dog", "paris");
 
 		//Assert
-		List<PresentationVideo> expectedVideos = List.of(new PresentationVideo(1, "http://www.url1.com", "title1", "description1"));
+		List<PresentationVideo> expectedVideos = List.of(new PresentationVideo(1, "http://www.url1.com", "title1", "description1", "26-02-2024"));
 
 		assertThat(actualVideos).isEqualTo(expectedVideos);
 	}

@@ -1,7 +1,10 @@
 CREATE TABLE VIDEO (
-    ID           INT AUTO_INCREMENT PRIMARY KEY,
+    ID           INT PRIMARY KEY,
     URL          VARCHAR(512)  NOT NULL,
     TITLE        VARCHAR(128)  NOT NULL,
     DESCRIPTION  VARCHAR(1024) NOT NULL,
-    POSTING_DATE DATE          NOT NULL
+    POSTING_DATE VARCHAR(10)    NOT NULL
 );
+
+INSERT INTO VIDEO
+VALUES (1, 'https://www.url1.com', 'title1', 'description1', '26-02-2024');

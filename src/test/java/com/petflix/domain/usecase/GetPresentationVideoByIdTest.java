@@ -8,6 +8,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -28,7 +30,7 @@ class GetPresentationVideoByIdTest {
 	@Test
 	void shouldReturnVideoWithGoodId() {
 		// Arrange
-		PresentationVideo presentationVideo = new PresentationVideo(1, "https://www.url1.com", "title1", "description1");
+		PresentationVideo presentationVideo = new PresentationVideo(1, "https://www.url1.com", "title1", "description1", "26-02-2024");
 
 		when(this.presentationVideoPort.getPresentationVideoById(1)).thenReturn(presentationVideo);
 
@@ -36,7 +38,7 @@ class GetPresentationVideoByIdTest {
 		PresentationVideo actualPresentationVideo = this.getPresentationVideoById.execute(1);
 
 		// Assert
-		PresentationVideo expectedPresentationVideo = new PresentationVideo(1, "https://www.url1.com", "title1", "description1");
+		PresentationVideo expectedPresentationVideo = new PresentationVideo(1, "https://www.url1.com", "title1", "description1", "26-02-2024");
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
 	}

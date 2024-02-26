@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +30,7 @@ class SubmitPresentationVideoTest {
 	@Test
 	public void shouldReturnActionSuccess() {
 	    //Arrange
-		PresentationVideo presentationVideo = new PresentationVideo(1, "https://www.url1.com/", "title1", "description1");
+		PresentationVideo presentationVideo = new PresentationVideo(1, "https://www.url1.com/", "title1", "description1", "26-02-2024");
 
 		when(this.videoAdapter.submitPresentationVideo(presentationVideo)).thenReturn(new ActionSuccess(true));
 
