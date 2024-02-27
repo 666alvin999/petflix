@@ -1,6 +1,7 @@
 package com.petflix.infrastructure.dao;
 
 import com.petflix.domain.bean.PresentationVideo;
+import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;

@@ -1,6 +1,9 @@
 package com.petflix.domain.usecase;
 
 import com.petflix.domain.bean.Member;
+import com.petflix.domain.bean.generalfields.FirstName;
+import com.petflix.domain.bean.generalfields.Id;
+import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.port.MemberPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +30,7 @@ class GetMemberInfoByIdTest {
 	@Test
 	public void shouldGetMember() {
 	    //Arrange
-		Member member = new Member(1, "Alvin", "Hamaide", "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
+		Member member = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
 
 		when(this.memberPort.getMemberById(1)).thenReturn(member);
 
@@ -35,7 +38,7 @@ class GetMemberInfoByIdTest {
 		Member actualMember = this.getMemberInfoById.execute(1);
 
 	    //Assert
-		Member expectedMember = new Member(1, "Alvin", "Hamaide", "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
+		Member expectedMember = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
 
 		assertThat(actualMember).isEqualTo(expectedMember);
 	}

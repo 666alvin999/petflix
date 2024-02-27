@@ -1,4 +1,8 @@
 package com.petflix.domain.bean;
 
-public record Adopter(int id, String firstName, String lastName, String address, String mail) {
+import com.petflix.domain.bean.generalfields.FirstName;
+import com.petflix.domain.bean.generalfields.Id;
+import com.petflix.domain.bean.generalfields.LastName;
+
+public record Adopter(Id id, FirstName firstName, LastName lastName, String address, String mail) {
 }

@@ -1,4 +1,9 @@
 package com.petflix.domain.bean;
 
-public record PresentationVideo(int id, String url, String title, String description, String postingDate) {
+import com.petflix.domain.bean.generalfields.Id;
+import com.petflix.domain.bean.generalfields.Url;
+
+import java.util.Date;
+
+public record PresentationVideo(Id id, Url url, String title, String description, Date postingDate) {
 }

@@ -1,4 +1,8 @@
 package com.petflix.domain.bean;
 
-public record Control(Adopter adopter, Animal animal, Member managing, String date) {
+import com.petflix.domain.bean.generalfields.Id;
+
+import java.util.Date;
+
+public record Control(Id id, Id adoptionId, Date date) {
 }

@@ -1,6 +1,8 @@
 package com.petflix.domain.usecase;
 
 import com.petflix.domain.bean.PresentationVideo;
+import com.petflix.domain.bean.generalfields.Id;
+import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.port.PresentationVideoPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,7 +33,7 @@ class GetPresentationVideoByIdTest {
 	@Test
 	void shouldReturnVideoWithGoodId() {
 		// Arrange
-		PresentationVideo presentationVideo = new PresentationVideo(1, "https://www.url1.com", "title1", "description1", "26-02-2024");
+		PresentationVideo presentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", new Date(2024, Calendar.FEBRUARY, 27));
 
 		when(this.presentationVideoPort.getPresentationVideoById(1)).thenReturn(presentationVideo);
 
@@ -38,7 +41,7 @@ class GetPresentationVideoByIdTest {
 		PresentationVideo actualPresentationVideo = this.getPresentationVideoById.execute(1);
 
 		// Assert
-		PresentationVideo expectedPresentationVideo = new PresentationVideo(1, "https://www.url1.com", "title1", "description1", "26-02-2024");
+		PresentationVideo expectedPresentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", new Date(2024, Calendar.FEBRUARY, 27));
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
 	}
