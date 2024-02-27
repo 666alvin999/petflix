@@ -9,20 +9,19 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetMemberInfoTest {
+class GetMemberInfoByIdTest {
 
-	private GetMemberInfo getMemberInfo;
+	private GetMemberInfoById getMemberInfoById;
 
 	@Mock
 	private MemberPort memberPort;
 
 	@BeforeEach
 	public void setUp() {
-		this.getMemberInfo = new GetMemberInfo(memberPort);
+		this.getMemberInfoById = new GetMemberInfoById(memberPort);
 	}
 
 	@Test
@@ -33,7 +32,7 @@ class GetMemberInfoTest {
 		when(this.memberPort.getMemberById(1)).thenReturn(member);
 
 	    //Act
-		Member actualMember = this.getMemberInfo.execute(1);
+		Member actualMember = this.getMemberInfoById.execute(1);
 
 	    //Assert
 		Member expectedMember = new Member(1, "Alvin", "Hamaide", "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");

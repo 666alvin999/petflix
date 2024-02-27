@@ -3,11 +3,11 @@ package com.petflix.domain.usecase;
 import com.petflix.domain.bean.Member;
 import com.petflix.domain.port.MemberPort;
 
-public class GetMemberInfo {
+public class GetMemberInfoById {
 
 	private final MemberPort memberPort;
 
-	public GetMemberInfo(MemberPort memberPort) {
+	public GetMemberInfoById(MemberPort memberPort) {
 		this.memberPort = memberPort;
 	}
 
