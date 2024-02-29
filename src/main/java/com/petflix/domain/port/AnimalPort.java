@@ -9,6 +9,6 @@ public interface AnimalPort {
 
 	List<String> getAllTypes();
 
-	List<Animal> getAnimalsByPresentationVideoUrl(Url url);
+	List<Animal> getAnimalsByPresentationVideoUrl(String url);
 
 }

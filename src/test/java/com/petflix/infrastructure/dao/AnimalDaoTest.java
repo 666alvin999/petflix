@@ -1,16 +1,20 @@
 package com.petflix.infrastructure.dao;
 
+import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 
 import static java.nio.file.Files.readAllBytes;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 @ExtendWith(BasicDatabaseExtension.class)
@@ -27,6 +31,31 @@ class AnimalDaoTest {
 		setField(this.animalDao, "jdbcTemplate", this.jdbcTemplate);
 
 		initTables();
+	}
+
+	@Test
+	public void shouldGetAnimalsByPresentationUrl() {
+	    //Act
+		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoUrl("https://www.url1.com");
+
+	    //Assert
+	    List<AnimalDTO> expectedAnimals = List.of(
+			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0),
+		    new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0)
+	    );
+
+		assertThat(actualAnimals).isEqualTo(expectedAnimals);
+	}
+
+	@Test
+	public void shouldGetAllTypes() {
+	    //Act
+		List<String> actualTypes = this.animalDao.getAllTypes();
+
+	    //Assert
+		List<String> expectedTypes = List.of("chat", "chien");
+
+		assertThat(actualTypes).isEqualTo(expectedTypes);
 	}
 
 	@SneakyThrows

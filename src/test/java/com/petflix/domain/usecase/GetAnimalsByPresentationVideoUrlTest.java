@@ -39,7 +39,7 @@ class GetAnimalsByPresentationVideoUrlTest {
 		Url url = new Url("https://www.url1.com/");
 		Animal animal = new Animal(new Id(1), "Oslo", new AnimalType("chat"), 2, url, managingMember);
 
-		when(this.animalPort.getAnimalsByPresentationVideoUrl(url)).thenReturn(List.of(animal));
+		when(this.animalPort.getAnimalsByPresentationVideoUrl(url.value())).thenReturn(List.of(animal));
 
 	    //Act
 		List<Animal> actualAnimal = this.getAnimalsByPresentationVideoUrl.execute(url);
