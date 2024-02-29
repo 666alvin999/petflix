@@ -15,7 +15,7 @@ public class PresentationVideoMapper {
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 	public PresentationVideo mapToDomain(PresentationVideoDTO presentationVideoDTO) {
-		return new PresentationVideo(new Id(presentationVideoDTO.getId()), new Url(presentationVideoDTO.getUrl()), presentationVideoDTO.getTitle(), presentationVideoDTO.getDescription(), LocalDate.parse(presentationVideoDTO.getPostingDate(), dateFormatter));
+		return new PresentationVideo(new Id(presentationVideoDTO.getId()), new Url(presentationVideoDTO.getUrl()), presentationVideoDTO.getTitle(), presentationVideoDTO.getDescription(), LocalDate.parse(presentationVideoDTO.getPostingDate(), this.dateFormatter));
 	}
 
 	public PresentationVideoDTO mapToDTO(PresentationVideo presentationVideo) {
