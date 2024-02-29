@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,7 +34,7 @@ class GetPresentationVideoByIdTest {
 	@Test
 	void shouldReturnVideoWithGoodId() {
 		// Arrange
-		PresentationVideo presentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", new Date(2024, Calendar.FEBRUARY, 27));
+		PresentationVideo presentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", LocalDate.of(2024, 2, 29));
 
 		when(this.presentationVideoPort.getPresentationVideoById(1)).thenReturn(presentationVideo);
 
@@ -41,7 +42,7 @@ class GetPresentationVideoByIdTest {
 		PresentationVideo actualPresentationVideo = this.getPresentationVideoById.execute(1);
 
 		// Assert
-		PresentationVideo expectedPresentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", new Date(2024, Calendar.FEBRUARY, 27));
+		PresentationVideo expectedPresentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", LocalDate.of(2024, 2, 29));
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
 	}

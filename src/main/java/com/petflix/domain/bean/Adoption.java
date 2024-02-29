@@ -2,7 +2,7 @@ package com.petflix.domain.bean;
 
 import com.petflix.domain.bean.generalfields.Id;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public record Adoption(Id id, Adopter adopter, Animal animal, Date date) {
+public record Adoption(Id id, Adopter adopter, Animal animal, LocalDate date) {
 }

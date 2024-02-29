@@ -16,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -46,8 +47,8 @@ class GetAllAdoptionsTest {
 		Animal secondAnimal = new Animal(new Id(1), "Uta", new AnimalType("chat"), 1, new Url("https://www.url1.com"), managingMember);
 
 		List<Adoption> adoptions = List.of(
-			new Adoption(new Id(0), adopter, animal, new Date(2024, Calendar.FEBRUARY, 29)),
-			new Adoption(new Id(1), adopter, secondAnimal, new Date(2024, Calendar.FEBRUARY, 29))
+			new Adoption(new Id(0), adopter, animal, LocalDate.of(2024, 2, 29)),
+			new Adoption(new Id(1), adopter, secondAnimal, LocalDate.of(2024, 2, 29))
 		);
 
 		when(this.adoptionPort.getAllAdoptions()).thenReturn(adoptions);
@@ -62,8 +63,8 @@ class GetAllAdoptionsTest {
 		Animal expectedSecondAnimal = new Animal(new Id(1), "Uta", new AnimalType("chat"), 1, new Url("https://www.url1.com"), expectedManagingMember);
 
 		List<Adoption> expectedAdoptions = List.of(
-			new Adoption(new Id(0), expectedAdopter, expectedAnimal, new Date(2024, Calendar.FEBRUARY, 29)),
-			new Adoption(new Id(1), expectedAdopter, expectedSecondAnimal, new Date(2024, Calendar.FEBRUARY, 29))
+			new Adoption(new Id(0), expectedAdopter, expectedAnimal, LocalDate.of(2024, 2, 29)),
+			new Adoption(new Id(1), expectedAdopter, expectedSecondAnimal, LocalDate.of(2024, 2, 29))
 		);
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);

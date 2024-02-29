@@ -11,9 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Month;
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -33,15 +32,15 @@ class SubmitPresentationVideoTest {
 
 	@Test
 	public void shouldReturnActionSuccess() {
-	    //Arrange
-		PresentationVideo presentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", new Date(2024, Calendar.FEBRUARY, 27));
+		//Arrange
+		PresentationVideo presentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", LocalDate.of(2024, 2, 29));
 
 		when(this.videoAdapter.submitPresentationVideo(presentationVideo)).thenReturn(new ActionSuccess(true));
 
-	    //Act
-	    ActionSuccess actionSuccess = this.submitPresentationVideo.execute(presentationVideo);
+		//Act
+		ActionSuccess actionSuccess = this.submitPresentationVideo.execute(presentationVideo);
 
-	    //Assert
+		//Assert
 		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
 
 		assertThat(actionSuccess).isEqualTo(expectedActionSuccess);
