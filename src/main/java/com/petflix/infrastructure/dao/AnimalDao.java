@@ -21,12 +21,19 @@ public class AnimalDao {
 
 	private final String GET_BY_PRESENTATION_VIDEO_URL = "SELECT * FROM ANIMAL WHERE PRESENTATION_VIDEO_URL = :url;";
 	private final String GET_ALL_TYPES = "SELECT DISTINCT TYPE FROM ANIMAL;";
+	private final String GET_ANIMAL_BY_ID = "SELECT * FROM ANIMAL WHERE ID = :id;";
 
 	public AnimalDao() {
 	}
 
 	public AnimalDao(@Qualifier(value = "dataSource") DataSource dataSource) {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+
+	public List<AnimalDTO> getAnimalById(int id) {
+		Map<String, Integer> parameters = Map.of("id", id);
+
+		return this.jdbcTemplate.query(GET_ANIMAL_BY_ID, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
 	}
 
 	public List<AnimalDTO> getAnimalsByPresentationVideoUrl(String url) {

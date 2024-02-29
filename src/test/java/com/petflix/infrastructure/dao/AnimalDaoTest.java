@@ -34,7 +34,7 @@ class AnimalDaoTest {
 	}
 
 	@Test
-	public void shouldGetAnimalsByPresentationUrl() {
+	public void shouldReturnAnimalsByPresentationUrl() {
 	    //Act
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoUrl("https://www.url1.com");
 
@@ -48,7 +48,20 @@ class AnimalDaoTest {
 	}
 
 	@Test
-	public void shouldGetAllTypes() {
+	public void shouldReturnAnimal() {
+		//Act
+		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalById(2);
+
+		//Assert
+		List<AnimalDTO> expectedAnimals = List.of(
+			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url2.com", 0)
+		);
+
+		assertThat(actualAnimals).isEqualTo(expectedAnimals);
+	}
+
+	@Test
+	public void shouldReturnAllTypes() {
 	    //Act
 		List<String> actualTypes = this.animalDao.getAllTypes();
 
