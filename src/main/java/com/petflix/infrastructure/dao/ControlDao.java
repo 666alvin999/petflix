@@ -31,4 +31,5 @@ public class ControlDao {
 
 		return this.jdbcTemplate.query(CONTROL_BY_ID, parameters, new BeanPropertyRowMapper<>(ControlDTO.class));
 	}
+
 }
