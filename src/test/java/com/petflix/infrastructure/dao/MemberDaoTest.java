@@ -44,6 +44,17 @@ class MemberDaoTest {
 		assertThat(actualMemberDTO).isEqualTo(List.of(expectedMemberDTO));
 	}
 
+	@Test
+	public void shouldReturnAllCities() {
+	    //Act
+		List<String> actualCities = this.memberDao.getAllCities();
+
+	    //Assert
+	    List<String> expectedCities = List.of("Lille", "Valenciennes");
+
+		assertThat(actualCities).isEqualTo(expectedCities);
+	}
+
 	@SneakyThrows
 	private void initTables() {
 		jdbcTemplate.update(

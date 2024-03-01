@@ -10,4 +10,5 @@ CREATE TABLE MEMBER (
 );
 
 INSERT INTO MEMBER
-VALUES (0, 'Alvin', 'Hamaide', 'Lille', 'alvin.hamaide@mail-ecv.fr', '06XXXXXXXX');
+VALUES (0, 'Alvin', 'Hamaide', 'Lille', 'alvin.hamaide@mail-ecv.fr', '06XXXXXXXX'),
+       (1, 'Martin', 'Matin', 'Valenciennes', 'martin.matin@mail-ecv.fr', '06XXXXXXXX');
