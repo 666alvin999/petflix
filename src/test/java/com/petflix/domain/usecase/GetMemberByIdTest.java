@@ -15,16 +15,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetMemberInfoByIdTest {
+class GetMemberByIdTest {
 
-	private GetMemberInfoById getMemberInfoById;
+	private GetMemberById getMemberById;
 
 	@Mock
 	private MemberPort memberPort;
 
 	@BeforeEach
 	public void setUp() {
-		this.getMemberInfoById = new GetMemberInfoById(memberPort);
+		this.getMemberById = new GetMemberById(memberPort);
 	}
 
 	@Test
@@ -35,7 +35,7 @@ class GetMemberInfoByIdTest {
 		when(this.memberPort.getMemberById(1)).thenReturn(member);
 
 	    //Act
-		Member actualMember = this.getMemberInfoById.execute(1);
+		Member actualMember = this.getMemberById.execute(1);
 
 	    //Assert
 		Member expectedMember = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
