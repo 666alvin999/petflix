@@ -23,14 +23,14 @@ public class MemberDao {
 	public MemberDao() {
 	}
 
+	public MemberDao(@Qualifier(value = "dataSource") DataSource dataSource) {
+		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+
 	public List<MemberDTO> getMemberById(int id) {
 		Map<String, Integer> parameters = Map.of("id", id);
 
 		return jdbcTemplate.query(MEMBER_BY_ID, parameters, new BeanPropertyRowMapper<>(MemberDTO.class));
-	}
-
-	public MemberDao(@Qualifier(value = "dataSource") DataSource dataSource) {
-		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
 }
