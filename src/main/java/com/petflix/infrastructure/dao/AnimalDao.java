@@ -21,7 +21,7 @@ public class AnimalDao {
 	private final String GET_BY_ID = "SELECT * FROM ANIMAL WHERE ID = :id;";
 	private final String GET_BY_PRESENTATION_VIDEO_URL = "SELECT * FROM ANIMAL WHERE PRESENTATION_VIDEO_URL = :url;";
 	private final String GET_ALL_TYPES = "SELECT DISTINCT TYPE FROM ANIMAL;";
-	private final String GET_BY_TYPE = "SELECT * FROM ANIMAL WHERE TYPE = :animalType";
+	private final String GET_BY_TYPE_AND_CITY = "SELECT * FROM ANIMAL WHERE TYPE = :type AND MANAGING_MEMBER IN (SELECT ID FROM MEMBER WHERE CITY = :city);";
 
 	public AnimalDao() {
 	}
@@ -46,9 +46,12 @@ public class AnimalDao {
 		return this.jdbcTemplate.queryForList(GET_ALL_TYPES, new HashMap<>(), String.class);
 	}
 
-	public List<AnimalDTO> getAnimalsByType(String animalType) {
-		Map<String, String> parameters = Map.of("animalType", animalType);
+	public List<AnimalDTO> getAnimalByTypeAndMemberCity(String type, String city) {
+		Map<String, String> parameters = Map.of(
+			"city", city,
+			"type", type
+		);
 
-		return this.jdbcTemplate.query(GET_BY_TYPE, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
+		return this.jdbcTemplate.query(GET_BY_TYPE_AND_CITY, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
 	}
 }

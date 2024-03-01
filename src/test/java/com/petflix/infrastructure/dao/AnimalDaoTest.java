@@ -35,11 +35,11 @@ class AnimalDaoTest {
 
 	@Test
 	public void shouldReturnAnimalsByPresentationUrl() {
-	    //Act
+		//Act
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoUrl("https://www.url1.com");
 
-	    //Assert
-	    List<AnimalDTO> expectedAnimals = createAnimals();
+		//Assert
+		List<AnimalDTO> expectedAnimals = createAnimals();
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
@@ -57,30 +57,32 @@ class AnimalDaoTest {
 
 	@Test
 	public void shouldReturnAllTypes() {
-	    //Act
+		//Act
 		List<String> actualTypes = this.animalDao.getAllTypes();
 
-	    //Assert
+		//Assert
 		List<String> expectedTypes = List.of("chat", "chien");
 
 		assertThat(actualTypes).isEqualTo(expectedTypes);
 	}
 
 	@Test
-	public void shouldReturnAnimalsByType() {
+	public void shouldGetAnimalByTypeAndMemberCity() {
 		//Act
-		List<AnimalDTO> actualTypes = this.animalDao.getAnimalsByType("chat");
+		List<AnimalDTO> actualAnimalDTOs = this.animalDao.getAnimalByTypeAndMemberCity("chat", "Valenciennes");
 
 		//Assert
-		List<AnimalDTO> expectedTypes = createAnimals();
+		List<AnimalDTO> animalDTOs = createAnimals();
+		List<AnimalDTO> expectedAnimalDTOs = List.of(animalDTOs.get(0), animalDTOs.get(1));
 
-		assertThat(actualTypes).isEqualTo(expectedTypes);
+		assertThat(actualAnimalDTOs).isEqualTo(expectedAnimalDTOs);
 	}
 
 	private List<AnimalDTO> createAnimals() {
 		return List.of(
 			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0)
+			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0),
+			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0)
 		);
 	}
 
