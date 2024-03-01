@@ -46,7 +46,7 @@ public class AnimalDao {
 		return this.jdbcTemplate.queryForList(GET_ALL_TYPES, new HashMap<>(), String.class);
 	}
 
-	public List<AnimalDTO> getAnimalByTypeAndMemberCity(String type, String city) {
+	public List<AnimalDTO> getAnimalsByTypeAndMemberCity(String type, String city) {
 		Map<String, String> parameters = Map.of(
 			"city", city,
 			"type", type

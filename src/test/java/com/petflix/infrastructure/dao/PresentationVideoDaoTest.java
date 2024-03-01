@@ -56,9 +56,9 @@ class PresentationVideoDaoTest {
 	}
 
 	@Test
-	public void shouldReturnPresentationVideosWithIds() {
+	public void shouldReturnPresentationVideosWithUrls() {
 	    //Act
-		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByIds(List.of(1, 2));
+		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByUrls(List.of("https://www.url1.com", "https://www.url2.com"));
 
 	    //Assert
 		List<PresentationVideoDTO> expectedPresentationVideoDTOs = this.createPresentationVideoDTOs();

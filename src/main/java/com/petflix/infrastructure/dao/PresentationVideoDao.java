@@ -21,7 +21,7 @@ public class PresentationVideoDao {
 
 	private final String GET_ALL_PRESENTATION_VIDEOS = "SELECT * FROM VIDEO;";
 	private final String GET_PRESENTATION_VIDEO_BY_ID = "SELECT * FROM VIDEO WHERE ID = :id;";
-	private final String GET_PRESENTATION_VIDEOS_BY_IDS = "SELECT * FROM VIDEO WHERE ID IN (:ids);";
+	private final String GET_PRESENTATION_VIDEOS_BY_URLS = "SELECT * FROM VIDEO WHERE URL IN (:urls);";
 
 	public PresentationVideoDao() {
 	}
@@ -40,10 +40,10 @@ public class PresentationVideoDao {
 		return this.jdbcTemplate.query(GET_ALL_PRESENTATION_VIDEOS, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
 	}
 
-	public List<PresentationVideoDTO> getPresentationVideosByIds(List<Integer> ids) {
-		Map<String, List<Integer>> parameters = Map.of("ids", ids);
+	public List<PresentationVideoDTO> getPresentationVideosByUrls(List<String> urls) {
+		Map<String, List<String>> parameters = Map.of("urls", urls);
 
-		return this.jdbcTemplate.query(GET_PRESENTATION_VIDEOS_BY_IDS, parameters, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
+		return this.jdbcTemplate.query(GET_PRESENTATION_VIDEOS_BY_URLS, parameters, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
 	}
 
 }

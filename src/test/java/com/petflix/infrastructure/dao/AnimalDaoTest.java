@@ -69,7 +69,7 @@ class AnimalDaoTest {
 	@Test
 	public void shouldGetAnimalByTypeAndMemberCity() {
 		//Act
-		List<AnimalDTO> actualAnimalDTOs = this.animalDao.getAnimalByTypeAndMemberCity("chat", "Valenciennes");
+		List<AnimalDTO> actualAnimalDTOs = this.animalDao.getAnimalsByTypeAndMemberCity("chat", "Valenciennes");
 
 		//Assert
 		List<AnimalDTO> animalDTOs = createAnimals();
