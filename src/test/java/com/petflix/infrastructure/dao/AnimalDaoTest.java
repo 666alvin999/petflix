@@ -6,14 +6,20 @@ import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.nio.file.Files.readAllBytes;
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
@@ -39,7 +45,7 @@ class AnimalDaoTest {
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoUrl("https://www.url1.com");
 
 		//Assert
-		List<AnimalDTO> expectedAnimals = createAnimals();
+		List<AnimalDTO> expectedAnimals = AnimalDaoTest.createAnimals();
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
@@ -50,7 +56,7 @@ class AnimalDaoTest {
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalById(0);
 
 		//Assert
-		List<AnimalDTO> expectedAnimals = List.of(createAnimals().get(0));
+		List<AnimalDTO> expectedAnimals = List.of(AnimalDaoTest.createAnimals().get(0));
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
@@ -66,19 +72,27 @@ class AnimalDaoTest {
 		assertThat(actualTypes).isEqualTo(expectedTypes);
 	}
 
-	@Test
-	public void shouldGetAnimalByTypeAndMemberCity() {
+	@ParameterizedTest
+	@MethodSource("getTestsData")
+	public void shouldGetAnimalByTypeAndMemberCity(String type, String city, List<AnimalDTO> expectedAnimalDTOs) {
 		//Act
-		List<AnimalDTO> actualAnimalDTOs = this.animalDao.getAnimalsByTypeAndMemberCity("chat", "Valenciennes");
+		List<AnimalDTO> actualAnimalDTOs = this.animalDao.getAnimalsByTypeAndMemberCity(type, city);
 
 		//Assert
-		List<AnimalDTO> animalDTOs = createAnimals();
-		List<AnimalDTO> expectedAnimalDTOs = List.of(animalDTOs.get(0), animalDTOs.get(1));
-
 		assertThat(actualAnimalDTOs).isEqualTo(expectedAnimalDTOs);
 	}
 
-	private List<AnimalDTO> createAnimals() {
+	private static Stream<Arguments> getTestsData() {
+		return Stream.of(
+			Arguments.of(null, "Valenciennes", AnimalDaoTest.createAnimals()),
+			Arguments.of("chat", "Valenciennes", List.of(AnimalDaoTest.createAnimals().get(0), AnimalDaoTest.createAnimals().get(1))),
+			Arguments.of("chat", null, List.of(AnimalDaoTest.createAnimals().get(0), AnimalDaoTest.createAnimals().get(1))),
+			Arguments.of("chien", "Valenciennes", List.of(AnimalDaoTest.createAnimals().get(2))),
+			Arguments.of("lapin", "Valenciennes", emptyList())
+		);
+	}
+
+	private static List<AnimalDTO> createAnimals() {
 		return List.of(
 			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0),
 			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0),

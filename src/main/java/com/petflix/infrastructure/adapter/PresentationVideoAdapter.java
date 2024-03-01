@@ -31,14 +31,6 @@ public class PresentationVideoAdapter implements PresentationVideoPort {
 	@Autowired
 	private PresentationVideoMapper presentationVideoMapper;
 
-
-	@Override
-	public List<PresentationVideo> getAllPresentationVideos() {
-		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getAllPresentationVideos();
-
-		return this.presentationVideoMapper.mapAllToDomain(presentationVideoDTOs);
-	}
-
 	@Override
 	public PresentationVideo getPresentationVideoById(int id) {
 		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideoById(id);

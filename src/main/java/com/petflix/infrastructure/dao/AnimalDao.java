@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Objects.nonNull;
+
 @Component
 public class AnimalDao {
 
@@ -21,7 +23,7 @@ public class AnimalDao {
 	private final String GET_BY_ID = "SELECT * FROM ANIMAL WHERE ID = :id;";
 	private final String GET_BY_PRESENTATION_VIDEO_URL = "SELECT * FROM ANIMAL WHERE PRESENTATION_VIDEO_URL = :url;";
 	private final String GET_ALL_TYPES = "SELECT DISTINCT TYPE FROM ANIMAL;";
-	private final String GET_BY_TYPE_AND_CITY = "SELECT * FROM ANIMAL WHERE TYPE = :type AND MANAGING_MEMBER IN (SELECT ID FROM MEMBER WHERE CITY = :city);";
+	private final String GET_BY_TYPE_AND_CITY_BASE = "SELECT * FROM ANIMAL";
 
 	public AnimalDao() {
 	}
@@ -47,11 +49,29 @@ public class AnimalDao {
 	}
 
 	public List<AnimalDTO> getAnimalsByTypeAndMemberCity(String type, String city) {
-		Map<String, String> parameters = Map.of(
-			"city", city,
-			"type", type
-		);
+		StringBuilder stringBuilder = new StringBuilder();
+		Map<String, String> parameters = new HashMap<>();
 
-		return this.jdbcTemplate.query(GET_BY_TYPE_AND_CITY, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
+		if (nonNull(type) || nonNull(city)) {
+			stringBuilder.append(" WHERE ");
+		}
+
+		if (nonNull(type)) {
+			parameters.put("type", type);
+			stringBuilder.append("TYPE = :type");
+
+			if (nonNull(city)) {
+				stringBuilder.append(" AND ");
+			}
+		}
+
+		if (nonNull(city)) {
+			parameters.put("city", city);
+			stringBuilder.append("MANAGING_MEMBER IN (SELECT ID FROM MEMBER WHERE CITY = :city)");
+		}
+
+		String sqlQuery = GET_BY_TYPE_AND_CITY_BASE + stringBuilder + ";";
+
+		return this.jdbcTemplate.query(sqlQuery, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
 	}
 }
