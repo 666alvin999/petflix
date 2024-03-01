@@ -16,4 +16,5 @@ public class GetPresentationVideosWithFilter {
 	public List<PresentationVideo> execute(String animalType, String city) {
 		return this.presentationVideoPort.getPresentationVideosWithFilter(animalType, city);
 	}
+
 }
