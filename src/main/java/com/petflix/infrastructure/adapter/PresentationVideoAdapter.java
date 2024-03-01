@@ -6,6 +6,7 @@ import com.petflix.domain.port.PresentationVideoPort;
 import com.petflix.infrastructure.dao.AnimalDao;
 import com.petflix.infrastructure.dao.MemberDao;
 import com.petflix.infrastructure.dao.PresentationVideoDao;
+import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
 import com.petflix.infrastructure.mapper.PresentationVideoMapper;
 import lombok.AllArgsConstructor;
@@ -51,12 +52,20 @@ public class PresentationVideoAdapter implements PresentationVideoPort {
 
 	@Override
 	public List<PresentationVideo> getPresentationVideosWithFilter(String animalType, String city) {
-		return null;
+		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByTypeAndMemberCity(animalType, city);
+
+		List<String> urls = animalDTOs.stream().map(AnimalDTO::getPresentationVideoUrl).toList();
+
+		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideosByUrls(urls);
+
+		return this.presentationVideoMapper.mapAllToDomain(presentationVideoDTOs);
 	}
 
 	@Override
 	public ActionSuccess submitPresentationVideo(PresentationVideo presentationVideo) {
-		return null;
+		PresentationVideoDTO presentationVideoDTO = this.presentationVideoMapper.mapToDTO(presentationVideo);
+
+		return this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO);
 	}
 
 }
