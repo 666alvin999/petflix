@@ -1,5 +1,6 @@
 package com.petflix.infrastructure.dao;
 
+import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
@@ -64,6 +65,20 @@ class PresentationVideoDaoTest {
 		List<PresentationVideoDTO> expectedPresentationVideoDTOs = this.createPresentationVideoDTOs();
 
 		assertThat(actualPresentationVideosDTO).isEqualTo(expectedPresentationVideoDTOs);
+	}
+
+	@Test
+	public void shouldSubmitPresentationVideoDTO() {
+	    //Arrange
+		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO(3, "https://www.url3.com", "title", "description", "01-03-2024");
+
+	    //Act
+		ActionSuccess actualActionSuccess = this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO);
+
+	    //Assert
+		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
+
+		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
 	@SneakyThrows
