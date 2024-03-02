@@ -13,7 +13,6 @@ import java.util.List;
 @Component
 public class AdoptionDao {
 
-	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_ALL_ADOPTIONS = "SELECT * FROM ADOPTION;";
@@ -21,6 +20,7 @@ public class AdoptionDao {
 	public AdoptionDao() {
 	}
 
+	@Autowired
 	public AdoptionDao(@Qualifier(value = "dataSource") DataSource dataSource) {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}

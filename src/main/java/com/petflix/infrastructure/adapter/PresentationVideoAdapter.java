@@ -15,17 +15,18 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@AllArgsConstructor
 public class PresentationVideoAdapter implements PresentationVideoPort {
 
-	@Autowired
-	private PresentationVideoDao presentationVideoDao;
+	private final PresentationVideoDao presentationVideoDao;
+	private final AnimalDao animalDao;
+	private final PresentationVideoMapper presentationVideoMapper;
 
 	@Autowired
-	private AnimalDao animalDao;
-
-	@Autowired
-	private PresentationVideoMapper presentationVideoMapper;
+	public PresentationVideoAdapter(PresentationVideoDao presentationVideoDao, AnimalDao animalDao, PresentationVideoMapper presentationVideoMapper) {
+		this.presentationVideoDao = presentationVideoDao;
+		this.animalDao = animalDao;
+		this.presentationVideoMapper = presentationVideoMapper;
+	}
 
 	@Override
 	public PresentationVideo getPresentationVideoById(int id) {

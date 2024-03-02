@@ -14,7 +14,6 @@ import java.util.Map;
 @Component
 public class AdopterDao {
 
-	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_ADOPTER_BY_ID = "SELECT * FROM ADOPTER WHERE ID = :id;";
@@ -22,6 +21,7 @@ public class AdopterDao {
 	public AdopterDao() {
 	}
 
+	@Autowired
 	public AdopterDao(@Qualifier(value = "dataSource") DataSource dataSource) {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}

@@ -17,7 +17,6 @@ import static java.util.Objects.nonNull;
 @Component
 public class AnimalDao {
 
-	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_BY_ID = "SELECT * FROM ANIMAL WHERE ID = :id;";
@@ -28,6 +27,7 @@ public class AnimalDao {
 	public AnimalDao() {
 	}
 
+	@Autowired
 	public AnimalDao(@Qualifier(value = "dataSource") DataSource dataSource) {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
