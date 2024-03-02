@@ -7,6 +7,8 @@ import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.infrastructure.dto.MemberDTO;
 
+import java.util.List;
+
 public class MemberMapper {
 
 	public Member mapToDomain(MemberDTO memberDTO) {
@@ -31,4 +33,7 @@ public class MemberMapper {
 		);
 	}
 
+	public List<MemberCity> mapCities(List<String> cities) {
+		return cities.stream().map(MemberCity::new).toList();
+	}
 }

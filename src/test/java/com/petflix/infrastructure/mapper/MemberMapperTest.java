@@ -9,6 +9,8 @@ import com.petflix.infrastructure.dto.MemberDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberMapperTest {
@@ -46,6 +48,20 @@ class MemberMapperTest {
 		MemberDTO expectedMemberDTO = createMemberDTO();
 
 		assertThat(actualMemberDTO).isEqualTo(expectedMemberDTO);
+	}
+
+	@Test
+	public void shouldReturnMemberCities() {
+	    //Arrange
+		List<String> cities = List.of("Valenciennes", "Lille");
+
+	    //Act
+		List<MemberCity> actualCities = this.memberMapper.mapCities(cities);
+
+	    //Assert
+	    List<MemberCity> expectedMemberCity = List.of(new MemberCity("Valenciennes"), new MemberCity("Lille"));
+
+		assertThat(actualCities).isEqualTo(expectedMemberCity);
 	}
 
 	private static Member createMember() {
