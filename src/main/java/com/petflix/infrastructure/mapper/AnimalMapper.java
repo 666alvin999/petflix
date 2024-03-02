@@ -6,7 +6,9 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.infrastructure.dto.AnimalDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AnimalMapper {
 
 	public Animal mapToDomain(AnimalDTO animalDTO, Member member) {

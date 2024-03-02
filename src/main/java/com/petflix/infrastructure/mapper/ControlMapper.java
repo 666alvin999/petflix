@@ -4,10 +4,12 @@ import com.petflix.domain.bean.Adoption;
 import com.petflix.domain.bean.Control;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.infrastructure.dto.ControlDTO;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Component
 public class ControlMapper {
 
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

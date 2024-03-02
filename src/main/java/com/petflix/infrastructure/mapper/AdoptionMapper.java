@@ -5,10 +5,12 @@ import com.petflix.domain.bean.Adoption;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.infrastructure.dto.AdoptionDTO;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Component
 public class AdoptionMapper {
 
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

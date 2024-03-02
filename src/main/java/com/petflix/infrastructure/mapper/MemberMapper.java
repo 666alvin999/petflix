@@ -6,9 +6,11 @@ import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.infrastructure.dto.MemberDTO;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class MemberMapper {
 
 	public Member mapToDomain(MemberDTO memberDTO) {

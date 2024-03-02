@@ -5,6 +5,7 @@ import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

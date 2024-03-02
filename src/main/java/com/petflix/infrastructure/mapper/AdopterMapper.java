@@ -5,7 +5,9 @@ import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.infrastructure.dto.AdopterDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AdopterMapper {
 
 	public Adopter mapToDomain(AdopterDTO adopterDTO) {
