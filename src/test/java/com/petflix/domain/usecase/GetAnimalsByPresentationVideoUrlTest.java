@@ -34,17 +34,17 @@ class GetAnimalsByPresentationVideoUrlTest {
 
 	@Test
 	public void shouldReturnAnimals() {
-	    //Arrange
+		//Arrange
 		Member managingMember = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
 		Url url = new Url("https://www.url1.com/");
 		Animal animal = new Animal(new Id(1), "Oslo", new AnimalType("chat"), 2, url, managingMember);
 
 		when(this.animalPort.getAnimalsByPresentationVideoUrl(url.value())).thenReturn(List.of(animal));
 
-	    //Act
+		//Act
 		List<Animal> actualAnimal = this.getAnimalsByPresentationVideoUrl.execute(url);
 
-	    //Assert
+		//Assert
 		Member expectedManagingMember = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
 		Url expectedUrl = new Url("https://www.url1.com/");
 		Animal expectedAnimal = new Animal(new Id(1), "Oslo", new AnimalType("chat"), 2, expectedUrl, expectedManagingMember);

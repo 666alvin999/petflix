@@ -35,10 +35,10 @@ class AdopterDaoTest {
 
 	@Test
 	public void shouldReturnAdopter() {
-	    //Act
+		//Act
 		List<AdopterDTO> actualAdopter = this.adopterDao.getAdopterById(0);
 
-	    //Assert
+		//Assert
 		AdopterDTO expectedAdopter = new AdopterDTO(0, "Alvin", "Hamaide", "Valenciennes", "alvin.hamaide@mail-ecv.fr");
 
 		assertThat(actualAdopter).isEqualTo(List.of(expectedAdopter));

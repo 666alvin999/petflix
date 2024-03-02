@@ -1,15 +1,10 @@
 package com.petflix.infrastructure.mapper;
 
 import com.petflix.domain.bean.Member;
-import com.petflix.domain.bean.PresentationVideo;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.infrastructure.dto.MemberDTO;
-import com.petflix.infrastructure.dto.PresentationVideoDTO;
-
-import java.time.LocalDate;
 
 public class MemberMapper {
 

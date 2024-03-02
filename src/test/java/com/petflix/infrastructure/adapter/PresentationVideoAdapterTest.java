@@ -5,7 +5,6 @@ import com.petflix.domain.bean.PresentationVideo;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.infrastructure.dao.AnimalDao;
-import com.petflix.infrastructure.dao.MemberDao;
 import com.petflix.infrastructure.dao.PresentationVideoDao;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
@@ -64,17 +63,17 @@ class PresentationVideoAdapterTest {
 
 	@Test
 	public void shouldReturnPresentationVideosWithAnimalTypeFilter() {
-	    //Arrange
+		//Arrange
 		List<AnimalDTO> animalDTOs = createAnimalsDTO();
 
 		when(this.animalDao.getAnimalsByTypeAndMemberCity("chat", "Valenciennes")).thenReturn(animalDTOs);
 		when(this.presentationVideoDao.getPresentationVideosByUrls(List.of("https://www.url1.com", "https://www.url2.com"))).thenReturn(createPresentationVideoDTOs());
 		when(this.presentationVideoMapper.mapAllToDomain(createPresentationVideoDTOs())).thenReturn(createPresentationVideos());
 
-	    //Act
+		//Act
 		List<PresentationVideo> actualPresentationVideos = this.presentationVideoAdapter.getPresentationVideosWithFilter("chat", "Valenciennes");
 
-	    //Assert
+		//Assert
 		List<PresentationVideo> expectedPresentationVideos = createPresentationVideos();
 
 		assertThat(actualPresentationVideos).isEqualTo(expectedPresentationVideos);
@@ -82,20 +81,20 @@ class PresentationVideoAdapterTest {
 
 	@Test
 	public void shouldReturnActionSuccess() {
-	    //Arrange
-	    PresentationVideoDTO presentationVideoDTO = createPresentationVideoDTOs().get(0);
+		//Arrange
+		PresentationVideoDTO presentationVideoDTO = createPresentationVideoDTOs().get(0);
 		PresentationVideo presentationVideo = createPresentationVideos().get(0);
 
 		when(this.presentationVideoMapper.mapToDTO(presentationVideo)).thenReturn(presentationVideoDTO);
 		when(this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO)).thenReturn(new ActionSuccess(true));
 
-	    //Act
-	    ActionSuccess actualActionSuccess = this.presentationVideoAdapter.submitPresentationVideo(presentationVideo);
+		//Act
+		ActionSuccess actualActionSuccess = this.presentationVideoAdapter.submitPresentationVideo(presentationVideo);
 
-	    //Assert
+		//Assert
 		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
 
-	    assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
+		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
 	private List<AnimalDTO> createAnimalsDTO() {

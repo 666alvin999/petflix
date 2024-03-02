@@ -29,15 +29,15 @@ class GetMemberByIdTest {
 
 	@Test
 	public void shouldGetMember() {
-	    //Arrange
+		//Arrange
 		Member member = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
 
 		when(this.memberPort.getMemberById(1)).thenReturn(member);
 
-	    //Act
+		//Act
 		Member actualMember = this.getMemberById.execute(1);
 
-	    //Assert
+		//Assert
 		Member expectedMember = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
 
 		assertThat(actualMember).isEqualTo(expectedMember);

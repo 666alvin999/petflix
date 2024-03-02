@@ -5,7 +5,7 @@ import com.petflix.domain.port.ControlPort;
 
 public class GetControlById {
 
-	private ControlPort controlPort;
+	private final ControlPort controlPort;
 
 	public GetControlById(ControlPort controlPort) {
 		this.controlPort = controlPort;

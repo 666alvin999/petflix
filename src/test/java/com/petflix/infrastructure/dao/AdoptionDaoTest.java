@@ -35,14 +35,14 @@ class AdoptionDaoTest {
 
 	@Test
 	public void shouldReturnAllAdoptions() {
-	    //Act
+		//Act
 		List<AdoptionDTO> actualAdoptions = this.adoptionDao.getAllAdoptions();
 
-	    //Assert
-	    List<AdoptionDTO> expectedAdoptions = List.of(
+		//Assert
+		List<AdoptionDTO> expectedAdoptions = List.of(
 			new AdoptionDTO(0, 0, 0, "29-02-2024"),
 			new AdoptionDTO(1, 0, 1, "29-02-2024")
-	    );
+		);
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
 	}

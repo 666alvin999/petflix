@@ -8,12 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PresentationVideoMapperTest {
 
@@ -26,13 +23,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-	    //Arrange
+		//Arrange
 		PresentationVideoDTO presentationVideoDTO = createPresentationVideoDTOs().get(0);
 
-	    //Act
+		//Act
 		PresentationVideo actualPresentationVideo = this.presentationVideoMapper.mapToDomain(presentationVideoDTO);
 
-	    //Assert
+		//Assert
 		PresentationVideo expectedPresentationVideo = createPresentationVideos().get(0);
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);

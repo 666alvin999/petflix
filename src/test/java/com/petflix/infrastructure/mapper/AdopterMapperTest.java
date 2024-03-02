@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AdopterMapperTest {
 
@@ -22,7 +21,7 @@ class AdopterMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-	    //Arrange
+		//Arrange
 		AdopterDTO adopterDTO = new AdopterDTO(
 			0,
 			"Alvin",
@@ -31,10 +30,10 @@ class AdopterMapperTest {
 			"alvin.hamaide@mail-ecv.fr"
 		);
 
-	    //Act
+		//Act
 		Adopter actualAdopter = this.adopterMapper.mapToDomain(adopterDTO);
 
-	    //Assert
+		//Assert
 		Adopter expectedAdopter = new Adopter(
 			new Id(0),
 			new FirstName("Alvin"),

@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AdoptionMapperTest {
 
@@ -29,13 +28,13 @@ class AdoptionMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-	    //Arrange
+		//Arrange
 		AdoptionDTO adoptionDTO = new AdoptionDTO(0, 0, 0, "01-03-2024");
 
-	    //Act
+		//Act
 		Adoption actualAdoption = this.adoptionMapper.mapToDomain(adoptionDTO, createAdopter(), createAnimal());
 
-	    //Assert
+		//Assert
 		Adoption expectedAdoption = new Adoption(
 			new Id(0),
 			createAdopter(),

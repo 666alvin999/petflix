@@ -6,7 +6,6 @@ import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.infrastructure.dto.AdoptionDTO;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

@@ -4,15 +4,11 @@ import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.PresentationVideo;
 import com.petflix.domain.port.PresentationVideoPort;
 import com.petflix.infrastructure.dao.AnimalDao;
-import com.petflix.infrastructure.dao.MemberDao;
 import com.petflix.infrastructure.dao.PresentationVideoDao;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
 import com.petflix.infrastructure.mapper.PresentationVideoMapper;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

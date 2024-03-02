@@ -17,12 +17,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -40,7 +37,7 @@ class GetAllAdoptionsTest {
 
 	@Test
 	public void shouldReturnAdoptions() {
-	    //Arrange
+		//Arrange
 		Adopter adopter = new Adopter(new Id(0), new FirstName("Alvin"), new LastName("Hamaide"), "Valenciennes", "alvin.hamaide@mail-ecv.fr");
 		Member managingMember = new Member(new Id(0), new FirstName("Citanimal"), new LastName("Asso"), "Valenciennes", "citanimal@gmail.com", "06XXXXXXXX");
 		Animal animal = new Animal(new Id(0), "Oslo", new AnimalType("chat"), 3, new Url("https://www.url1.com"), managingMember);
@@ -53,10 +50,10 @@ class GetAllAdoptionsTest {
 
 		when(this.adoptionPort.getAllAdoptions()).thenReturn(adoptions);
 
-	    //Act
+		//Act
 		List<Adoption> actualAdoptions = this.getAllAdoptions.execute();
 
-	    //Assert
+		//Assert
 		Adopter expectedAdopter = new Adopter(new Id(0), new FirstName("Alvin"), new LastName("Hamaide"), "Valenciennes", "alvin.hamaide@mail-ecv.fr");
 		Member expectedManagingMember = new Member(new Id(0), new FirstName("Citanimal"), new LastName("Asso"), "Valenciennes", "citanimal@gmail.com", "06XXXXXXXX");
 		Animal expectedAnimal = new Animal(new Id(0), "Oslo", new AnimalType("chat"), 3, new Url("https://www.url1.com"), expectedManagingMember);

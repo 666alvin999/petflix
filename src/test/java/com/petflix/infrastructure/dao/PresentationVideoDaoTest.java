@@ -58,10 +58,10 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldReturnPresentationVideosWithUrls() {
-	    //Act
+		//Act
 		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByUrls(List.of("https://www.url1.com", "https://www.url2.com"));
 
-	    //Assert
+		//Assert
 		List<PresentationVideoDTO> expectedPresentationVideoDTOs = this.createPresentationVideoDTOs();
 
 		assertThat(actualPresentationVideosDTO).isEqualTo(expectedPresentationVideoDTOs);
@@ -69,13 +69,13 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldSubmitPresentationVideoDTO() {
-	    //Arrange
+		//Arrange
 		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO(3, "https://www.url3.com", "title", "description", "01-03-2024");
 
-	    //Act
+		//Act
 		ActionSuccess actualActionSuccess = this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO);
 
-	    //Assert
+		//Assert
 		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
 
 		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GetAllAdoptions {
 
-	private AdoptionPort adoptionPort;
+	private final AdoptionPort adoptionPort;
 
 	public GetAllAdoptions(AdoptionPort adoptionPort) {
 		this.adoptionPort = adoptionPort;

@@ -25,18 +25,18 @@ class ControlMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-	    //Arrange
+		//Arrange
 		ControlDTO controlDTO = new ControlDTO(0, 0, "29-02-2024");
 
-	    //Act
+		//Act
 		Control actualControl = this.controlMapper.mapToDomain(controlDTO, createAdoption());
 
-	    //Assert
-	    Control expectedControl = new Control(
+		//Assert
+		Control expectedControl = new Control(
 			new Id(0),
-		    createAdoption(),
-		    LocalDate.of(2024, 2, 29)
-	    );
+			createAdoption(),
+			LocalDate.of(2024, 2, 29)
+		);
 
 		assertThat(actualControl).isEqualTo(expectedControl);
 	}

@@ -9,4 +9,5 @@ CREATE TABLE ADOPTER
     MAIL       VARCHAR(255) NOT NULL
 );
 
-INSERT INTO ADOPTER VALUES (0, 'Alvin', 'Hamaide', 'Valenciennes', 'alvin.hamaide@mail-ecv.fr');
+INSERT INTO ADOPTER
+VALUES (0, 'Alvin', 'Hamaide', 'Valenciennes', 'alvin.hamaide@mail-ecv.fr');

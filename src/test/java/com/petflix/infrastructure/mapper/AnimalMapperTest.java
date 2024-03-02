@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AnimalMapperTest {
 
@@ -25,7 +24,7 @@ class AnimalMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-	    //Arrange
+		//Arrange
 		Member member = new Member(
 			new Id(0),
 			new FirstName("Alvin"),
@@ -35,19 +34,19 @@ class AnimalMapperTest {
 			"06XXXXXXXX"
 		);
 
-	    AnimalDTO animalDTO = new AnimalDTO(
+		AnimalDTO animalDTO = new AnimalDTO(
 			0,
-		    "Oslo",
-		    "chat",
-		    3,
-		    "https://www.url1.com",
-		    0
-	    );
+			"Oslo",
+			"chat",
+			3,
+			"https://www.url1.com",
+			0
+		);
 
-	    //Act
+		//Act
 		Animal actualAnimal = this.animalMapper.mapToDomain(animalDTO, member);
 
-	    //Assert
+		//Assert
 		Member expectedMember = new Member(
 			new Id(0),
 			new FirstName("Alvin"),
@@ -57,14 +56,14 @@ class AnimalMapperTest {
 			"06XXXXXXXX"
 		);
 
-	    Animal expectedAnimal = new Animal(
+		Animal expectedAnimal = new Animal(
 			new Id(0),
-		    "Oslo",
-		    new AnimalType("chat"),
-		    3,
-		    new Url("https://www.url1.com"),
-		    expectedMember
-	    );
+			"Oslo",
+			new AnimalType("chat"),
+			3,
+			new Url("https://www.url1.com"),
+			expectedMember
+		);
 
 		assertThat(actualAnimal).isEqualTo(expectedAnimal);
 	}

@@ -1,7 +1,6 @@
 package com.petflix.domain.port;
 
 import com.petflix.domain.bean.Animal;
-import com.petflix.domain.bean.generalfields.Url;
 
 import java.util.List;
 
