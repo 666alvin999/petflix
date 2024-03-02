@@ -83,13 +83,13 @@ class PresentationVideoDaoTest {
 
 	@SneakyThrows
 	private void initTables() {
-		jdbcTemplate.update(
+		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/video_init.sql"))),
 			new HashMap<>()
 		);
 	}
 
-	private List<PresentationVideoDTO> createPresentationVideoDTOs() {
+	private static List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
 				1,

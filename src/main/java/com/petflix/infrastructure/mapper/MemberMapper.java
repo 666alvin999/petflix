@@ -4,6 +4,7 @@ import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.infrastructure.dto.MemberDTO;
 
 public class MemberMapper {
@@ -13,7 +14,7 @@ public class MemberMapper {
 			new Id(memberDTO.getId()),
 			new FirstName(memberDTO.getFirstName()),
 			new LastName(memberDTO.getLastName()),
-			memberDTO.getCity(),
+			new MemberCity(memberDTO.getCity()),
 			memberDTO.getEmail(),
 			memberDTO.getPhone()
 		);
@@ -24,7 +25,7 @@ public class MemberMapper {
 			member.id().value(),
 			member.firstName().value(),
 			member.lastName().value(),
-			member.city(),
+			member.city().value(),
 			member.mail(),
 			member.phone()
 		);

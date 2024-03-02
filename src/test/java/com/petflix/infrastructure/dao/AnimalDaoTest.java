@@ -44,7 +44,7 @@ class AnimalDaoTest {
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoUrl("https://www.url1.com");
 
 		//Assert
-		List<AnimalDTO> expectedAnimals = AnimalDaoTest.createAnimals();
+		List<AnimalDTO> expectedAnimals = createAnimals();
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
@@ -55,7 +55,7 @@ class AnimalDaoTest {
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalById(0);
 
 		//Assert
-		List<AnimalDTO> expectedAnimals = List.of(AnimalDaoTest.createAnimals().get(0));
+		List<AnimalDTO> expectedAnimals = List.of(createAnimals().get(0));
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
@@ -83,10 +83,10 @@ class AnimalDaoTest {
 
 	private static Stream<Arguments> getTestsData() {
 		return Stream.of(
-			Arguments.of(null, "Valenciennes", AnimalDaoTest.createAnimals()),
-			Arguments.of("chat", "Valenciennes", List.of(AnimalDaoTest.createAnimals().get(0), AnimalDaoTest.createAnimals().get(1))),
-			Arguments.of("chat", null, List.of(AnimalDaoTest.createAnimals().get(0), AnimalDaoTest.createAnimals().get(1))),
-			Arguments.of("chien", "Valenciennes", List.of(AnimalDaoTest.createAnimals().get(2))),
+			Arguments.of(null, "Valenciennes", createAnimals()),
+			Arguments.of("chat", "Valenciennes", List.of(createAnimals().get(0), createAnimals().get(1))),
+			Arguments.of("chat", null, List.of(createAnimals().get(0), createAnimals().get(1))),
+			Arguments.of("chien", "Valenciennes", List.of(createAnimals().get(2))),
 			Arguments.of("lapin", "Valenciennes", emptyList())
 		);
 	}
@@ -101,7 +101,7 @@ class AnimalDaoTest {
 
 	@SneakyThrows
 	private void initTables() {
-		jdbcTemplate.update(
+		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/animal_init.sql"))),
 			new HashMap<>()
 		);

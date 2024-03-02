@@ -57,7 +57,7 @@ class MemberDaoTest {
 
 	@SneakyThrows
 	private void initTables() {
-		jdbcTemplate.update(
+		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/member_init.sql"))),
 			new HashMap<>()
 		);

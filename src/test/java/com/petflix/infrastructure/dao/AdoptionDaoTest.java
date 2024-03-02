@@ -49,7 +49,7 @@ class AdoptionDaoTest {
 
 	@SneakyThrows
 	private void initTables() {
-		jdbcTemplate.update(
+		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/adoption_init.sql"))),
 			new HashMap<>()
 		);

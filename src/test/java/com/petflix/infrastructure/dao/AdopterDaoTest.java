@@ -46,7 +46,7 @@ class AdopterDaoTest {
 
 	@SneakyThrows
 	private void initTables() {
-		jdbcTemplate.update(
+		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/adopter_init.sql"))),
 			new HashMap<>()
 		);

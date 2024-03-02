@@ -6,6 +6,7 @@ import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.infrastructure.dto.ControlDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,17 +27,13 @@ class ControlMapperTest {
 	@Test
 	public void shouldMapDtoToDomain() {
 		//Arrange
-		ControlDTO controlDTO = new ControlDTO(0, 0, "29-02-2024");
+		ControlDTO controlDTO = createControlDTO();
 
 		//Act
 		Control actualControl = this.controlMapper.mapToDomain(controlDTO, createAdoption());
 
 		//Assert
-		Control expectedControl = new Control(
-			new Id(0),
-			createAdoption(),
-			LocalDate.of(2024, 2, 29)
-		);
+		Control expectedControl = createControl();
 
 		assertThat(actualControl).isEqualTo(expectedControl);
 	}
@@ -44,19 +41,27 @@ class ControlMapperTest {
 	@Test
 	public void shouldMapDomainToDto() {
 		//Arrange
-		Control control = new Control(
-			new Id(0),
-			createAdoption(),
-			LocalDate.of(2024, 2, 29)
-		);
+		Control control = createControl();
 
 		//Act
 		ControlDTO actualControlDTO = this.controlMapper.mapToDTO(control);
 
 		//Assert
-		ControlDTO expectedControlDTO = new ControlDTO(0, 0, "29-02-2024");
+		ControlDTO expectedControlDTO = createControlDTO();
 
 		assertThat(actualControlDTO).isEqualTo(expectedControlDTO);
+	}
+
+	private Control createControl() {
+		return new Control(
+			new Id(0),
+			createAdoption(),
+			LocalDate.of(2024, 2, 29)
+		);
+	}
+
+	private static ControlDTO createControlDTO() {
+		return new ControlDTO(0, 0, "29-02-2024");
 	}
 
 	private Adoption createAdoption() {
@@ -64,7 +69,7 @@ class ControlMapperTest {
 			new Id(0),
 			new FirstName("Citanimal"),
 			new LastName("Asso"),
-			"Valenciennes",
+			new MemberCity("Valenciennes"),
 			"citanimal@gmail.com",
 			"06XXXXXXXX"
 		);

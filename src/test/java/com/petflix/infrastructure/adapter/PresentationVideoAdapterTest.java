@@ -97,14 +97,14 @@ class PresentationVideoAdapterTest {
 		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
-	private List<AnimalDTO> createAnimalsDTO() {
+	private static List<AnimalDTO> createAnimalsDTO() {
 		return List.of(
 			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0),
 			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url2.com", 0)
 		);
 	}
 
-	private List<PresentationVideoDTO> createPresentationVideoDTOs() {
+	private static List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
 				0,
@@ -123,7 +123,7 @@ class PresentationVideoAdapterTest {
 		);
 	}
 
-	private List<PresentationVideo> createPresentationVideos() {
+	private static List<PresentationVideo> createPresentationVideos() {
 		return List.of(
 			new PresentationVideo(
 				new Id(0),

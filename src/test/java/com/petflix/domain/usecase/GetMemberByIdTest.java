@@ -4,6 +4,7 @@ import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.domain.port.MemberPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ class GetMemberByIdTest {
 	@Test
 	public void shouldGetMember() {
 		//Arrange
-		Member member = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
+		Member member = createMember();
 
 		when(this.memberPort.getMemberById(1)).thenReturn(member);
 
@@ -38,9 +39,13 @@ class GetMemberByIdTest {
 		Member actualMember = this.getMemberById.execute(1);
 
 		//Assert
-		Member expectedMember = new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), "Lille", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
+		Member expectedMember = createMember();
 
 		assertThat(actualMember).isEqualTo(expectedMember);
+	}
+
+	private static Member createMember() {
+		return new Member(new Id(1), new FirstName("Alvin"), new LastName("Hamaide"), new MemberCity("Valenciennes"), "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
 	}
 
 }

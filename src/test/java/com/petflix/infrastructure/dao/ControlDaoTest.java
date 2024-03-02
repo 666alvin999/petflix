@@ -25,6 +25,14 @@ class ControlDaoTest {
 	@EzDatabase
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
+	@BeforeEach
+	public void setUp() {
+		this.controlDao = new ControlDao();
+		setField(this.controlDao, "jdbcTemplate", this.jdbcTemplate);
+
+		initTables();
+	}
+
 	@Test
 	public void shouldReturnControl() {
 		//Act
@@ -36,17 +44,9 @@ class ControlDaoTest {
 		assertThat(actualControlDTOs).isEqualTo(List.of(expectedControlDTO));
 	}
 
-	@BeforeEach
-	public void setUp() {
-		this.controlDao = new ControlDao();
-		setField(this.controlDao, "jdbcTemplate", this.jdbcTemplate);
-
-		initTables();
-	}
-
 	@SneakyThrows
 	private void initTables() {
-		jdbcTemplate.update(
+		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/control_init.sql"))),
 			new HashMap<>()
 		);

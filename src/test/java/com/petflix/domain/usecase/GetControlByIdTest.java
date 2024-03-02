@@ -6,6 +6,7 @@ import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.domain.port.ControlPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ class GetControlByIdTest {
 	@Test
 	public void shouldGetControl() {
 		//Arrange
-		Control control = this.createControl();
+		Control control = createControl();
 
 		when(this.controlPort.getControlById(0)).thenReturn(control);
 
@@ -42,17 +43,17 @@ class GetControlByIdTest {
 		Control actualControl = this.getControlById.execute(0);
 
 		//Assert
-		Control expectedControl = this.createControl();
+		Control expectedControl = createControl();
 
 		assertThat(actualControl).isEqualTo(expectedControl);
 	}
 
-	private Control createControl() {
+	private static Control createControl() {
 		Member managingMember = new Member(
 			new Id(0),
 			new FirstName("Citanimal"),
 			new LastName("Asso"),
-			"Valenciennes",
+			new MemberCity("Valenciennes"),
 			"citanimal@gmail.com",
 			"06XXXXXXXX"
 		);

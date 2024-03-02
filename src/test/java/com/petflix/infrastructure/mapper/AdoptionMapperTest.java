@@ -9,6 +9,7 @@ import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.infrastructure.dto.AdoptionDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,12 +36,7 @@ class AdoptionMapperTest {
 		Adoption actualAdoption = this.adoptionMapper.mapToDomain(adoptionDTO, createAdopter(), createAnimal());
 
 		//Assert
-		Adoption expectedAdoption = new Adoption(
-			new Id(0),
-			createAdopter(),
-			createAnimal(),
-			LocalDate.of(2024, 3, 1)
-		);
+		Adoption expectedAdoption = createAdoption();
 
 		assertThat(actualAdoption).isEqualTo(expectedAdoption);
 	}
@@ -48,12 +44,7 @@ class AdoptionMapperTest {
 	@Test
 	public void shouldMapDomainToDto() {
 		//Arrange
-		Adoption adoption = new Adoption(
-			new Id(0),
-			createAdopter(),
-			createAnimal(),
-			LocalDate.of(2024, 3, 1)
-		);
+		Adoption adoption = createAdoption();
 
 		//Act
 		AdoptionDTO actualAdoptionDTO = this.adoptionMapper.mapToDTO(adoption);
@@ -62,6 +53,15 @@ class AdoptionMapperTest {
 		AdoptionDTO expectedAdoptionDTO = new AdoptionDTO(0, 0, 0, "01-03-2024");
 
 		assertThat(actualAdoptionDTO).isEqualTo(expectedAdoptionDTO);
+	}
+
+	private Adoption createAdoption() {
+		return new Adoption(
+			new Id(0),
+			createAdopter(),
+			createAnimal(),
+			LocalDate.of(2024, 3, 1)
+		);
 	}
 
 	private Adopter createAdopter() {
@@ -75,11 +75,11 @@ class AdoptionMapperTest {
 	}
 
 	private Animal createAnimal() {
-		Member expectedMember = new Member(
+		Member member = new Member(
 			new Id(0),
 			new FirstName("Citanimal"),
 			new LastName("Asso"),
-			"Valenciennes",
+			new MemberCity("Valenciennes"),
 			"citanimal@gmail.com",
 			"06XXXXXXXX"
 		);
@@ -90,7 +90,7 @@ class AdoptionMapperTest {
 			new AnimalType("chat"),
 			3,
 			new Url("https://www.url1.com"),
-			expectedMember
+			member
 		);
 	}
 

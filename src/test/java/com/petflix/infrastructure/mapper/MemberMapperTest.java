@@ -4,6 +4,7 @@ import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.infrastructure.dto.MemberDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,27 +23,13 @@ class MemberMapperTest {
 	@Test
 	public void shouldMapDtoToDomain() {
 		// Arrange
-		MemberDTO memberDTO = new MemberDTO(
-			0,
-			"Alvin",
-			"Hamaide",
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr",
-			"06XXXXXXXX"
-		);
+		MemberDTO memberDTO = createMemberDTO();
 
 		// Act
 		Member actualMember = this.memberMapper.mapToDomain(memberDTO);
 
 		// Assert
-		Member expectedMember = new Member(
-			new Id(0),
-			new FirstName("Alvin"),
-			new LastName("Hamaide"),
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr",
-			"06XXXXXXXX"
-		);
+		Member expectedMember = createMember();
 
 		assertThat(actualMember).isEqualTo(expectedMember);
 	}
@@ -50,20 +37,30 @@ class MemberMapperTest {
 	@Test
 	public void shouldMapDomainToDTO() {
 		// Arrange
-		Member member = new Member(
-			new Id(0),
-			new FirstName("Alvin"),
-			new LastName("Hamaide"),
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr",
-			"06XXXXXXXX"
-		);
+		Member member = createMember();
 
 		// Act
 		MemberDTO actualMemberDTO = this.memberMapper.mapToDTO(member);
 
 		// Assert
-		MemberDTO expectedMemberDTO = new MemberDTO(
+		MemberDTO expectedMemberDTO = createMemberDTO();
+
+		assertThat(actualMemberDTO).isEqualTo(expectedMemberDTO);
+	}
+
+	private static Member createMember() {
+		return new Member(
+			new Id(0),
+			new FirstName("Alvin"),
+			new LastName("Hamaide"),
+			new MemberCity("Valenciennes"),
+			"alvin.hamaide@mail-ecv.fr",
+			"06XXXXXXXX"
+		);
+	}
+
+	private static MemberDTO createMemberDTO() {
+		return new MemberDTO(
 			0,
 			"Alvin",
 			"Hamaide",
@@ -71,8 +68,6 @@ class MemberMapperTest {
 			"alvin.hamaide@mail-ecv.fr",
 			"06XXXXXXXX"
 		);
-
-		assertThat(actualMemberDTO).isEqualTo(expectedMemberDTO);
 	}
 
 }

@@ -22,25 +22,13 @@ class AdopterMapperTest {
 	@Test
 	public void shouldMapDtoToDomain() {
 		//Arrange
-		AdopterDTO adopterDTO = new AdopterDTO(
-			0,
-			"Alvin",
-			"Hamaide",
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr"
-		);
+		AdopterDTO adopterDTO = createAdopterDTO();
 
 		//Act
 		Adopter actualAdopter = this.adopterMapper.mapToDomain(adopterDTO);
 
 		//Assert
-		Adopter expectedAdopter = new Adopter(
-			new Id(0),
-			new FirstName("Alvin"),
-			new LastName("Hamaide"),
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr"
-		);
+		Adopter expectedAdopter = createAdopter();
 
 		assertThat(actualAdopter).isEqualTo(expectedAdopter);
 	}
@@ -48,27 +36,35 @@ class AdopterMapperTest {
 	@Test
 	public void shouldMapDomaintoDto() {
 		//Arrange
-		Adopter adopter = new Adopter(
+		Adopter adopter = createAdopter();
+
+		//Act
+		AdopterDTO actualAdopterDTO = this.adopterMapper.mapToDTO(adopter);
+
+		//Assert
+		AdopterDTO expectedAdopterDTO = createAdopterDTO();
+
+		assertThat(actualAdopterDTO).isEqualTo(expectedAdopterDTO);
+	}
+
+	private static Adopter createAdopter() {
+		return new Adopter(
 			new Id(0),
 			new FirstName("Alvin"),
 			new LastName("Hamaide"),
 			"Valenciennes",
 			"alvin.hamaide@mail-ecv.fr"
 		);
+	}
 
-		//Act
-		AdopterDTO actualAdopterDTO = this.adopterMapper.mapToDTO(adopter);
-
-		//Assert
-		AdopterDTO expectedAdopterDTO = new AdopterDTO(
+	private static AdopterDTO createAdopterDTO() {
+		return new AdopterDTO(
 			0,
 			"Alvin",
 			"Hamaide",
 			"Valenciennes",
 			"alvin.hamaide@mail-ecv.fr"
 		);
-
-		assertThat(actualAdopterDTO).isEqualTo(expectedAdopterDTO);
 	}
 
 }
