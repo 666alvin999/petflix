@@ -12,6 +12,8 @@ import com.petflix.infrastructure.dto.AnimalDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AnimalMapperTest {
@@ -50,6 +52,20 @@ class AnimalMapperTest {
 		AnimalDTO expectedAnimalDTO = createAnimalDTO();
 
 		assertThat(actualAnimalDTO).isEqualTo(expectedAnimalDTO);
+	}
+
+	@Test
+	public void shouldMapAnimalTypeDTOsToDomain() {
+	    //Arrange
+		List<String> animalTypeDTOs = List.of("chat", "chien");
+
+	    //Act
+		List<AnimalType> actualAnimalTypes = this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs);
+
+	    //Assert
+		List<AnimalType> expectedAnimalTypes = List.of(new AnimalType("chat"), new AnimalType("chien"));
+
+		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
 	}
 
 	private static Animal createAnimal() {

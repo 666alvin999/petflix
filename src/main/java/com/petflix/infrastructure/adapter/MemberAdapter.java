@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class MemberAdapter implements MemberPort {
@@ -41,4 +42,10 @@ public class MemberAdapter implements MemberPort {
 		return this.memberMapper.mapToDomain(memberDTOs.get(0));
 	}
 
+	@Override
+	public List<Member> getMembersByIds(Set<Integer> ids) {
+		List<MemberDTO> memberDTOs = this.memberDao.getMembersByIds(ids);
+
+		return this.memberMapper.mapAllToDomain(memberDTOs);
+	}
 }

@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 public class MemberDao {
@@ -19,7 +20,8 @@ public class MemberDao {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_BY_ID = "SELECT * FROM MEMBER WHERE ID = :id;";
-	private final String GET_ALL_CITIES = "SELECT CITY FROM MEMBER";
+	private final String GET_ALL_CITIES = "SELECT DISTINCT CITY FROM MEMBER";
+	private final String GET_BY_IDS = "SELECT * FROM MEMBER WHERE ID IN (:ids);";
 
 	public MemberDao() {
 	}
@@ -38,4 +40,9 @@ public class MemberDao {
 		return this.jdbcTemplate.queryForList(GET_ALL_CITIES, new HashMap<>(), String.class);
 	}
 
+	public List<MemberDTO> getMembersByIds(Set<Integer> ids) {
+		Map<String, Set<Integer>> parameters = Map.of("ids", ids);
+
+		return this.jdbcTemplate.query(GET_BY_IDS, parameters, new BeanPropertyRowMapper<>(MemberDTO.class));
+	}
 }

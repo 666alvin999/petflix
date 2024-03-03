@@ -24,6 +24,10 @@ public class MemberMapper {
 		);
 	}
 
+	public List<Member> mapAllToDomain(List<MemberDTO> memberDTOs) {
+		return memberDTOs.stream().map(this::mapToDomain).toList();
+	}
+
 	public MemberDTO mapToDTO(Member member) {
 		return new MemberDTO(
 			member.id().value(),
