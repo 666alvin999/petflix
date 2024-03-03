@@ -33,4 +33,11 @@ public class AdopterAdapter implements AdopterPort {
 		return this.adopterMapper.mapToDomain(adopterDTOs.get(0));
 	}
 
+	@Override
+	public List<Adopter> getAdoptersByIds(List<Integer> ids) {
+		List<AdopterDTO> adopterDTOs = this.adopterDao.getAdoptersByIds(ids);
+
+		return this.adopterMapper.mapAllToDomain(adopterDTOs);
+	}
+
 }

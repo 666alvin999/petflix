@@ -10,4 +10,5 @@ CREATE TABLE ADOPTER
 );
 
 INSERT INTO ADOPTER
-VALUES (0, 'Alvin', 'Hamaide', 'Valenciennes', 'alvin.hamaide@mail-ecv.fr');
+VALUES (0, 'Alvin', 'Hamaide', 'Valenciennes', 'alvin.hamaide@mail-ecv.fr'),
+       (1, 'Martin', 'Matin', 'Valenciennes', 'martin.matin@mail-ecv.fr');

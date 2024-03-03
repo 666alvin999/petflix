@@ -7,6 +7,8 @@ import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.infrastructure.dto.AdopterDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class AdopterMapper {
 
@@ -18,6 +20,10 @@ public class AdopterMapper {
 			adopterDTO.getAddress(),
 			adopterDTO.getMail()
 		);
+	}
+
+	public List<Adopter> mapAllToDomain(List<AdopterDTO> adopterDTOs) {
+		return adopterDTOs.stream().map(this::mapToDomain).toList();
 	}
 
 	public AdopterDTO mapToDTO(Adopter adopter) {

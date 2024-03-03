@@ -39,9 +39,39 @@ class AdopterDaoTest {
 		List<AdopterDTO> actualAdopter = this.adopterDao.getAdopterById(0);
 
 		//Assert
-		AdopterDTO expectedAdopter = new AdopterDTO(0, "Alvin", "Hamaide", "Valenciennes", "alvin.hamaide@mail-ecv.fr");
+		AdopterDTO expectedAdopter = createAdopters().get(0);
 
 		assertThat(actualAdopter).isEqualTo(List.of(expectedAdopter));
+	}
+
+	@Test
+	public void shouldReturnAdopters() {
+		//Act
+		List<AdopterDTO> actualAdopters = this.adopterDao.getAdoptersByIds(List.of(0, 1));
+
+		//Assert
+		List<AdopterDTO> expectedAdopters = createAdopters();
+
+		assertThat(actualAdopters).isEqualTo(expectedAdopters);
+	}
+
+	private static List<AdopterDTO> createAdopters() {
+		return List.of(
+			new AdopterDTO(
+				0,
+				"Alvin",
+				"Hamaide",
+				"Valenciennes",
+				"alvin.hamaide@mail-ecv.fr"
+			),
+			new AdopterDTO(
+				1,
+				"Martin",
+				"Matin",
+				"Valenciennes",
+				"martin.matin@mail-ecv.fr"
+			)
+		);
 	}
 
 	@SneakyThrows

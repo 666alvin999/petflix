@@ -17,6 +17,7 @@ public class AdopterDao {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_ADOPTER_BY_ID = "SELECT * FROM ADOPTER WHERE ID = :id;";
+	private final String GET_ADOPTERS_BY_IDS = "SELECT * FROM ADOPTER WHERE ID IN (:ids);";
 
 	public AdopterDao() {
 	}
@@ -30,6 +31,12 @@ public class AdopterDao {
 		Map<String, Integer> parameters = Map.of("id", id);
 
 		return this.jdbcTemplate.query(GET_ADOPTER_BY_ID, parameters, new BeanPropertyRowMapper<>(AdopterDTO.class));
+	}
+
+	public List<AdopterDTO> getAdoptersByIds(List<Integer> ids) {
+		Map<String, List<Integer>> parameters = Map.of("ids", ids);
+
+		return this.jdbcTemplate.query(GET_ADOPTERS_BY_IDS, parameters, new BeanPropertyRowMapper<>(AdopterDTO.class));
 	}
 
 }

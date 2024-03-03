@@ -37,9 +37,9 @@ class AdopterAdapterTest {
 	@Test
 	public void shouldReturnAdopterById() {
 	    //Arrange
-		AdopterDTO adopterDTO = new AdopterDTO(0, "Alvin", "Hamaide", "Valenciennes", "alvin.hamaide@mail-ecv.fr");
+		AdopterDTO adopterDTO = createAdopterDTOs().get(0);
 
-		Adopter adopter = createAdopter();
+		Adopter adopter = createAdopters().get(0);
 
 		when(this.adopterDao.getAdopterById(0)).thenReturn(List.of(adopterDTO));
 		when(this.adopterMapper.mapToDomain(adopterDTO)).thenReturn(adopter);
@@ -48,13 +48,66 @@ class AdopterAdapterTest {
 	    Adopter actualAdopter = this.adopterAdapter.getAdopterById(0);
 
 	    //Assert
-		Adopter expectedAdopter = createAdopter();
+		Adopter expectedAdopter = createAdopters().get(0);
 
 		assertThat(actualAdopter).isEqualTo(expectedAdopter);
 	}
 
-	private static Adopter createAdopter() {
-		return new Adopter(new Id(0), new FirstName("Alvin"), new LastName("Hamaide"), "Valenciennes", "alvin.hamaide@mail-ecv.fr");
+	@Test
+	public void shouldReturnAdoptersByIds() {
+		//Arrange
+		List<AdopterDTO> adopterDTOs = createAdopterDTOs();
+
+		List<Adopter> adopters = createAdopters();
+
+		when(this.adopterDao.getAdoptersByIds(List.of(0, 1))).thenReturn(adopterDTOs);
+		when(this.adopterMapper.mapAllToDomain(adopterDTOs)).thenReturn(adopters);
+
+		//Act
+		List<Adopter> actualAdopters = this.adopterAdapter.getAdoptersByIds(List.of(0, 1));
+
+		//Assert
+		List<Adopter> expectedAdopters = createAdopters();
+
+		assertThat(actualAdopters).isEqualTo(expectedAdopters);
+	}
+
+	private static List<Adopter> createAdopters() {
+		return List.of(
+			new Adopter(
+				new Id(0),
+				new FirstName("Alvin"),
+				new LastName("Hamaide"),
+				"Valenciennes",
+				"alvin.hamaide@mail-ecv.fr"
+			),
+			new Adopter(
+				new Id(1),
+				new FirstName("Martin"),
+				new LastName("Matin"),
+				"Valenciennes",
+				"martin.matin@mail-ecv.fr"
+			)
+		);
+	}
+
+	private static List<AdopterDTO> createAdopterDTOs() {
+		return List.of(
+			new AdopterDTO(
+				0,
+				"Alvin",
+				"Hamaide",
+				"Valenciennes",
+				"alvin.hamaide@mail-ecv.fr"
+			),
+			new AdopterDTO(
+				1,
+				"Martin",
+				"Matin",
+				"Valenciennes",
+				"martin.matin@mail-ecv.fr"
+			)
+		);
 	}
 
 }
