@@ -45,11 +45,13 @@ public class AdoptionMapper {
 
 	private Adopter findAdoptionAdopter(List<Adopter> adopters, AdoptionDTO adoptionDTO) {
 		Adopter adoptionAdopter = null;
+
 		for (Adopter adopter: adopters) {
 			if (adopter.id().value() == adoptionDTO.getAdopterId()) {
 				adoptionAdopter = adopter;
 			}
 		}
+
 		return adoptionAdopter;
 	}
 
@@ -61,6 +63,7 @@ public class AdoptionMapper {
 				adoptionAnimal = animal;
 			}
 		}
+
 		return adoptionAnimal;
 	}
 

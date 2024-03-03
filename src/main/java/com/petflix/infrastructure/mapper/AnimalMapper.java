@@ -31,6 +31,7 @@ public class AnimalMapper {
 					return mapToDomain(animalDTO, member);
 				}
 			}
+
 			return mapToDomain(animalDTO, null);
 		}).toList();
 	}

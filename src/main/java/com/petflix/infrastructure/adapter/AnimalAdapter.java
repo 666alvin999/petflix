@@ -37,7 +37,7 @@ public class AnimalAdapter implements AnimalPort {
 			return null;
 		}
 
-		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getId());
+		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getMemberId());
 
 		return this.animalMapper.mapToDomain(animalDTOs.get(0), member);
 	}
