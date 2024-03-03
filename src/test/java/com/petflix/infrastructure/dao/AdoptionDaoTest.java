@@ -39,12 +39,27 @@ class AdoptionDaoTest {
 		List<AdoptionDTO> actualAdoptions = this.adoptionDao.getAllAdoptions();
 
 		//Assert
-		List<AdoptionDTO> expectedAdoptions = List.of(
+		List<AdoptionDTO> expectedAdoptions = createAdoptionDTOs();
+
+		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
+	}
+
+	@Test
+	public void shouldReturnAdoption() {
+	    //Act
+	    List<AdoptionDTO> actualAdoptionDTO = this.adoptionDao.getAdoptionById(0);
+
+	    //Assert
+		List<AdoptionDTO> expectedAdoptions = List.of(createAdoptionDTOs().get(0));
+
+		assertThat(actualAdoptionDTO).isEqualTo(expectedAdoptions);
+	}
+
+	private static List<AdoptionDTO> createAdoptionDTOs() {
+		return List.of(
 			new AdoptionDTO(0, 0, 0, "29-02-2024"),
 			new AdoptionDTO(1, 0, 1, "29-02-2024")
 		);
-
-		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
 	}
 
 	@SneakyThrows

@@ -14,8 +14,8 @@ import java.util.Set;
 @Repository
 public class AdopterAdapter implements AdopterPort {
 
-	private AdopterDao adopterDao;
-	private AdopterMapper adopterMapper;
+	private final AdopterDao adopterDao;
+	private final AdopterMapper adopterMapper;
 
 	@Autowired
 	public AdopterAdapter(AdopterDao adopterDao, AdopterMapper adopterMapper) {
