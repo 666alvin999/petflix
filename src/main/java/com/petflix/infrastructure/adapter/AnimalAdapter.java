@@ -31,6 +31,19 @@ public class AnimalAdapter implements AnimalPort {
 	}
 
 	@Override
+	public Animal getAnimalById(int id) {
+		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalById(id);
+
+		if (animalDTOs.size() != 1) {
+			return null;
+		}
+
+		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getId());
+
+		return this.animalMapper.mapToDomain(animalDTOs.get(0), member);
+	}
+
+	@Override
 	public List<AnimalType> getAllTypes() {
 		List<String> animalTypeDTOs = this.animalDao.getAllTypes();
 

@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface AnimalPort {
 
+	Animal getAnimalById(int id);
+
 	List<AnimalType> getAllTypes();
 
 	List<Animal> getAnimalsByPresentationVideoUrl(String url);
