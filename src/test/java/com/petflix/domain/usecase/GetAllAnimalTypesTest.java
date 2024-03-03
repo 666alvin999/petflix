@@ -1,5 +1,6 @@
 package com.petflix.domain.usecase;
 
+import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.port.AnimalPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,17 +29,21 @@ class GetAllAnimalTypesTest {
 	@Test
 	public void shouldReturnAnimalTypes() {
 		//Arrange
-		List<String> animalTypes = List.of("chat", "lapins", "chien");
+		List<AnimalType> animalTypes = createAnimalTypes();
 
 		when(this.animalPort.getAllTypes()).thenReturn(animalTypes);
 
 		//Act
-		List<String> actualAnimalTypes = this.getAllAnimalTypes.execute();
+		List<AnimalType> actualAnimalTypes = this.getAllAnimalTypes.execute();
 
 		//Assert
-		List<String> expectedAnimalTypes = List.of("chat", "lapins", "chien");
+		List<AnimalType> expectedAnimalTypes = createAnimalTypes();
 
 		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
+	}
+
+	private static List<AnimalType> createAnimalTypes() {
+		return List.of(new AnimalType("chat"), new AnimalType("lapin"), new AnimalType("chien"));
 	}
 
 }
