@@ -83,6 +83,26 @@ class AnimalAdapterTest {
 	}
 
 	@Test
+	public void shouldReturnAnimalsByIds() {
+		//Arrange
+		List<AnimalDTO> animalDTOs = createAnimalDTOs();
+		Member member = createMember();
+		String url = "https://www.url1.com";
+
+		when(this.animalDao.getAnimalsByIds(Set.of(0, 1))).thenReturn(animalDTOs);
+		when(this.animalMapper.mapAllToDomain(animalDTOs, List.of(member))).thenReturn(createAnimals(url, member));
+		when(this.memberAdapter.getMembersByIds(Set.of(0))).thenReturn(List.of(member));
+
+		//Act
+		List<Animal> actualAnimals = this.animalAdapter.getAnimalsByIds(Set.of(0, 1));
+
+		//Assert
+		List<Animal> expectedAnimals = createAnimals(url, member);
+
+		assertThat(actualAnimals).isEqualTo(expectedAnimals);
+	}
+
+	@Test
 	public void shouldReturnAnimalsByUrl() {
 	    //Arrange
 		String url = "https://www.url1.com";

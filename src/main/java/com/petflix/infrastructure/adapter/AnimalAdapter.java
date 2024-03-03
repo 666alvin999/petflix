@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -41,6 +40,17 @@ public class AnimalAdapter implements AnimalPort {
 		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getId());
 
 		return this.animalMapper.mapToDomain(animalDTOs.get(0), member);
+	}
+
+	@Override
+	public List<Animal> getAnimalsByIds(Set<Integer> ids) {
+		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByIds(ids);
+
+		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getMemberId).collect(toSet());
+
+		List<Member> members = this.memberAdapter.getMembersByIds(memberIds);
+
+		return this.animalMapper.mapAllToDomain(animalDTOs, members);
 	}
 
 	@Override

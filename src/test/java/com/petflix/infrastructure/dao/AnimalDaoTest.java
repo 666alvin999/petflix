@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.nio.file.Files.readAllBytes;
@@ -56,6 +57,17 @@ class AnimalDaoTest {
 
 		//Assert
 		List<AnimalDTO> expectedAnimals = List.of(createAnimals().get(0));
+
+		assertThat(actualAnimals).isEqualTo(expectedAnimals);
+	}
+
+	@Test
+	public void shouldReturnAnimals() {
+		//Act
+		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByIds(Set.of(0, 1, 2));
+
+		//Assert
+		List<AnimalDTO> expectedAnimals = createAnimals();
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}

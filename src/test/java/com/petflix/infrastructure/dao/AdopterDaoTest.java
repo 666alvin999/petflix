@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import static java.nio.file.Files.readAllBytes;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,7 +48,7 @@ class AdopterDaoTest {
 	@Test
 	public void shouldReturnAdopters() {
 		//Act
-		List<AdopterDTO> actualAdopters = this.adopterDao.getAdoptersByIds(List.of(0, 1));
+		List<AdopterDTO> actualAdopters = this.adopterDao.getAdoptersByIds(Set.of(0, 1));
 
 		//Assert
 		List<AdopterDTO> expectedAdopters = createAdopters();

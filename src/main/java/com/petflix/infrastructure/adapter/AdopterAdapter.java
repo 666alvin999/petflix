@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class AdopterAdapter implements AdopterPort {
@@ -34,7 +35,7 @@ public class AdopterAdapter implements AdopterPort {
 	}
 
 	@Override
-	public List<Adopter> getAdoptersByIds(List<Integer> ids) {
+	public List<Adopter> getAdoptersByIds(Set<Integer> ids) {
 		List<AdopterDTO> adopterDTOs = this.adopterDao.getAdoptersByIds(ids);
 
 		return this.adopterMapper.mapAllToDomain(adopterDTOs);

@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -60,11 +61,11 @@ class AdopterAdapterTest {
 
 		List<Adopter> adopters = createAdopters();
 
-		when(this.adopterDao.getAdoptersByIds(List.of(0, 1))).thenReturn(adopterDTOs);
+		when(this.adopterDao.getAdoptersByIds(Set.of(0, 1))).thenReturn(adopterDTOs);
 		when(this.adopterMapper.mapAllToDomain(adopterDTOs)).thenReturn(adopters);
 
 		//Act
-		List<Adopter> actualAdopters = this.adopterAdapter.getAdoptersByIds(List.of(0, 1));
+		List<Adopter> actualAdopters = this.adopterAdapter.getAdoptersByIds(Set.of(0, 1));
 
 		//Assert
 		List<Adopter> expectedAdopters = createAdopters();

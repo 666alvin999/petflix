@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static java.util.Objects.nonNull;
 
@@ -20,6 +21,7 @@ public class AnimalDao {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_BY_ID = "SELECT * FROM ANIMAL WHERE ID = :id;";
+	private final String GET_BY_IDS = "SELECT * FROM ANIMAL WHERE ID IN (:ids);";
 	private final String GET_BY_PRESENTATION_VIDEO_URL = "SELECT * FROM ANIMAL WHERE PRESENTATION_VIDEO_URL = :url;";
 	private final String GET_ALL_TYPES = "SELECT DISTINCT TYPE FROM ANIMAL;";
 	private final String GET_BY_TYPE_AND_CITY_BASE = "SELECT * FROM ANIMAL";
@@ -36,6 +38,12 @@ public class AnimalDao {
 		Map<String, Integer> parameters = Map.of("id", id);
 
 		return this.jdbcTemplate.query(GET_BY_ID, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
+	}
+
+	public List<AnimalDTO> getAnimalsByIds(Set<Integer> ids) {
+		Map<String, Set<Integer>> parameters = Map.of("ids", ids);
+
+		return this.jdbcTemplate.query(GET_BY_IDS, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
 	}
 
 	public List<AnimalDTO> getAnimalsByPresentationVideoUrl(String url) {
