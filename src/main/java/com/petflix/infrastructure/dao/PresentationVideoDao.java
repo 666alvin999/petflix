@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class PresentationVideoDao {
@@ -43,8 +44,8 @@ public class PresentationVideoDao {
 		return this.jdbcTemplate.query(GET_ALL_PRESENTATION_VIDEOS, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
 	}
 
-	public List<PresentationVideoDTO> getPresentationVideosByUrls(List<String> urls) {
-		Map<String, List<String>> parameters = Map.of("urls", urls);
+	public List<PresentationVideoDTO> getPresentationVideosByUrls(Set<String> urls) {
+		Map<String, Set<String>> parameters = Map.of("urls", urls);
 
 		return this.jdbcTemplate.query(GET_PRESENTATION_VIDEOS_BY_URLS, parameters, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
 	}

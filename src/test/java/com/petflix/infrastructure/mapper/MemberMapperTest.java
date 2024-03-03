@@ -25,64 +25,98 @@ class MemberMapperTest {
 	@Test
 	public void shouldMapDtoToDomain() {
 		// Arrange
-		MemberDTO memberDTO = createMemberDTO();
+		MemberDTO memberDTO = createMemberDTOs().get(0);
 
 		// Act
 		Member actualMember = this.memberMapper.mapToDomain(memberDTO);
 
 		// Assert
-		Member expectedMember = createMember();
+		Member expectedMember = createMembers().get(0);
 
 		assertThat(actualMember).isEqualTo(expectedMember);
 	}
 
 	@Test
+	public void shouldMapAllDtosToDomain() {
+		// Arrange
+		List<MemberDTO> memberDTOs = createMemberDTOs();
+
+		// Act
+		List<Member> actualMembers = this.memberMapper.mapAllToDomain(memberDTOs);
+
+		// Assert
+		List<Member> expectedMembers = createMembers();
+
+		assertThat(actualMembers).isEqualTo(expectedMembers);
+	}
+
+	@Test
 	public void shouldMapDomainToDTO() {
 		// Arrange
-		Member member = createMember();
+		Member member = createMembers().get(0);
 
 		// Act
 		MemberDTO actualMemberDTO = this.memberMapper.mapToDTO(member);
 
 		// Assert
-		MemberDTO expectedMemberDTO = createMemberDTO();
+		MemberDTO expectedMemberDTO = createMemberDTOs().get(0);
 
 		assertThat(actualMemberDTO).isEqualTo(expectedMemberDTO);
 	}
 
 	@Test
 	public void shouldReturnMemberCities() {
-	    //Arrange
+		//Arrange
 		List<String> cities = List.of("Valenciennes", "Lille");
 
-	    //Act
+		//Act
 		List<MemberCity> actualCities = this.memberMapper.mapCities(cities);
 
-	    //Assert
-	    List<MemberCity> expectedMemberCity = List.of(new MemberCity("Valenciennes"), new MemberCity("Lille"));
+		//Assert
+		List<MemberCity> expectedMemberCity = List.of(new MemberCity("Valenciennes"), new MemberCity("Lille"));
 
 		assertThat(actualCities).isEqualTo(expectedMemberCity);
 	}
 
-	private static Member createMember() {
-		return new Member(
-			new Id(0),
-			new FirstName("Alvin"),
-			new LastName("Hamaide"),
-			new MemberCity("Valenciennes"),
-			"alvin.hamaide@mail-ecv.fr",
-			"06XXXXXXXX"
+	private static List<Member> createMembers() {
+		return List.of(
+			new Member(
+				new Id(0),
+				new FirstName("Alvin"),
+				new LastName("Hamaide"),
+				new MemberCity("Valenciennes"),
+				"alvin.hamaide@mail-ecv.fr",
+				"06XXXXXXXX"
+			),
+			new Member(
+				new Id(1),
+				new FirstName("Citanimal"),
+				new LastName("Asso"),
+				new MemberCity("Valenciennes"),
+				"citanimal@gmail.com",
+				"06XXXXXXXX"
+			)
 		);
 	}
 
-	private static MemberDTO createMemberDTO() {
-		return new MemberDTO(
-			0,
-			"Alvin",
-			"Hamaide",
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr",
-			"06XXXXXXXX"
+	private static List<MemberDTO> createMemberDTOs() {
+		return List.of(
+			new MemberDTO(
+				0,
+				"Alvin",
+				"Hamaide",
+				"Valenciennes",
+				"alvin.hamaide@mail-ecv.fr",
+				"06XXXXXXXX"
+			),
+			new MemberDTO(
+				1,
+				"Citanimal",
+				"Asso",
+				"Valenciennes",
+				"citanimal@gmail.com",
+				"06XXXXXXXX"
+			)
 		);
 	}
 

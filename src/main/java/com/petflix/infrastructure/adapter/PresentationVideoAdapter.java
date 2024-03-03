@@ -13,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toSet;
 
 @Repository
 public class PresentationVideoAdapter implements PresentationVideoPort {
@@ -43,7 +47,7 @@ public class PresentationVideoAdapter implements PresentationVideoPort {
 	public List<PresentationVideo> getPresentationVideosWithFilter(String animalType, String city) {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByTypeAndMemberCity(animalType, city);
 
-		List<String> urls = animalDTOs.stream().map(AnimalDTO::getPresentationVideoUrl).toList();
+		Set<String> urls = animalDTOs.stream().map(AnimalDTO::getPresentationVideoUrl).collect(toSet());
 
 		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideosByUrls(urls);
 

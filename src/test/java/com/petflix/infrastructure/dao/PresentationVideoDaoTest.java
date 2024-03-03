@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import static java.nio.file.Files.readAllBytes;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,7 +60,7 @@ class PresentationVideoDaoTest {
 	@Test
 	public void shouldReturnPresentationVideosWithUrls() {
 		//Act
-		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByUrls(List.of("https://www.url1.com", "https://www.url2.com"));
+		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByUrls(Set.of("https://www.url1.com", "https://www.url2.com"));
 
 		//Assert
 		List<PresentationVideoDTO> expectedPresentationVideoDTOs = this.createPresentationVideoDTOs();

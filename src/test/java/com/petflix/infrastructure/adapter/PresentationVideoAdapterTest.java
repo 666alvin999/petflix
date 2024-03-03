@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -67,7 +68,7 @@ class PresentationVideoAdapterTest {
 		List<AnimalDTO> animalDTOs = createAnimalsDTO();
 
 		when(this.animalDao.getAnimalsByTypeAndMemberCity("chat", "Valenciennes")).thenReturn(animalDTOs);
-		when(this.presentationVideoDao.getPresentationVideosByUrls(List.of("https://www.url1.com", "https://www.url2.com"))).thenReturn(createPresentationVideoDTOs());
+		when(this.presentationVideoDao.getPresentationVideosByUrls(Set.of("https://www.url1.com", "https://www.url2.com"))).thenReturn(createPresentationVideoDTOs());
 		when(this.presentationVideoMapper.mapAllToDomain(createPresentationVideoDTOs())).thenReturn(createPresentationVideos());
 
 		//Act
