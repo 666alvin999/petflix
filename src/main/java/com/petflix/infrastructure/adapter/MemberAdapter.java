@@ -35,10 +35,6 @@ public class MemberAdapter implements MemberPort {
 	public Member getMemberById(int id) {
 		List<MemberDTO> memberDTOs = this.memberDao.getMemberById(id);
 
-		if (memberDTOs.size() != 1) {
-			return null;
-		}
-
 		return this.memberMapper.mapToDomain(memberDTOs.get(0));
 	}
 

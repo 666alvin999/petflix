@@ -48,10 +48,6 @@ public class AdoptionAdapter implements AdoptionPort {
 	public Adoption getAdoptionById(int id) {
 		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionById(id);
 
-		if (adoptionDTOs.size() != 1) {
-			return null;
-		}
-
 		Animal animal = this.animalAdapter.getAnimalById(adoptionDTOs.get(0).getAnimalId());
 		Adopter adopter = this.adopterAdapter.getAdopterById(adoptionDTOs.get(0).getAdopterId());
 

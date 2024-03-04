@@ -33,10 +33,6 @@ public class AnimalAdapter implements AnimalPort {
 	public Animal getAnimalById(int id) {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalById(id);
 
-		if (animalDTOs.size() != 1) {
-			return null;
-		}
-
 		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getMemberId());
 
 		return this.animalMapper.mapToDomain(animalDTOs.get(0), member);

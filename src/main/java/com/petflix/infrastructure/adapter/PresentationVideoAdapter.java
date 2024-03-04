@@ -36,10 +36,6 @@ public class PresentationVideoAdapter implements PresentationVideoPort {
 	public PresentationVideo getPresentationVideoById(int id) {
 		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideoById(id);
 
-		if (presentationVideoDTOs.size() != 1) {
-			return null;
-		}
-
 		return this.presentationVideoMapper.mapToDomain(presentationVideoDTOs.get(0));
 	}
 

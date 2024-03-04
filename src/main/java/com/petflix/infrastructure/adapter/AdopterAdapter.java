@@ -27,10 +27,6 @@ public class AdopterAdapter implements AdopterPort {
 	public Adopter getAdopterById(int id) {
 		List<AdopterDTO> adopterDTOs = this.adopterDao.getAdopterById(id);
 
-		if (adopterDTOs.size() != 1) {
-			return null;
-		}
-
 		return this.adopterMapper.mapToDomain(adopterDTOs.get(0));
 	}
 
