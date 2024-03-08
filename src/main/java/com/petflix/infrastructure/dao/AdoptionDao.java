@@ -44,4 +44,5 @@ public class AdoptionDao {
 
 		return this.jdbcTemplate.query(GET_BY_IDS, parameters, new BeanPropertyRowMapper<>(AdoptionDTO.class));
 	}
+
 }

@@ -82,4 +82,5 @@ public class AnimalDao {
 
 		return this.jdbcTemplate.query(sqlQuery, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
 	}
+
 }

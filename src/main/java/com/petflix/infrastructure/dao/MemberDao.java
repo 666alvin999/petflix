@@ -45,4 +45,5 @@ public class MemberDao {
 
 		return this.jdbcTemplate.query(GET_BY_IDS, parameters, new BeanPropertyRowMapper<>(MemberDTO.class));
 	}
+
 }

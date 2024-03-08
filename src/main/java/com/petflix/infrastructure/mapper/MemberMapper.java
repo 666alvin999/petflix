@@ -42,4 +42,5 @@ public class MemberMapper {
 	public List<MemberCity> mapCities(List<String> cities) {
 		return cities.stream().map(MemberCity::new).toList();
 	}
+
 }
