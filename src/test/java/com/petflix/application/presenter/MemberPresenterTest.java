@@ -32,12 +32,12 @@ class MemberPresenterTest {
 	@Test
 	public void shouldReturnPresentedMembers() {
 		//Act
-		ResponseEntity<String> actualPresentedMember = this.memberPresenter.presentAll(createMemberDTOs());
+		ResponseEntity<String> actualPresentedMembers = this.memberPresenter.presentAll(createMemberDTOs());
 
 		//Assert
-		ResponseEntity<String> expectedPresentedMember = ResponseEntity.ok(createPresentedMembers());
+		ResponseEntity<String> expectedPresentedMembers = ResponseEntity.ok(createPresentedMembers());
 
-		assertThat(actualPresentedMember).isEqualTo(expectedPresentedMember);
+		assertThat(actualPresentedMembers).isEqualTo(expectedPresentedMembers);
 	}
 
 	private static String createPresentedMember() {
