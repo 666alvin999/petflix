@@ -69,8 +69,16 @@ class GetAllAdoptionsTest {
 		);
 	}
 
-	private static Animal createAnimal(int value, String Oslo, int age, Member managingMember) {
-		return new Animal(new Id(value), Oslo, new AnimalType("chat"), age, new Url("https://www.url1.com"), managingMember);
+	private static Animal createAnimal(int value, String animalName, int age, Member managingMember) {
+		return new Animal(
+			new Id(value),
+			animalName,
+			new AnimalType("chat"),
+			age,
+			new Url("https://www.url1.com"),
+			managingMember,
+			LocalDate.of(2024, 3, 8),
+			null);
 	}
 
 	private static Member createMember() {

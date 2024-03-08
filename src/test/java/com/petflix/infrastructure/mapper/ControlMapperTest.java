@@ -105,7 +105,9 @@ class ControlMapperTest {
 			new AnimalType("chat"),
 			3,
 			new Url("https://www.url1.com"),
-			managingMember
+			managingMember,
+			LocalDate.of(2024, 3, 8),
+			null
 		);
 
 		Adopter adopter = new Adopter(

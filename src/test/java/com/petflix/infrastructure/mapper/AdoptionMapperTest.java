@@ -121,8 +121,26 @@ class AdoptionMapperTest {
 		);
 
 		return List.of(
-			new Animal(new Id(0), "Oslo", new AnimalType("chat"), 3, url, member),
-			new Animal(new Id(1), "Uta", new AnimalType("chat"), 1, url, member)
+			new Animal(
+				new Id(0),
+				"Oslo",
+				new AnimalType("chat"),
+				3,
+				url,
+				member,
+				LocalDate.of(2024, 3, 8),
+				null
+			),
+			new Animal(
+				new Id(1),
+				"Uta",
+				new AnimalType("chat"),
+				1,
+				url,
+				member,
+				LocalDate.of(2024, 3, 8),
+				null
+			)
 		);
 	}
 

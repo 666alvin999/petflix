@@ -12,6 +12,7 @@ import com.petflix.infrastructure.dto.AnimalDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -75,7 +76,9 @@ class AnimalMapperTest {
 			new AnimalType("chat"),
 			3,
 			new Url("https://www.url1.com"),
-			createMember()
+			createMember(),
+			LocalDate.of(2024, 3, 8),
+			null
 		);
 	}
 
@@ -86,7 +89,9 @@ class AnimalMapperTest {
 			"chat",
 			3,
 			"https://www.url1.com",
-			0
+			0,
+			"08-03-2024",
+			null
 		);
 	}
 

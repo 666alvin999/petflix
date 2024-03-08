@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -126,17 +127,43 @@ class AnimalAdapterTest {
 
 	private static List<Animal> createAnimals(String url, Member member) {
 		return List.of(
-			new Animal(new Id(0), "Oslo", new AnimalType("chat"), 3, new Url(url), member),
-			new Animal(new Id(0), "Uta", new AnimalType("chat"), 1, new Url(url), member),
-			new Animal(new Id(0), "Maul", new AnimalType("chien"), 4, new Url(url), member)
+			new Animal(new Id(0),
+				"Oslo",
+				new AnimalType("chat"),
+				3,
+				new Url(url),
+				member,
+				LocalDate.of(2024, 3, 8),
+				null
+			),
+			new Animal(
+				new Id(0),
+				"Uta",
+				new AnimalType("chat"),
+				1,
+				new Url(url),
+				member,
+				LocalDate.of(2024, 3, 8),
+				null
+			),
+			new Animal(
+				new Id(0),
+				"Maul",
+				new AnimalType("chien"),
+				4,
+				new Url(url),
+				member,
+				LocalDate.of(2024, 3, 8),
+				null
+			)
 		);
 	}
 
 	private static List<AnimalDTO> createAnimalDTOs() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0),
-			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0)
+			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "08-03-2024", null),
+			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "08-03-2024", null),
+			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "08-03-2024", null)
 		);
 	}
 
