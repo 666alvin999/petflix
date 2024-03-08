@@ -17,7 +17,8 @@ public class ControlDao {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	private final String CONTROL_BY_ID = "SELECT * FROM CONTROL WHERE ID = :id;";
+	private final String GET_ALL = "SELECT * FROM CONTROL;";
+	private final String GET_BY_ID = "SELECT * FROM CONTROL WHERE ID = :id;";
 
 	public ControlDao() {
 	}
@@ -29,7 +30,11 @@ public class ControlDao {
 	public List<ControlDTO> getControlById(int id) {
 		Map<String, Integer> parameters = Map.of("id", id);
 
-		return this.jdbcTemplate.query(CONTROL_BY_ID, parameters, new BeanPropertyRowMapper<>(ControlDTO.class));
+		return this.jdbcTemplate.query(GET_BY_ID, parameters, new BeanPropertyRowMapper<>(ControlDTO.class));
+	}
+
+	public List<ControlDTO> getAllControls() {
+		return this.jdbcTemplate.query(GET_ALL, new BeanPropertyRowMapper<>(ControlDTO.class));
 	}
 
 }

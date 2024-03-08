@@ -8,4 +8,6 @@ public interface AdoptionPort {
 
 	List<Adoption> getAllAdoptions();
 
+	Adoption getAdoptionById(int id);
+
 }

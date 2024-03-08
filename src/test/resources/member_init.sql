@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS MEMBER;
 
-CREATE TABLE MEMBER (
+CREATE TABLE MEMBER
+(
     ID         INT PRIMARY KEY,
     FIRST_NAME VARCHAR(30)  NOT NULL,
     LAST_NAME  VARCHAR(30)  NOT NULL,
@@ -10,4 +11,5 @@ CREATE TABLE MEMBER (
 );
 
 INSERT INTO MEMBER
-VALUES (0, 'Alvin', 'Hamaide', 'Lille', 'alvin.hamaide@mail-ecv.fr', '06XXXXXXXX');
+VALUES (0, 'Alvin', 'Hamaide', 'Valenciennes', 'alvin.hamaide@mail-ecv.fr', '06XXXXXXXX'),
+       (1, 'Citanimal', 'Asso', 'Valenciennes', 'citanimal@gmail.com', '06XXXXXXXX');

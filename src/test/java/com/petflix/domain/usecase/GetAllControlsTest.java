@@ -15,40 +15,41 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetControlByIdTest {
+class GetAllControlsTest {
 
-	private GetControlById getControlById;
+	private GetAllControls getAllControls;
 
 	@Mock
 	private ControlPort controlPort;
 
 	@BeforeEach
 	public void setUp() {
-		this.getControlById = new GetControlById(controlPort);
+		this.getAllControls = new GetAllControls(controlPort);
 	}
 
 	@Test
-	public void shouldGetControl() {
+	public void shouldReturnAllControls() {
 		//Arrange
-		Control control = createControl();
+		List<Control> controls = createControls();
 
-		when(this.controlPort.getControlById(0)).thenReturn(control);
+		when(this.controlPort.getAllControls()).thenReturn(controls);
 
 		//Act
-		Control actualControl = this.getControlById.execute(0);
+		List<Control> actualControls = this.getAllControls.execute();
 
 		//Assert
-		Control expectedControl = createControl();
+		List<Control> expectedControls = createControls();
 
-		assertThat(actualControl).isEqualTo(expectedControl);
+		assertThat(actualControls).isEqualTo(expectedControls);
 	}
 
-	private static Control createControl() {
+	private static List<Control> createControls() {
 		Member managingMember = new Member(
 			new Id(0),
 			new FirstName("Citanimal"),
@@ -82,10 +83,17 @@ class GetControlByIdTest {
 			LocalDate.of(2024, 2, 29)
 		);
 
-		return new Control(
-			new Id(0),
-			adoption,
-			LocalDate.of(2024, 2, 29)
+		return List.of(
+			new Control(
+				new Id(0),
+				adoption,
+				LocalDate.of(2024, 2, 29)
+			),
+			new Control(
+				new Id(1),
+				adoption,
+				LocalDate.of(2024, 3, 8)
+			)
 		);
 	}
 

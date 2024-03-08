@@ -25,17 +25,6 @@ class ControlDaoTest {
 	@EzDatabase
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	@Test
-	public void shouldReturnControl() {
-	    //Act
-		List<ControlDTO> actualControlDTOs = this.controlDao.getControlById(0);
-
-	    //Assert
-		ControlDTO expectedControlDTO = new ControlDTO(0, 0, "27-02-2024");
-
-		assertThat(actualControlDTOs).isEqualTo(List.of(expectedControlDTO));
-	}
-
 	@BeforeEach
 	public void setUp() {
 		this.controlDao = new ControlDao();
@@ -44,9 +33,34 @@ class ControlDaoTest {
 		initTables();
 	}
 
+	@Test
+	public void shouldReturnControl() {
+		//Act
+		List<ControlDTO> actualControlDTO = this.controlDao.getControlById(0);
+
+		//Assert
+		ControlDTO expectedControlDTO = new ControlDTO(0, 0, "27-02-2024");
+
+		assertThat(actualControlDTO).isEqualTo(List.of(expectedControlDTO));
+	}
+
+	@Test
+	public void shouldReturnAllControls() {
+		// Act
+		List<ControlDTO> actualControlDTOs = this.controlDao.getAllControls();
+
+		//Assert
+		List<ControlDTO> expectedControlDTOs = List.of(
+			new ControlDTO(0, 0, "27-02-2024"),
+			new ControlDTO(1, 1, "08-03-2024")
+		);
+
+		assertThat(actualControlDTOs).isEqualTo(expectedControlDTOs);
+	}
+
 	@SneakyThrows
 	private void initTables() {
-		jdbcTemplate.update(
+		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/control_init.sql"))),
 			new HashMap<>()
 		);

@@ -7,12 +7,14 @@ import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AnimalMapperTest {
 
@@ -25,46 +27,15 @@ class AnimalMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-	    //Arrange
-		Member member = new Member(
-			new Id(0),
-			new FirstName("Alvin"),
-			new LastName("Hamaide"),
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr",
-			"06XXXXXXXX"
-		);
+		//Arrange
+		Member member = createMember();
+		AnimalDTO animalDTO = createAnimalDTO();
 
-	    AnimalDTO animalDTO = new AnimalDTO(
-			0,
-		    "Oslo",
-		    "chat",
-		    3,
-		    "https://www.url1.com",
-		    0
-	    );
-
-	    //Act
+		//Act
 		Animal actualAnimal = this.animalMapper.mapToDomain(animalDTO, member);
 
-	    //Assert
-		Member expectedMember = new Member(
-			new Id(0),
-			new FirstName("Alvin"),
-			new LastName("Hamaide"),
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr",
-			"06XXXXXXXX"
-		);
-
-	    Animal expectedAnimal = new Animal(
-			new Id(0),
-		    "Oslo",
-		    new AnimalType("chat"),
-		    3,
-		    new Url("https://www.url1.com"),
-		    expectedMember
-	    );
+		//Assert
+		Animal expectedAnimal = createAnimal();
 
 		assertThat(actualAnimal).isEqualTo(expectedAnimal);
 	}
@@ -72,29 +43,44 @@ class AnimalMapperTest {
 	@Test
 	public void shouldMapDomainToDto() {
 		//Arrange
-		Member member = new Member(
-			new Id(0),
-			new FirstName("Alvin"),
-			new LastName("Hamaide"),
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr",
-			"06XXXXXXXX"
-		);
-
-		Animal animal = new Animal(
-			new Id(0),
-			"Oslo",
-			new AnimalType("chat"),
-			3,
-			new Url("https://www.url1.com"),
-			member
-		);
+		Animal animal = createAnimal();
 
 		//Act
 		AnimalDTO actualAnimalDTO = this.animalMapper.mapToDTO(animal);
 
 		//Assert
-		AnimalDTO expectedAnimalDTO = new AnimalDTO(
+		AnimalDTO expectedAnimalDTO = createAnimalDTO();
+
+		assertThat(actualAnimalDTO).isEqualTo(expectedAnimalDTO);
+	}
+
+	@Test
+	public void shouldMapAnimalTypeDTOsToDomain() {
+	    //Arrange
+		List<String> animalTypeDTOs = List.of("chat", "chien");
+
+	    //Act
+		List<AnimalType> actualAnimalTypes = this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs);
+
+	    //Assert
+		List<AnimalType> expectedAnimalTypes = List.of(new AnimalType("chat"), new AnimalType("chien"));
+
+		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
+	}
+
+	private static Animal createAnimal() {
+		return new Animal(
+			new Id(0),
+			"Oslo",
+			new AnimalType("chat"),
+			3,
+			new Url("https://www.url1.com"),
+			createMember()
+		);
+	}
+
+	private static AnimalDTO createAnimalDTO() {
+		return new AnimalDTO(
 			0,
 			"Oslo",
 			"chat",
@@ -102,8 +88,17 @@ class AnimalMapperTest {
 			"https://www.url1.com",
 			0
 		);
+	}
 
-		assertThat(actualAnimalDTO).isEqualTo(expectedAnimalDTO);
+	private static Member createMember() {
+		return new Member(
+			new Id(0),
+			new FirstName("Alvin"),
+			new LastName("Hamaide"),
+			new MemberCity("Valenciennes"),
+			"alvin.hamaide@mail-ecv.fr",
+			"06XXXXXXXX"
+		);
 	}
 
 }

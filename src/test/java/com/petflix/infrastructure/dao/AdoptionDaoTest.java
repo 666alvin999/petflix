@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import static java.nio.file.Files.readAllBytes;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,21 +36,47 @@ class AdoptionDaoTest {
 
 	@Test
 	public void shouldReturnAllAdoptions() {
-	    //Act
+		//Act
 		List<AdoptionDTO> actualAdoptions = this.adoptionDao.getAllAdoptions();
 
-	    //Assert
-	    List<AdoptionDTO> expectedAdoptions = List.of(
-			new AdoptionDTO(0, 0, 0, "29-02-2024"),
-			new AdoptionDTO(1, 0, 1, "29-02-2024")
-	    );
+		//Assert
+		List<AdoptionDTO> expectedAdoptions = createAdoptionDTOs();
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
 	}
 
+	@Test
+	public void shouldReturnAdoption() {
+	    //Act
+	    List<AdoptionDTO> actualAdoptionDTO = this.adoptionDao.getAdoptionById(0);
+
+	    //Assert
+		List<AdoptionDTO> expectedAdoptionDTO = List.of(createAdoptionDTOs().get(0));
+
+		assertThat(actualAdoptionDTO).isEqualTo(expectedAdoptionDTO);
+	}
+
+	@Test
+	public void shouldReturnAdoptions() {
+		//Act
+		List<AdoptionDTO> actualAdoptionDTOs = this.adoptionDao.getAdoptionsByIds(Set.of(0,1));
+
+		//Assert
+		List<AdoptionDTO> expectedAdoptionDTOs = createAdoptionDTOs();
+
+		assertThat(actualAdoptionDTOs).isEqualTo(expectedAdoptionDTOs);
+	}
+
+	private static List<AdoptionDTO> createAdoptionDTOs() {
+		return List.of(
+			new AdoptionDTO(0, 0, 0, "29-02-2024"),
+			new AdoptionDTO(1, 0, 1, "29-02-2024")
+		);
+	}
+
 	@SneakyThrows
 	private void initTables() {
-		jdbcTemplate.update(
+		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/adoption_init.sql"))),
 			new HashMap<>()
 		);

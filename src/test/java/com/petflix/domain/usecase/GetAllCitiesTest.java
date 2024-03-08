@@ -1,5 +1,6 @@
 package com.petflix.domain.usecase;
 
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.domain.port.MemberPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,15 +29,15 @@ class GetAllCitiesTest {
 	@Test
 	public void shouldReturnAllCities() {
 		//Arrange
-		List<String> cities = List.of("Paris", "Lille", "Nice");
+		List<MemberCity> cities = List.of(new MemberCity("Paris"), new MemberCity("Valenciennes"), new MemberCity("Nice"));
 
 		when(this.memberPort.getAllMembersCity()).thenReturn(cities);
 
 		//Act
-		List<String> actualCities = this.getAllCities.execute();
+		List<MemberCity> actualCities = this.getAllCities.execute();
 
 		//Assert
-		List<String> expectedCities = List.of("Paris", "Lille", "Nice");
+		List<MemberCity> expectedCities = List.of(new MemberCity("Paris"), new MemberCity("Valenciennes"), new MemberCity("Nice"));
 
 		assertThat(actualCities).isEqualTo(expectedCities);
 	}

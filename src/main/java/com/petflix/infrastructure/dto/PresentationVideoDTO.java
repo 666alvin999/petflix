@@ -1,6 +1,5 @@
 package com.petflix.infrastructure.dto;
 
-import com.petflix.domain.bean.generalfields.Id;
 import lombok.*;
 
 @NoArgsConstructor

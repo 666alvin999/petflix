@@ -10,18 +10,20 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 public class AdopterDao {
 
-	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_ADOPTER_BY_ID = "SELECT * FROM ADOPTER WHERE ID = :id;";
+	private final String GET_ADOPTERS_BY_IDS = "SELECT * FROM ADOPTER WHERE ID IN (:ids);";
 
 	public AdopterDao() {
 	}
 
+	@Autowired
 	public AdopterDao(@Qualifier(value = "dataSource") DataSource dataSource) {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
@@ -30,6 +32,12 @@ public class AdopterDao {
 		Map<String, Integer> parameters = Map.of("id", id);
 
 		return this.jdbcTemplate.query(GET_ADOPTER_BY_ID, parameters, new BeanPropertyRowMapper<>(AdopterDTO.class));
+	}
+
+	public List<AdopterDTO> getAdoptersByIds(Set<Integer> ids) {
+		Map<String, Set<Integer>> parameters = Map.of("ids", ids);
+
+		return this.jdbcTemplate.query(GET_ADOPTERS_BY_IDS, parameters, new BeanPropertyRowMapper<>(AdopterDTO.class));
 	}
 
 }

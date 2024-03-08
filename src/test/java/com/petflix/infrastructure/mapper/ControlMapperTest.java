@@ -6,11 +6,13 @@ import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.infrastructure.dto.ControlDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,38 +27,66 @@ class ControlMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-	    //Arrange
-		ControlDTO controlDTO = new ControlDTO(0, 0, "29-02-2024");
+		//Arrange
+		ControlDTO controlDTO = createControlDTOs().get(0);
 
-	    //Act
+		//Act
 		Control actualControl = this.controlMapper.mapToDomain(controlDTO, createAdoption());
 
-	    //Assert
-	    Control expectedControl = new Control(
-			new Id(0),
-		    createAdoption(),
-		    LocalDate.of(2024, 2, 29)
-	    );
+		//Assert
+		Control expectedControl = createControls().get(0);
 
 		assertThat(actualControl).isEqualTo(expectedControl);
 	}
 
 	@Test
+	public void shouldMapAllDtosToDomain() {
+		//Arrange
+		List<ControlDTO> controlDTOs = createControlDTOs();
+
+		//Act
+		List<Control> actualControl = this.controlMapper.mapAllToDomain(controlDTOs, List.of(createAdoption()));
+
+		//Assert
+		List<Control> expectedControls = createControls();
+
+		assertThat(actualControl).isEqualTo(expectedControls);
+	}
+
+	@Test
 	public void shouldMapDomainToDto() {
 		//Arrange
-		Control control = new Control(
-			new Id(0),
-			createAdoption(),
-			LocalDate.of(2024, 2, 29)
-		);
+		Control control = createControls().get(0);
 
 		//Act
 		ControlDTO actualControlDTO = this.controlMapper.mapToDTO(control);
 
 		//Assert
-		ControlDTO expectedControlDTO = new ControlDTO(0, 0, "29-02-2024");
+		ControlDTO expectedControlDTO = createControlDTOs().get(0);
 
 		assertThat(actualControlDTO).isEqualTo(expectedControlDTO);
+	}
+
+	private List<Control> createControls() {
+		return List.of(
+			new Control(
+				new Id(0),
+				createAdoption(),
+				LocalDate.of(2024, 2, 29)
+			),
+			new Control(
+				new Id(1),
+				createAdoption(),
+				LocalDate.of(2024, 2, 29)
+			)
+		);
+	}
+
+	private static List<ControlDTO> createControlDTOs() {
+		return List.of(
+			new ControlDTO(0, 0, "29-02-2024"),
+			new ControlDTO(1, 0, "29-02-2024")
+		);
 	}
 
 	private Adoption createAdoption() {
@@ -64,7 +94,7 @@ class ControlMapperTest {
 			new Id(0),
 			new FirstName("Citanimal"),
 			new LastName("Asso"),
-			"Valenciennes",
+			new MemberCity("Valenciennes"),
 			"citanimal@gmail.com",
 			"06XXXXXXXX"
 		);
