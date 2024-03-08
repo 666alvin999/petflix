@@ -16,5 +16,7 @@ public class AnimalDTO {
 	private int age;
 	private String presentationVideoUrl;
 	private int memberId;
+	private String arrivalDate;
+	private String adoptionDate;
 
 }

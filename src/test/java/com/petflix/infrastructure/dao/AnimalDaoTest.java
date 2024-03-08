@@ -105,9 +105,9 @@ class AnimalDaoTest {
 
 	private static List<AnimalDTO> createAnimals() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0),
-			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0)
+			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "08-03-2024", null),
+			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "08-03-2024", null),
+			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "08-03-2024", null)
 		);
 	}
 

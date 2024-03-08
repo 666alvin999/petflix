@@ -100,8 +100,8 @@ class PresentationVideoAdapterTest {
 
 	private static List<AnimalDTO> createAnimalsDTO() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url2.com", 0)
+			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "08-03-2024", null),
+			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url2.com", 0, "08-03-2024", null)
 		);
 	}
 

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,7 +60,15 @@ class GetAnimalsByPresentationVideoUrlTest {
 	}
 
 	private static Animal createAnimal() {
-		return new Animal(new Id(1), "Oslo", new AnimalType("chat"), 2, createUrl(), createMember());
+		return new Animal(
+			new Id(1),
+			"Oslo",
+			new AnimalType("chat"),
+			2,
+			createUrl(),
+			createMember(),
+			LocalDate.of(2024, 3, 8),
+			null);
 	}
 
 }
