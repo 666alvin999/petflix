@@ -97,6 +97,29 @@ class AdoptionAdapterTest {
 		assertThat(actualAdoption).isEqualTo(expectedAdoption);
 	}
 
+	@Test
+	public void shouldReturnAdoptionsByIds() {
+		//Arrange
+		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
+		List<Adopter> adopters = createAdopters();
+		List<Animal> animals = createAnimals();
+		List<Adoption> adoptions = createAdoptions();
+
+
+		when(this.adoptionDao.getAdoptionsByIds(Set.of(0, 1))).thenReturn(adoptionDTOs);
+		when(this.adopterAdapter.getAdoptersByIds(Set.of(0, 1))).thenReturn(adopters);
+		when(this.animalAdapter.getAnimalsByIds(Set.of(0, 1))).thenReturn(animals);
+		when(this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals)).thenReturn(adoptions);
+
+		//Act
+		List<Adoption> actualAdoptions = this.adoptionAdapter.getAdoptionsByIds(Set.of(0, 1));
+
+		//Assert
+		List<Adoption> expectedAdoptions = createAdoptions();
+
+		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
+	}
+
 	private static List<Adoption> createAdoptions() {
 		return List.of(
 			new Adoption(

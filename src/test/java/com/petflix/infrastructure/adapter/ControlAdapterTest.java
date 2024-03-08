@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -57,6 +58,25 @@ class ControlAdapterTest {
 	    Control expectedControl = createControl();
 
 		assertThat(actualControl).isEqualTo(expectedControl);
+	}
+
+	@Test
+	public void shouldReturnAllControls() {
+		//Arrange
+		List<ControlDTO> controlDTOs = List.of(createControlDTO());
+		List<Adoption> adoptions = List.of(createAdoption());
+
+		when(this.controlDao.getAllControls()).thenReturn(controlDTOs);
+		when(this.adoptionAdapter.getAdoptionsByIds(Set.of(0))).thenReturn(adoptions);
+		when(this.controlMapper.mapAllToDomain(controlDTOs, adoptions)).thenReturn(List.of(createControl()));
+
+		//Act
+		List<Control> actualControls = this.controlAdapter.getAllControls();
+
+		//Assert
+		List<Control> expectedControls = List.of(createControl());
+
+		assertThat(actualControls).isEqualTo(expectedControls);
 	}
 
 	private Control createControl() {

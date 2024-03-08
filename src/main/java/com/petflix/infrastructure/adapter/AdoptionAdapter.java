@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -52,5 +51,17 @@ public class AdoptionAdapter implements AdoptionPort {
 		Adopter adopter = this.adopterAdapter.getAdopterById(adoptionDTOs.get(0).getAdopterId());
 
 		return this.adoptionMapper.mapToDomain(adoptionDTOs.get(0), adopter, animal);
+	}
+
+	public List<Adoption> getAdoptionsByIds(Set<Integer> ids) {
+		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionsByIds(ids);
+
+		Set<Integer> animalsIds = adoptionDTOs.stream().map(AdoptionDTO::getAnimalId).collect(toSet());
+		Set<Integer> adoptersIds = adoptionDTOs.stream().map(AdoptionDTO::getAdopterId).collect(toSet());
+
+		List<Animal> animals = this.animalAdapter.getAnimalsByIds(animalsIds);
+		List<Adopter> adopters = this.adopterAdapter.getAdoptersByIds(adoptersIds);
+
+		return this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals);
 	}
 }

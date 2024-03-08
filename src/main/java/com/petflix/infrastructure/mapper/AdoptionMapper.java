@@ -44,27 +44,23 @@ public class AdoptionMapper {
 	}
 
 	private Adopter findAdoptionAdopter(List<Adopter> adopters, AdoptionDTO adoptionDTO) {
-		Adopter adoptionAdopter = null;
-
 		for (Adopter adopter: adopters) {
 			if (adopter.id().value() == adoptionDTO.getAdopterId()) {
-				adoptionAdopter = adopter;
+				return adopter;
 			}
 		}
 
-		return adoptionAdopter;
+		return null;
 	}
 
 	private Animal findAdoptionAnimal(List<Animal> animals, AdoptionDTO adoptionDTO) {
-		Animal adoptionAnimal = null;
-
 		for (Animal animal: animals) {
 			if (animal.id().value() == adoptionDTO.getAnimalId()) {
-				adoptionAnimal = animal;
+				return animal;
 			}
 		}
 
-		return adoptionAnimal;
+		return null;
 	}
 
 }

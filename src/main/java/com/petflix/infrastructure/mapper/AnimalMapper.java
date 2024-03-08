@@ -55,4 +55,16 @@ public class AnimalMapper {
 		return animalTypeDTOs.stream().map(this::mapToAnimalType).toList();
 	}
 
+	private Member findMember(List<Member> members, AnimalDTO animalDTO) {
+		Member animalMember = null;
+
+		for (Member member: members) {
+			if (member.id().value() == animalDTO.getId()) {
+				return member;
+			}
+		}
+
+		return null;
+	}
+
 }

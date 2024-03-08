@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Component
 public class ControlMapper {
@@ -28,6 +29,24 @@ public class ControlMapper {
 			control.adoption().id().value(),
 			this.dateFormatter.format(control.date())
 		);
+	}
+
+	public List<Control> mapAllToDomain(List<ControlDTO> controlDTOs, List<Adoption> adoptions) {
+		return controlDTOs.stream().map(controlDTO -> {
+			Adoption adoption = findAdoption(adoptions, controlDTO);
+
+			return this.mapToDomain(controlDTO, adoption);
+		}).toList();
+	}
+
+	private Adoption findAdoption(List<Adoption> adoptions, ControlDTO controlDTO) {
+		for (Adoption adoption : adoptions) {
+			if (adoption.id().value() == controlDTO.getAdoptionId()) {
+				return adoption;
+			}
+		}
+
+		return null;
 	}
 
 }

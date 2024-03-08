@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Component
 public class AdoptionDao {
@@ -18,6 +19,7 @@ public class AdoptionDao {
 
 	private final String GET_ALL_ADOPTIONS = "SELECT * FROM ADOPTION;";
 	private final String GET_BY_ID = "SELECT * FROM ADOPTION WHERE ID = :id;";
+	private final String GET_BY_IDS = "SELECT * FROM ADOPTION WHERE ID IN (:ids);";
 
 	public AdoptionDao() {
 	}
@@ -37,4 +39,9 @@ public class AdoptionDao {
 		return this.jdbcTemplate.query(GET_BY_ID, parameters, new BeanPropertyRowMapper<>(AdoptionDTO.class));
 	}
 
+	public List<AdoptionDTO> getAdoptionsByIds(Set<Integer> ids) {
+		Map<String, Set<Integer>> parameters = Map.of("ids", ids);
+
+		return this.jdbcTemplate.query(GET_BY_IDS, parameters, new BeanPropertyRowMapper<>(AdoptionDTO.class));
+	}
 }

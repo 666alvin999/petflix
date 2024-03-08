@@ -10,13 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
 
 @Repository
 public class ControlAdapter implements ControlPort {
 
-	private ControlDao controlDao;
-	private AdoptionAdapter adoptionAdapter;
-	private ControlMapper controlMapper;
+	private final ControlDao controlDao;
+	private final AdoptionAdapter adoptionAdapter;
+	private final ControlMapper controlMapper;
 
 	@Autowired
 	public ControlAdapter(ControlDao controlDao, AdoptionAdapter adoptionAdapter, ControlMapper controlMapper) {
@@ -33,6 +36,16 @@ public class ControlAdapter implements ControlPort {
 		Adoption adoption = this.adoptionAdapter.getAdoptionById(adoptionId);
 
 		return this.controlMapper.mapToDomain(controlDTOs.get(0), adoption);
+	}
+
+	@Override
+	public List<Control> getAllControls() {
+		List<ControlDTO> controlDTOs = this.controlDao.getAllControls();
+
+		Set<Integer> adoptionIds = controlDTOs.stream().map(ControlDTO::getAdoptionId).collect(toSet());
+		List<Adoption> adoptions = this.adoptionAdapter.getAdoptionsByIds(adoptionIds);
+
+		return this.controlMapper.mapAllToDomain(controlDTOs, adoptions);
 	}
 
 }
