@@ -8,13 +8,12 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class MemberPresentationDTO {
+public class AdopterViewModel {
 
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String city;
-	private String email;
-	private String phone;
+	private String address;
+	private String mail;
 
 }

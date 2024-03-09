@@ -1,6 +1,6 @@
 package com.petflix.application.presenter;
 
-import com.petflix.application.dto.AdopterPresentationDTO;
+import com.petflix.application.dto.AdopterViewModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
@@ -48,10 +48,10 @@ class AdopterPresenterTest {
 		return "[{\"id\":0,\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},{\"id\":1,\"firstName\":\"Martin\",\"lastName\":\"Matin\",\"address\":\"Valenciennes\",\"mail\":\"martin.matin@mail-ecv.fr\"}]";
 	}
 
-	private static List<AdopterPresentationDTO> createAdopterDTOs() {
+	private static List<AdopterViewModel> createAdopterDTOs() {
 		return List.of(
-			new AdopterPresentationDTO(0, "Alvin", "Hamaide", "Valenciennes", "alvin.hamaide@mail-ecv.fr"),
-			new AdopterPresentationDTO(1, "Martin", "Matin", "Valenciennes", "martin.matin@mail-ecv.fr")
+			new AdopterViewModel(0, "Alvin", "Hamaide", "Valenciennes", "alvin.hamaide@mail-ecv.fr"),
+			new AdopterViewModel(1, "Martin", "Matin", "Valenciennes", "martin.matin@mail-ecv.fr")
 		);
 	}
 
