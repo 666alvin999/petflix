@@ -6,11 +6,15 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dto.AnimalDTO;
+import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class AnimalMapper {
@@ -57,10 +61,27 @@ public class AnimalMapper {
 		return animalTypeDTOs.stream().map(this::mapToAnimalType).toList();
 	}
 
-	private Member findMember(List<Member> members, AnimalDTO animalDTO) {
-		Member animalMember = null;
+	public Map<VideoId, List<AnimalType>> mapToAnimalTypesByPresentationVideoIds(List<AnimalTypesByPresentationVideoIdDTO> animalTypesByPresentationVideoIdDTOs) {
+		Map<VideoId, List<AnimalType>> map = new HashMap<>();
 
-		for (Member member: members) {
+		animalTypesByPresentationVideoIdDTOs.forEach(
+			animalTypesByPresentationVideoIdDTO -> map.put(
+				new VideoId(animalTypesByPresentationVideoIdDTO.getPresentationVideoId()),
+				Arrays.stream(
+					      animalTypesByPresentationVideoIdDTO
+						      .getAnimalTypes()
+						      .split(",")
+				      )
+				      .map(AnimalType::new)
+				      .toList()
+			)
+		);
+
+		return map;
+	}
+
+	private Member findMember(List<Member> members, AnimalDTO animalDTO) {
+		for (Member member : members) {
 			if (member.id().value() == animalDTO.getId()) {
 				return member;
 			}
@@ -68,5 +89,4 @@ public class AnimalMapper {
 
 		return null;
 	}
-
 }

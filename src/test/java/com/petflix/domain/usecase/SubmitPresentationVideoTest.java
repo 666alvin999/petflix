@@ -31,15 +31,15 @@ class SubmitPresentationVideoTest {
 
 	@Test
 	public void shouldReturnActionSuccess() {
-		//Arrange
+		// Arrange
 		PresentationVideo presentationVideo = new PresentationVideo(new VideoId("1"), "title1", "description1", LocalDate.of(2024, 2, 29));
 
 		when(this.videoAdapter.submitPresentationVideo(presentationVideo)).thenReturn(new ActionSuccess(true));
 
-		//Act
+		// Act
 		ActionSuccess actionSuccess = this.submitPresentationVideo.execute(presentationVideo);
 
-		//Assert
+		// Assert
 		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
 
 		assertThat(actionSuccess).isEqualTo(expectedActionSuccess);

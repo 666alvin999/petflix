@@ -34,17 +34,17 @@ class GetAllVideoFiltersTest {
 
 	@Test
 	public void shouldReturnAnimalTypes() {
-		//Arrange
+		// Arrange
 		List<AnimalType> animalTypes = createAnimalTypes();
 		List<MemberCity> memberCities = createMemberCities();
 
 		when(this.animalPort.getAllTypes()).thenReturn(animalTypes);
 		when(this.memberPort.getAllMembersCity()).thenReturn(memberCities);
 
-		//Act
+		// Act
 		VideoFilters actualVideoFilters = this.getAllVideoFilters.execute();
 
-		//Assert
+		// Assert
 		VideoFilters expectedVideoFilters = createVideoFilters();
 
 		assertThat(actualVideoFilters).isEqualTo(expectedVideoFilters);

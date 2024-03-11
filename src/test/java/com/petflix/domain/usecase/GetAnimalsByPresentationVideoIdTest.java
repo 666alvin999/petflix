@@ -36,16 +36,16 @@ class GetAnimalsByPresentationVideoIdTest {
 
 	@Test
 	public void shouldReturnAnimals() {
-		//Arrange
+		// Arrange
 		VideoId videoId = createVideoId();
 		Animal animal = createAnimal();
 
 		when(this.animalPort.getAnimalsByPresentationVideoId(videoId.value())).thenReturn(List.of(animal));
 
-		//Act
+		// Act
 		List<Animal> actualAnimal = this.getAnimalsByPresentationVideoId.execute(videoId);
 
-		//Assert
+		// Assert
 		List<Animal> expectedAnimals = List.of(createAnimal());
 
 		assertThat(actualAnimal).isEqualTo(expectedAnimals);

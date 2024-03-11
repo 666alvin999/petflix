@@ -20,10 +20,10 @@ class AdopterPresenterTest {
 
 	@Test
 	public void shouldReturnPresentedAdopter() {
-		//Act
+		// Act
 		ResponseEntity<String> actualPresentedAdopter = this.adopterPresenter.present(createAdopterDTOs().get(0));
 
-		//Assert
+		// Assert
 		ResponseEntity<String> expectedPresentedAdopter = ResponseEntity.ok(createPresentedAdopter());
 
 		assertThat(actualPresentedAdopter).isEqualTo(expectedPresentedAdopter);
@@ -31,10 +31,10 @@ class AdopterPresenterTest {
 
 	@Test
 	public void shouldReturnPresentedAdopters() {
-		//Act
+		// Act
 		ResponseEntity<String> actualPresentedAdopters = this.adopterPresenter.presentAll(createAdopterDTOs());
 
-		//Assert
+		// Assert
 		ResponseEntity<String> expectedPresentedAdopters = ResponseEntity.ok(createPresentedAdopters());
 
 		assertThat(actualPresentedAdopters).isEqualTo(expectedPresentedAdopters);

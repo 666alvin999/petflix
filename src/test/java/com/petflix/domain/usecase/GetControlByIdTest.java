@@ -34,15 +34,15 @@ class GetControlByIdTest {
 
 	@Test
 	public void shouldGetControl() {
-		//Arrange
+		// Arrange
 		Control control = createControl();
 
 		when(this.controlPort.getControlById(0)).thenReturn(control);
 
-		//Act
+		// Act
 		Control actualControl = this.getControlById.execute(0);
 
-		//Assert
+		// Assert
 		Control expectedControl = createControl();
 
 		assertThat(actualControl).isEqualTo(expectedControl);

@@ -9,11 +9,13 @@ import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dto.AnimalDTO;
+import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,14 +30,14 @@ class AnimalMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-		//Arrange
+		// Arrange
 		Member member = createMember();
 		AnimalDTO animalDTO = createAnimalDTO();
 
-		//Act
+		// Act
 		Animal actualAnimal = this.animalMapper.mapToDomain(animalDTO, member);
 
-		//Assert
+		// Assert
 		Animal expectedAnimal = createAnimal();
 
 		assertThat(actualAnimal).isEqualTo(expectedAnimal);
@@ -43,13 +45,13 @@ class AnimalMapperTest {
 
 	@Test
 	public void shouldMapDomainToDto() {
-		//Arrange
+		// Arrange
 		Animal animal = createAnimal();
 
-		//Act
+		// Act
 		AnimalDTO actualAnimalDTO = this.animalMapper.mapToDTO(animal);
 
-		//Assert
+		// Assert
 		AnimalDTO expectedAnimalDTO = createAnimalDTO();
 
 		assertThat(actualAnimalDTO).isEqualTo(expectedAnimalDTO);
@@ -57,16 +59,35 @@ class AnimalMapperTest {
 
 	@Test
 	public void shouldMapAnimalTypeDTOsToDomain() {
-	    //Arrange
+	    // Arrange
 		List<String> animalTypeDTOs = List.of("chat", "chien");
 
-	    //Act
+	    // Act
 		List<AnimalType> actualAnimalTypes = this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs);
 
-	    //Assert
+	    // Assert
 		List<AnimalType> expectedAnimalTypes = List.of(new AnimalType("chat"), new AnimalType("chien"));
 
 		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
+	}
+
+	@Test
+	public void mapAnimalTypesAndPresentationVideoIdDtoToMap() {
+		List<AnimalTypesByPresentationVideoIdDTO> animalTypesByPresentationVideoIdDTOs = List.of(
+			new AnimalTypesByPresentationVideoIdDTO("id1", "chat,chien"),
+			new AnimalTypesByPresentationVideoIdDTO("id2", "chat,chien")
+		);
+
+		// Act
+		Map<VideoId, List<AnimalType>> actualMap = this.animalMapper.mapToAnimalTypesByPresentationVideoIds(animalTypesByPresentationVideoIdDTOs);
+
+		// Assert
+		Map<VideoId, List<AnimalType>> expectedMap = Map.of(
+			new VideoId("id1"), List.of(new AnimalType("chat"), new AnimalType("chien")),
+			new VideoId("id2"), List.of(new AnimalType("chat"), new AnimalType("chien"))
+		);
+
+		assertThat(actualMap).isEqualTo(expectedMap);
 	}
 
 	private static Animal createAnimal() {

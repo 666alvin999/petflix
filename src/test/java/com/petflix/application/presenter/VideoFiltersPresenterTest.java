@@ -14,9 +14,9 @@ class VideoFiltersPresenterTest {
 
 	@Test
 	public void shouldReturnPresentedAnimalsAndMember() {
-		//Act
+		// Act
 
-		//Assert
+		// Assert
 	}
 
 }

@@ -46,16 +46,16 @@ class PresentationVideoAdapterTest {
 
 	@Test
 	public void shouldReturnPresentationVideoById() {
-		//Arrange
+		// Arrange
 		PresentationVideoDTO presentationVideoDTO = this.createPresentationVideoDTOs().get(0);
 
 		when(this.presentationVideoDao.getPresentationVideoById("0")).thenReturn(List.of(presentationVideoDTO));
 		when(this.presentationVideoMapper.mapToDomain(presentationVideoDTO)).thenReturn(this.createPresentationVideos().get(0));
 
-		//Act
+		// Act
 		PresentationVideo actualPresentationVideo = this.presentationVideoAdapter.getPresentationVideoById("0");
 
-		//Assert
+		// Assert
 		PresentationVideo expectedPresentationVideo = this.createPresentationVideos().get(0);
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
@@ -63,17 +63,17 @@ class PresentationVideoAdapterTest {
 
 	@Test
 	public void shouldReturnPresentationVideosWithAnimalTypeFilter() {
-		//Arrange
+		// Arrange
 		List<AnimalDTO> animalDTOs = createAnimalsDTO();
 
 		when(this.animalDao.getAnimalsByTypeAndMemberCity("chat", "Valenciennes")).thenReturn(animalDTOs);
 		when(this.presentationVideoDao.getPresentationVideosByIds(Set.of("id1", "id2"))).thenReturn(createPresentationVideoDTOs());
 		when(this.presentationVideoMapper.mapAllToDomain(createPresentationVideoDTOs())).thenReturn(createPresentationVideos());
 
-		//Act
+		// Act
 		List<PresentationVideo> actualPresentationVideos = this.presentationVideoAdapter.getPresentationVideosWithFilter("chat", "Valenciennes");
 
-		//Assert
+		// Assert
 		List<PresentationVideo> expectedPresentationVideos = createPresentationVideos();
 
 		assertThat(actualPresentationVideos).isEqualTo(expectedPresentationVideos);
@@ -81,17 +81,17 @@ class PresentationVideoAdapterTest {
 
 	@Test
 	public void shouldReturnActionSuccess() {
-		//Arrange
+		// Arrange
 		PresentationVideoDTO presentationVideoDTO = createPresentationVideoDTOs().get(0);
 		PresentationVideo presentationVideo = createPresentationVideos().get(0);
 
 		when(this.presentationVideoMapper.mapToDTO(presentationVideo)).thenReturn(presentationVideoDTO);
 		when(this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO)).thenReturn(new ActionSuccess(true));
 
-		//Act
+		// Act
 		ActionSuccess actualActionSuccess = this.presentationVideoAdapter.submitPresentationVideo(presentationVideo);
 
-		//Assert
+		// Assert
 		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
 
 		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);

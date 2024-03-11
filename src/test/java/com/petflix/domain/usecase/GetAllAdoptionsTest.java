@@ -38,7 +38,7 @@ class GetAllAdoptionsTest {
 
 	@Test
 	public void shouldReturnAdoptions() {
-		//Arrange
+		// Arrange
 		Adopter adopter = GetAllAdoptionsTest.createAdopter();
 		Member managingMember = GetAllAdoptionsTest.createMember();
 		Animal animal = GetAllAdoptionsTest.createAnimal(0, "Oslo", 3, managingMember);
@@ -48,10 +48,10 @@ class GetAllAdoptionsTest {
 
 		when(this.adoptionPort.getAllAdoptions()).thenReturn(adoptions);
 
-		//Act
+		// Act
 		List<Adoption> actualAdoptions = this.getAllAdoptions.execute();
 
-		//Assert
+		// Assert
 		Adopter expectedAdopter = GetAllAdoptionsTest.createAdopter();
 		Member expectedManagingMember = GetAllAdoptionsTest.createMember();
 		Animal expectedAnimal = GetAllAdoptionsTest.createAnimal(0, "Oslo", 3, expectedManagingMember);

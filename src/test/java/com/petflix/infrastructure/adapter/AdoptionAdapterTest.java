@@ -51,7 +51,7 @@ class AdoptionAdapterTest {
 
 	@Test
 	public void shouldReturnAllAdoptions() {
-		//Arrange
+		// Arrange
 		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
 		List<Adoption> adoptions = createAdoptions();
 		List<Animal> animals = createAnimals();
@@ -65,10 +65,10 @@ class AdoptionAdapterTest {
 		when(this.animalAdapter.getAnimalsByIds(animalsIds)).thenReturn(animals);
 		when(this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals)).thenReturn(adoptions);
 
-		//Act
+		// Act
 		List<Adoption> actualAdoptions = this.adoptionAdapter.getAllAdoptions();
 
-		//Assert
+		// Assert
 		List<Adoption> expectedAdoptions = createAdoptions();
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
@@ -76,7 +76,7 @@ class AdoptionAdapterTest {
 
 	@Test
 	public void shouldReturnAdoptionById() {
-		//Arrange
+		// Arrange
 		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
 		Adoption adoption = createAdoptions().get(0);
 		Animal animal = createAnimals().get(0);
@@ -87,10 +87,10 @@ class AdoptionAdapterTest {
 		when(this.animalAdapter.getAnimalById(0)).thenReturn(animal);
 		when(this.adoptionMapper.mapToDomain(adoptionDTOs.get(0), adopter, animal)).thenReturn(adoption);
 
-		//Act
+		// Act
 		Adoption actualAdoption = this.adoptionAdapter.getAdoptionById(0);
 
-		//Assert
+		// Assert
 		Adoption expectedAdoption = createAdoptions().get(0);
 
 		assertThat(actualAdoption).isEqualTo(expectedAdoption);
@@ -98,7 +98,7 @@ class AdoptionAdapterTest {
 
 	@Test
 	public void shouldReturnAdoptionsByIds() {
-		//Arrange
+		// Arrange
 		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
 		List<Adopter> adopters = createAdopters();
 		List<Animal> animals = createAnimals();
@@ -110,10 +110,10 @@ class AdoptionAdapterTest {
 		when(this.animalAdapter.getAnimalsByIds(Set.of(0, 1))).thenReturn(animals);
 		when(this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals)).thenReturn(adoptions);
 
-		//Act
+		// Act
 		List<Adoption> actualAdoptions = this.adoptionAdapter.getAdoptionsByIds(Set.of(0, 1));
 
-		//Assert
+		// Assert
 		List<Adoption> expectedAdoptions = createAdoptions();
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);

@@ -20,10 +20,10 @@ class PresentationVideoAndAnimalTypesPresenterTest {
 
 		@Test
 		public void shouldReturnPresentedAdopter() {
-			//Act
+			// Act
 			ResponseEntity<String> actualPresented = this.presentationVideoAndAnimalTypesPresenter.present(createViewModels().get(0));
 
-			//Assert
+			// Assert
 			ResponseEntity<String> expectedPresented = ResponseEntity.ok(createPresented());
 
 			assertThat(actualPresented).isEqualTo(expectedPresented);
@@ -31,10 +31,10 @@ class PresentationVideoAndAnimalTypesPresenterTest {
 
 		@Test
 		public void shouldReturnPresentedAdopters() {
-			//Act
+			// Act
 			ResponseEntity<String> actualPresented = this.presentationVideoAndAnimalTypesPresenter.presentAll(createViewModels());
 
-			//Assert
+			// Assert
 			ResponseEntity<String> expectedPresented = ResponseEntity.ok(createAllPresented());
 
 			assertThat(actualPresented).isEqualTo(expectedPresented);

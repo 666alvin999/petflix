@@ -30,13 +30,13 @@ class AdoptionMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-		//Arrange
+		// Arrange
 		AdoptionDTO adoptionDTO = createAdoptionDTOs().get(0);
 
-		//Act
+		// Act
 		Adoption actualAdoption = this.adoptionMapper.mapToDomain(adoptionDTO, createAdopters().get(0), createAnimals().get(0));
 
-		//Assert
+		// Assert
 		Adoption expectedAdoption = createAdoptions().get(0);
 
 		assertThat(actualAdoption).isEqualTo(expectedAdoption);
@@ -44,13 +44,13 @@ class AdoptionMapperTest {
 
 	@Test
 	public void shouldMapAllDtosToDomain() {
-		//Arrange
+		// Arrange
 		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
 
-		//Act
+		// Act
 		List<Adoption> actualAdoptions = this.adoptionMapper.mapAllToDomain(adoptionDTOs, createAdopters(), createAnimals());
 
-		//Assert
+		// Assert
 		List<Adoption> expectedAdoptions = createAdoptions();
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
@@ -58,13 +58,13 @@ class AdoptionMapperTest {
 
 	@Test
 	public void shouldMapDomainToDto() {
-		//Arrange
+		// Arrange
 		Adoption adoption = createAdoptions().get(0);
 
-		//Act
+		// Act
 		AdoptionDTO actualAdoptionDTO = this.adoptionMapper.mapToDTO(adoption);
 
-		//Assert
+		// Assert
 		AdoptionDTO expectedAdoptionDTO = createAdoptionDTOs().get(0);
 
 		assertThat(actualAdoptionDTO).isEqualTo(expectedAdoptionDTO);

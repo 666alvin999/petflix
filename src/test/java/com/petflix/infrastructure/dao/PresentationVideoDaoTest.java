@@ -37,10 +37,10 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldReturnAllPresentationVideoDTOs() {
-		//Act
+		// Act
 		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getAllPresentationVideos();
 
-		//Assert
+		// Assert
 		List<PresentationVideoDTO> expectedPresentationVideo = createPresentationVideoDTOs();
 
 		assertThat(presentationVideo).isEqualTo(expectedPresentationVideo);
@@ -48,10 +48,10 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldReturnPresentationVideoDTOs() {
-		//Act
+		// Act
 		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getPresentationVideoById("id1");
 
-		//Assert
+		// Assert
 		PresentationVideoDTO expectedPresentationVideo = createPresentationVideoDTOs().get(0);
 
 		assertThat(presentationVideo).isEqualTo(List.of(expectedPresentationVideo));
@@ -59,10 +59,10 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldReturnPresentationVideosWithUrls() {
-		//Act
+		// Act
 		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByIds(Set.of("id1", "id2"));
 
-		//Assert
+		// Assert
 		List<PresentationVideoDTO> expectedPresentationVideoDTOs = createPresentationVideoDTOs();
 
 		assertThat(actualPresentationVideosDTO).isEqualTo(expectedPresentationVideoDTOs);
@@ -70,13 +70,13 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldSubmitPresentationVideoDTO() {
-		//Arrange
+		// Arrange
 		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO("3", "title", "description", "2024-03-08");
 
-		//Act
+		// Act
 		ActionSuccess actualActionSuccess = this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO);
 
-		//Assert
+		// Assert
 		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
 
 		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);

@@ -29,4 +29,4 @@ VALUES (0, 'Alvin', 'Hamaide', 'Valenciennes', 'alvin.hamaide@mail-ecv.fr', '06X
 INSERT INTO ANIMAL
 VALUES (0, 'Oslo', 'chat', 3, 'id1', 0, '2024-03-08'),
        (1, 'Uta', 'chat', 1, 'id1', 0, '2024-03-08'),
-       (2, 'Maul', 'chien', 4, 'id1', 0, '2024-03-08');
+       (2, 'Maul', 'chien', 4, 'id2', 0, '2024-03-08');

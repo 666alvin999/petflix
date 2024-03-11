@@ -1,6 +1,7 @@
 package com.petflix.infrastructure.dao;
 
 import com.petflix.infrastructure.dto.AnimalDTO;
+import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -26,6 +27,7 @@ public class AnimalDao {
 	private final String GET_ALL_TYPES = "SELECT DISTINCT TYPE FROM ANIMAL;";
 	private final String GET_TYPES_BY_PRESENTATION_VIDEO_ID = "SELECT DISTINCT TYPE FROM ANIMAL WHERE PRESENTATION_VIDEO_ID = :id";
 	private final String GET_BY_TYPE_AND_CITY_BASE = "SELECT * FROM ANIMAL";
+	private final String GET_TYPE_GROUP_BY_PRESENTATION_VIDEO_ID = "SELECT PRESENTATION_VIDEO_ID, GROUP_CONCAT(DISTINCT TYPE) as ANIMAL_TYPES FROM ANIMAL WHERE ANIMAL.PRESENTATION_VIDEO_ID IN (:ids) GROUP BY PRESENTATION_VIDEO_ID";
 
 	public AnimalDao() {
 	}
@@ -89,4 +91,12 @@ public class AnimalDao {
 
 		return this.jdbcTemplate.queryForList(GET_TYPES_BY_PRESENTATION_VIDEO_ID, parameters, String.class);
 	}
+
+	public List<AnimalTypesByPresentationVideoIdDTO> getAnimalTypesGroupByPresentationVideoIds(Set<String> ids) {
+		Map<String, Set<String>> parameters = Map.of("ids", ids);
+
+		List<AnimalTypesByPresentationVideoIdDTO> query = this.jdbcTemplate.query(GET_TYPE_GROUP_BY_PRESENTATION_VIDEO_ID, parameters, new BeanPropertyRowMapper<>(AnimalTypesByPresentationVideoIdDTO.class));
+		return query;
+	}
+
 }

@@ -27,13 +27,13 @@ class ControlMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-		//Arrange
+		// Arrange
 		ControlDTO controlDTO = createControlDTOs().get(0);
 
-		//Act
+		// Act
 		Control actualControl = this.controlMapper.mapToDomain(controlDTO, createAdoptions().get(0));
 
-		//Assert
+		// Assert
 		Control expectedControl = createControls().get(0);
 
 		assertThat(actualControl).isEqualTo(expectedControl);
@@ -41,13 +41,13 @@ class ControlMapperTest {
 
 	@Test
 	public void shouldMapAllDtosToDomain() {
-		//Arrange
+		// Arrange
 		List<ControlDTO> controlDTOs = createControlDTOs();
 
-		//Act
+		// Act
 		List<Control> actualControl = this.controlMapper.mapAllToDomain(controlDTOs, createAdoptions());
 
-		//Assert
+		// Assert
 		List<Control> expectedControls = createControls();
 
 		assertThat(actualControl).isEqualTo(expectedControls);
@@ -55,13 +55,13 @@ class ControlMapperTest {
 
 	@Test
 	public void shouldMapDomainToDto() {
-		//Arrange
+		// Arrange
 		Control control = createControls().get(0);
 
-		//Act
+		// Act
 		ControlDTO actualControlDTO = this.controlMapper.mapToDTO(control);
 
-		//Assert
+		// Assert
 		ControlDTO expectedControlDTO = createControlDTOs().get(0);
 
 		assertThat(actualControlDTO).isEqualTo(expectedControlDTO);

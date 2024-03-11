@@ -22,13 +22,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-		//Arrange
+		// Arrange
 		PresentationVideoDTO presentationVideoDTO = createPresentationVideoDTOs().get(0);
 
-		//Act
+		// Act
 		PresentationVideo actualPresentationVideo = this.presentationVideoMapper.mapToDomain(presentationVideoDTO);
 
-		//Assert
+		// Assert
 		PresentationVideo expectedPresentationVideo = createPresentationVideos().get(0);
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
@@ -36,13 +36,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapAllDtosToDomain() {
-		//Arrange
+		// Arrange
 		List<PresentationVideoDTO> presentationVideoDTOs = createPresentationVideoDTOs();
 
-		//Act
+		// Act
 		List<PresentationVideo> actualPresentationVideos = this.presentationVideoMapper.mapAllToDomain(presentationVideoDTOs);
 
-		//Assert
+		// Assert
 		List<PresentationVideo> expectedPresentationVideos = createPresentationVideos();
 
 		assertThat(actualPresentationVideos).isEqualTo(expectedPresentationVideos);
@@ -50,13 +50,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapDomainToDTO() {
-		//Arrange
+		// Arrange
 		PresentationVideo presentationVideos = createPresentationVideos().get(0);
 
-		//Act
+		// Act
 		PresentationVideoDTO actualPresentationVideoDTO = this.presentationVideoMapper.mapToDTO(presentationVideos);
 
-		//Assert
+		// Assert
 		PresentationVideoDTO expectedPresentationVideoDTO = createPresentationVideoDTOs().get(0);
 
 		assertThat(actualPresentationVideoDTO).isEqualTo(expectedPresentationVideoDTO);
@@ -64,13 +64,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapAllDomainToDTO() {
-		//Arrange
+		// Arrange
 		List<PresentationVideo> presentationVideos = createPresentationVideos();
 
-		//Act
+		// Act
 		List<PresentationVideoDTO> actualPresentationVideoDTOs = this.presentationVideoMapper.mapAllToDTO(presentationVideos);
 
-		//Assert
+		// Assert
 		List<PresentationVideoDTO> expectedPresentationVideoDTOs = createPresentationVideoDTOs();
 
 		assertThat(actualPresentationVideoDTOs).isEqualTo(expectedPresentationVideoDTOs);

@@ -35,15 +35,15 @@ class GetAllControlsTest {
 
 	@Test
 	public void shouldReturnAllControls() {
-		//Arrange
+		// Arrange
 		List<Control> controls = createControls();
 
 		when(this.controlPort.getAllControls()).thenReturn(controls);
 
-		//Act
+		// Act
 		List<Control> actualControls = this.getAllControls.execute();
 
-		//Assert
+		// Assert
 		List<Control> expectedControls = createControls();
 
 		assertThat(actualControls).isEqualTo(expectedControls);

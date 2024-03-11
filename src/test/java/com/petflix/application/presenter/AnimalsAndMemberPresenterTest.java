@@ -22,10 +22,10 @@ class AnimalsAndMemberPresenterTest {
 
 	@Test
 	public void shouldReturnPresentedAnimalsAndMember() {
-		//Act
+		// Act
 		ResponseEntity<String> actualPresentedMember = this.animalsAndMemberPresenter.present(createAnimalsAndMemberDTOs());
 
-	    //Assert
+	    // Assert
 		ResponseEntity<String> expectedPresentedMember = ResponseEntity.ok(createPresentedMember());
 
 		assertThat(actualPresentedMember).isEqualTo(expectedPresentedMember);
