@@ -64,4 +64,12 @@ public class AnimalAdapter implements AnimalPort {
 
 		return this.animalMapper.mapAllToDomain(animalDTOs, members);
 	}
+
+	@Override
+	public List<AnimalType> getAnimalTypesByPresentationVideoUrl(String url) {
+		List<String> animalTypeDTOs = this.animalDao.getTypesByPresentationVideoUrl(url);
+
+		return this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs);
+	}
+
 }

@@ -21,9 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -125,6 +123,24 @@ class AnimalAdapterTest {
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
 
+	@Test
+	public void shouldReturnAnimalTypesByUrl() {
+	    //Arrange
+		List<String> animalTypeDTOs = createAnimalTypeDTOs();
+		List<AnimalType> animalTypes = createAnimalTypes();
+
+		when(this.animalDao.getTypesByPresentationVideoUrl("https://www.url1.com")).thenReturn(animalTypeDTOs);
+		when(this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs)).thenReturn(animalTypes);
+
+	    //Act
+		List<AnimalType> actualAnimalTypes = this.animalAdapter.getAnimalTypesByPresentationVideoUrl("https://www.url1.com");
+
+	    //Assert
+		List<AnimalType> expectedAnimalTypes = createAnimalTypes();
+
+		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
+	}
+
 	private static List<Animal> createAnimals(String url, Member member) {
 		return List.of(
 			new Animal(new Id(0),
@@ -161,9 +177,9 @@ class AnimalAdapterTest {
 
 	private static List<AnimalDTO> createAnimalDTOs() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "08-03-2024", null),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "08-03-2024", null),
-			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "08-03-2024", null)
+			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "2024-03-08", null),
+			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "2024-03-08", null),
+			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "2024-03-08", null)
 		);
 	}
 

@@ -90,7 +90,7 @@ class AnimalMapperTest {
 			3,
 			"https://www.url1.com",
 			0,
-			"08-03-2024",
+			"2024-03-08",
 			null
 		);
 	}

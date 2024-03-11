@@ -32,14 +32,14 @@ class AnimalsAndMemberPresenterTest {
 	}
 
 	private static String createPresentedMember() {
-		return "{\"animals\":[{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoUrl\":\"https://www.url1.com\",\"arrivalDate\":\"09-03-2024\",\"adopted\":false},{\"name\":\"Uta\",\"type\":\"chat\",\"age\":1,\"presentationVideoUrl\":\"https://www.url1.com\",\"arrivalDate\":\"09-03-2024\",\"adopted\":false}],\"member\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"city\":\"Valenciennes\",\"email\":\"alvin.hamaide@mail-ecv.fr\",\"phone\":\"06XXXXXXXX\"}}";
+		return "{\"animals\":[{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoUrl\":\"https://www.url1.com\",\"arrivalDate\":\"2024-03-08\",\"adopted\":false},{\"name\":\"Uta\",\"type\":\"chat\",\"age\":1,\"presentationVideoUrl\":\"https://www.url1.com\",\"arrivalDate\":\"2024-03-08\",\"adopted\":false}],\"member\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"city\":\"Valenciennes\",\"email\":\"alvin.hamaide@mail-ecv.fr\",\"phone\":\"06XXXXXXXX\"}}";
 	}
 
 	private static AnimalsAndMemberViewModel createAnimalsAndMemberDTOs() {
 		return new AnimalsAndMemberViewModel(
 			List.of(
-				new AnimalViewModel("Oslo", "chat", 3, "https://www.url1.com", "09-03-2024", false),
-				new AnimalViewModel("Uta", "chat", 1, "https://www.url1.com", "09-03-2024", false)
+				new AnimalViewModel("Oslo", "chat", 3, "https://www.url1.com", "2024-03-08", false),
+				new AnimalViewModel("Uta", "chat", 1, "https://www.url1.com", "2024-03-08", false)
 			),
 			new MemberViewModel("Alvin", "Hamaide", "Valenciennes", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX")
 		);

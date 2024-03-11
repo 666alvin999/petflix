@@ -71,7 +71,7 @@ class PresentationVideoDaoTest {
 	@Test
 	public void shouldSubmitPresentationVideoDTO() {
 		//Arrange
-		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO(3, "https://www.url3.com", "title", "description", "01-03-2024");
+		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO("3", "https://www.url3.com", "title", "description", "2024-03-08");
 
 		//Act
 		ActionSuccess actualActionSuccess = this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO);
@@ -93,18 +93,18 @@ class PresentationVideoDaoTest {
 	private static List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
-				1,
+				"1",
 				"https://www.url1.com",
 				"title1",
 				"description1",
-				"26-02-2024"
+				"2024-03-08"
 			),
 			new PresentationVideoDTO(
-				2,
+				"2",
 				"https://www.url2.com",
 				"title2",
 				"description2",
-				"26-02-2024"
+				"2024-03-08"
 			)
 		);
 	}

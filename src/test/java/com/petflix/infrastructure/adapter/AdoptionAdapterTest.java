@@ -139,8 +139,8 @@ class AdoptionAdapterTest {
 
 	private static List<AdoptionDTO> createAdoptionDTOs() {
 		return List.of(
-			new AdoptionDTO(0, 0, 0, "03-03-2024"),
-			new AdoptionDTO(1, 1, 1, "03-03-2024")
+			new AdoptionDTO(0, 0, 0, "2024-03-08"),
+			new AdoptionDTO(1, 1, 1, "2024-03-08")
 		);
 	}
 

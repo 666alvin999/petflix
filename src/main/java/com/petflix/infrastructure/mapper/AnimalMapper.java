@@ -17,7 +17,7 @@ import static java.util.Objects.nonNull;
 @Component
 public class AnimalMapper {
 
-	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public Animal mapToDomain(AnimalDTO animalDTO, Member member) {
 		LocalDate adoptionDate = nonNull(animalDTO.getAdoptionDate()) ? LocalDate.parse(animalDTO.getAdoptionDate(), this.dateFormatter) : null;

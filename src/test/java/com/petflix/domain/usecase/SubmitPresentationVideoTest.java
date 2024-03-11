@@ -2,8 +2,8 @@ package com.petflix.domain.usecase;
 
 import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.domain.port.PresentationVideoPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class SubmitPresentationVideoTest {
 	@Test
 	public void shouldReturnActionSuccess() {
 		//Arrange
-		PresentationVideo presentationVideo = new PresentationVideo(new Id(1), new Url("https://www.url1.com/"), "title1", "description1", LocalDate.of(2024, 2, 29));
+		PresentationVideo presentationVideo = new PresentationVideo(new VideoId("1"), new Url("https://www.url1.com/"), "title1", "description1", LocalDate.of(2024, 2, 29));
 
 		when(this.videoAdapter.submitPresentationVideo(presentationVideo)).thenReturn(new ActionSuccess(true));
 

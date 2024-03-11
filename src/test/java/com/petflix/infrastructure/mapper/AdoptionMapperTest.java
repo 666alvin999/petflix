@@ -76,18 +76,18 @@ class AdoptionMapperTest {
 				new Id(0),
 				createAdopters().get(0),
 				createAnimals().get(0),
-				LocalDate.of(2024, 3, 3)
+				LocalDate.of(2024, 3, 8)
 			),
 			new Adoption(
 				new Id(1),
 				createAdopters().get(1),
 				createAnimals().get(1),
-				LocalDate.of(2024, 3, 3)
+				LocalDate.of(2024, 3, 8)
 			));
 	}
 
 	private static List<AdoptionDTO> createAdoptionDTOs() {
-		return List.of(new AdoptionDTO(0, 0, 0, "03-03-2024"), new AdoptionDTO(1, 1, 1, "03-03-2024"));
+		return List.of(new AdoptionDTO(0, 0, 0, "2024-03-08"), new AdoptionDTO(1, 1, 1, "2024-03-08"));
 	}
 
 	private static List<Adopter> createAdopters() {

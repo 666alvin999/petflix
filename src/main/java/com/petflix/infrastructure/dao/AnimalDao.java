@@ -24,6 +24,7 @@ public class AnimalDao {
 	private final String GET_BY_IDS = "SELECT * FROM ANIMAL WHERE ID IN (:ids);";
 	private final String GET_BY_PRESENTATION_VIDEO_URL = "SELECT * FROM ANIMAL WHERE PRESENTATION_VIDEO_URL = :url;";
 	private final String GET_ALL_TYPES = "SELECT DISTINCT TYPE FROM ANIMAL;";
+	private static final String GET_TYPES_BY_PRESENTATION_VIDEO_URL = "SELECT DISTINCT TYPE FROM ANIMAL WHERE PRESENTATION_VIDEO_URL = :url";
 	private final String GET_BY_TYPE_AND_CITY_BASE = "SELECT * FROM ANIMAL";
 
 	public AnimalDao() {
@@ -83,4 +84,9 @@ public class AnimalDao {
 		return this.jdbcTemplate.query(sqlQuery, parameters, new BeanPropertyRowMapper<>(AnimalDTO.class));
 	}
 
+	public List<String> getTypesByPresentationVideoUrl(String url) {
+		Map<String, String> parameters = Map.of("url", url);
+
+		return this.jdbcTemplate.queryForList(GET_TYPES_BY_PRESENTATION_VIDEO_URL, parameters, String.class);
+	}
 }

@@ -9,5 +9,5 @@ CREATE TABLE ADOPTION
 );
 
 INSERT INTO ADOPTION
-VALUES (0, 0, 0, '29-02-2024'),
-       (1, 0, 1, '29-02-2024');
+VALUES (0, 0, 0, '2024-03-08'),
+       (1, 0, 1, '2024-03-08');

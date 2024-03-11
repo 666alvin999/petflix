@@ -8,5 +8,5 @@ CREATE TABLE CONTROL
 );
 
 INSERT INTO CONTROL
-VALUES (0, 0, '27-02-2024'),
-       (1, 1, '08-03-2024');
+VALUES (0, 0, '2024-03-08'),
+       (1, 1, '2024-03-08');

@@ -2,8 +2,8 @@ package com.petflix.infrastructure.adapter;
 
 import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dao.AnimalDao;
 import com.petflix.infrastructure.dao.PresentationVideoDao;
 import com.petflix.infrastructure.dto.AnimalDTO;
@@ -100,26 +100,26 @@ class PresentationVideoAdapterTest {
 
 	private static List<AnimalDTO> createAnimalsDTO() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "08-03-2024", null),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url2.com", 0, "08-03-2024", null)
+			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "2024-03-08", null),
+			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url2.com", 0, "2024-03-08", null)
 		);
 	}
 
 	private static List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
-				0,
+				"0",
 				"https://www.url1.com",
 				"title",
 				"description",
-				"01-03-2024"
+				"2024-03-08"
 			),
 			new PresentationVideoDTO(
-				1,
+				"1",
 				"https://www.url2.com",
 				"title",
 				"description",
-				"01-03-2024"
+				"2024-03-08"
 			)
 		);
 	}
@@ -127,14 +127,14 @@ class PresentationVideoAdapterTest {
 	private static List<PresentationVideo> createPresentationVideos() {
 		return List.of(
 			new PresentationVideo(
-				new Id(0),
+				new VideoId("0"),
 				new Url("https://www.url1.com"),
 				"title",
 				"description",
 				LocalDate.of(2024, 3, 1)
 			),
 			new PresentationVideo(
-				new Id(1),
+				new VideoId("1"),
 				new Url("https://www.url2.com"),
 				"title",
 				"description",

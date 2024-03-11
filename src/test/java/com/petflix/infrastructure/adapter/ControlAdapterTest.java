@@ -88,7 +88,7 @@ class ControlAdapterTest {
 	}
 
 	private static ControlDTO createControlDTO() {
-		return new ControlDTO(0, 0, "29-02-2024");
+		return new ControlDTO(0, 0, "2024-03-08");
 	}
 
 	private Adoption createAdoption() {

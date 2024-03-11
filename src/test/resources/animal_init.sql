@@ -28,6 +28,6 @@ INSERT INTO MEMBER
 VALUES (0, 'Alvin', 'Hamaide', 'Valenciennes', 'alvin.hamaide@mail-ecv.fr', '06XXXXXXXX');
 
 INSERT INTO ANIMAL
-VALUES (0, 'Oslo', 'chat', 3, 'https://www.url1.com', 0, '08-03-2024', null),
-       (1, 'Uta', 'chat', 1, 'https://www.url1.com', 0, '08-03-2024', null),
-       (2, 'Maul', 'chien', 4, 'https://www.url1.com', 0, '08-03-2024', null);
+VALUES (0, 'Oslo', 'chat', 3, 'https://www.url1.com', 0, '2024-03-08', null),
+       (1, 'Uta', 'chat', 1, 'https://www.url1.com', 0, '2024-03-08', null),
+       (2, 'Maul', 'chien', 4, 'https://www.url1.com', 0, '2024-03-08', null);

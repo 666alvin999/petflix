@@ -83,6 +83,15 @@ class AnimalDaoTest {
 		assertThat(actualTypes).isEqualTo(expectedTypes);
 	}
 
+	@Test
+	public void shouldReturnTypesByUrl() {
+	    //Act
+		List<String> actualTypes = this.animalDao.getTypesByPresentationVideoUrl("https://www.url1.com");
+
+	    //Assert
+	    List<String> expectedTypes = List.of("chien", "chat");
+	}
+
 	@ParameterizedTest
 	@MethodSource("getTestsData")
 	public void shouldGetAnimalByTypeAndMemberCity(String type, String city, List<AnimalDTO> expectedAnimalDTOs) {
@@ -105,9 +114,9 @@ class AnimalDaoTest {
 
 	private static List<AnimalDTO> createAnimals() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "08-03-2024", null),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "08-03-2024", null),
-			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "08-03-2024", null)
+			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "2024-03-08", null),
+			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "2024-03-08", null),
+			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "2024-03-08", null)
 		);
 	}
 

@@ -72,20 +72,20 @@ class ControlMapperTest {
 			new Control(
 				new Id(0),
 				createAdoption(),
-				LocalDate.of(2024, 2, 29)
+				LocalDate.of(2024, 3, 8)
 			),
 			new Control(
 				new Id(1),
 				createAdoption(),
-				LocalDate.of(2024, 2, 29)
+				LocalDate.of(2024, 3, 8)
 			)
 		);
 	}
 
 	private static List<ControlDTO> createControlDTOs() {
 		return List.of(
-			new ControlDTO(0, 0, "29-02-2024"),
-			new ControlDTO(1, 0, "29-02-2024")
+			new ControlDTO(0, 0, "2024-03-08"),
+			new ControlDTO(1, 0, "2024-03-08")
 		);
 	}
 

@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class ControlMapper {
 
-	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public Control mapToDomain(ControlDTO controlDTO, Adoption adoption) {
 		return new Control(

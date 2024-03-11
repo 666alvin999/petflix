@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class AdoptionMapper {
 
-	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public Adoption mapToDomain(AdoptionDTO adoptionDTO, Adopter adopter, Animal animal) {
 		return new Adoption(
