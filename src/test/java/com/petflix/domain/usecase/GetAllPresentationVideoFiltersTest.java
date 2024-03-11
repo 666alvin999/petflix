@@ -1,6 +1,6 @@
 package com.petflix.domain.usecase;
 
-import com.petflix.domain.bean.VideoFilters;
+import com.petflix.domain.bean.PresentationVideoFilters;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.domain.port.AnimalPort;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetAllVideoFiltersTest {
+class GetAllPresentationVideoFiltersTest {
 
 	private GetAllVideoFilters getAllVideoFilters;
 
@@ -42,16 +42,16 @@ class GetAllVideoFiltersTest {
 		when(this.memberPort.getAllMembersCity()).thenReturn(memberCities);
 
 		// Act
-		VideoFilters actualVideoFilters = this.getAllVideoFilters.execute();
+		PresentationVideoFilters actualPresentationVideoFilters = this.getAllVideoFilters.execute();
 
 		// Assert
-		VideoFilters expectedVideoFilters = createVideoFilters();
+		PresentationVideoFilters expectedPresentationVideoFilters = createVideoFilters();
 
-		assertThat(actualVideoFilters).isEqualTo(expectedVideoFilters);
+		assertThat(actualPresentationVideoFilters).isEqualTo(expectedPresentationVideoFilters);
 	}
 
-	private static VideoFilters createVideoFilters() {
-		return new VideoFilters(createAnimalTypes(), createMemberCities());
+	private static PresentationVideoFilters createVideoFilters() {
+		return new PresentationVideoFilters(createAnimalTypes(), createMemberCities());
 	}
 
 	private static List<AnimalType> createAnimalTypes() {

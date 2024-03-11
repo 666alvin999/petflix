@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class VideoFiltersViewModel {
+public class PresentationVideoFiltersViewModel {
 
 	private List<String> animalFilters;
 	private List<String> cityFilters;

@@ -6,12 +6,12 @@ import com.petflix.domain.bean.memberfield.MemberCity;
 import java.util.List;
 import java.util.Objects;
 
-public class VideoFilters {
+public class PresentationVideoFilters {
 
 	private List<AnimalType> animalTypes;
 	private List<MemberCity> memberCities;
 
-	public VideoFilters(List<AnimalType> animalTypes, List<MemberCity> memberCities) {
+	public PresentationVideoFilters(List<AnimalType> animalTypes, List<MemberCity> memberCities) {
 		this.animalTypes = animalTypes;
 		this.memberCities = memberCities;
 	}
@@ -40,7 +40,7 @@ public class VideoFilters {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		VideoFilters that = (VideoFilters) o;
+		PresentationVideoFilters that = (PresentationVideoFilters) o;
 		return Objects.equals(getAnimalTypes(), that.getAnimalTypes()) && Objects.equals(getMemberCities(), that.getMemberCities());
 	}
 

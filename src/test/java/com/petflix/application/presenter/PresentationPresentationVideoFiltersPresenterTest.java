@@ -3,13 +3,13 @@ package com.petflix.application.presenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class VideoFiltersPresenterTest {
+class PresentationPresentationVideoFiltersPresenterTest {
 
-	private VideoFiltersPresenter videoFiltersPresenter;
+	private PresentationVideoFiltersPresenter presentationVideoFiltersPresenter;
 
 	@BeforeEach
 	public void setUp() {
-		this.videoFiltersPresenter = new VideoFiltersPresenter();
+		this.presentationVideoFiltersPresenter = new PresentationVideoFiltersPresenter();
 	}
 
 	@Test
