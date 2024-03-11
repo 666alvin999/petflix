@@ -6,6 +6,7 @@ import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -33,6 +34,11 @@ class PresentationVideoDaoTest {
 		setField(this.presentationVideoDao, "jdbcTemplate", this.jdbcTemplate);
 
 		initTables();
+	}
+
+	@AfterEach
+	public void clean() {
+		dropTables();
 	}
 
 	@Test
@@ -82,14 +88,6 @@ class PresentationVideoDaoTest {
 		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
-	@SneakyThrows
-	private void initTables() {
-		this.jdbcTemplate.update(
-			new String(readAllBytes(Paths.get("src/test/resources/video_init.sql"))),
-			new HashMap<>()
-		);
-	}
-
 	private static List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
@@ -104,6 +102,22 @@ class PresentationVideoDaoTest {
 				"description2",
 				"2024-03-08"
 			)
+		);
+	}
+
+	@SneakyThrows
+	private void initTables() {
+		this.jdbcTemplate.update(
+			new String(readAllBytes(Paths.get("src/test/resources/video_init.sql"))),
+			new HashMap<>()
+		);
+	}
+
+	@SneakyThrows
+	private void dropTables() {
+		this.jdbcTemplate.update(
+			new String(readAllBytes(Paths.get("src/test/resources/video_clean.sql"))),
+			new HashMap<>()
 		);
 	}
 

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -63,8 +64,9 @@ public class HomepageController {
 
 	@GetMapping("getAllVideoOverviews")
 	@CrossOrigin(origins = {"http://localhost:5173", "https://ecv-petflix.netlify.app/"})
-	public ResponseEntity<String> getAllVideoOverviews() {
-		List<PresentationVideo> presentationVideos = this.getPresentationVideosWithFilter.execute(null, null);
+	public ResponseEntity<String> getAllVideoOverviews(@RequestParam(required = false) String animalFilter, @RequestParam(required = false) String cityFilter) {
+
+		List<PresentationVideo> presentationVideos = this.getPresentationVideosWithFilter.execute(animalFilter, cityFilter);
 		Set<VideoId> presentationVideoIds = presentationVideos.stream().map(PresentationVideo::id).collect(toSet());
 		Map<VideoId, List<AnimalType>> animalTypesByPresentationVideoIds = this.getAnimalTypesByPresentationVideoIds.execute(presentationVideoIds);
 

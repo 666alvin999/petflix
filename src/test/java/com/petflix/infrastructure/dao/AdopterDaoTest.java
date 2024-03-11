@@ -5,6 +5,7 @@ import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -32,6 +33,11 @@ class AdopterDaoTest {
 		setField(this.adopterDao, "jdbcTemplate", this.jdbcTemplate);
 
 		initTables();
+	}
+
+	@AfterEach
+	public void clean() {
+		dropTables();
 	}
 
 	@Test
@@ -79,6 +85,14 @@ class AdopterDaoTest {
 	private void initTables() {
 		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/adopter_init.sql"))),
+			new HashMap<>()
+		);
+	}
+
+	@SneakyThrows
+	private void dropTables() {
+		this.jdbcTemplate.update(
+			new String(readAllBytes(Paths.get("src/test/resources/adopter_clean.sql"))),
 			new HashMap<>()
 		);
 	}

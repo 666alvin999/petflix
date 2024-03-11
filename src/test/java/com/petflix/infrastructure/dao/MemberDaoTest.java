@@ -5,6 +5,7 @@ import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -32,6 +33,11 @@ class MemberDaoTest {
 		setField(this.memberDao, "jdbcTemplate", this.jdbcTemplate);
 
 		initTables();
+	}
+
+	@AfterEach
+	public void clean() {
+		dropTables();
 	}
 
 	@Test
@@ -92,6 +98,14 @@ class MemberDaoTest {
 	private void initTables() {
 		this.jdbcTemplate.update(
 			new String(readAllBytes(Paths.get("src/test/resources/member_init.sql"))),
+			new HashMap<>()
+		);
+	}
+
+	@SneakyThrows
+	private void dropTables() {
+		this.jdbcTemplate.update(
+			new String(readAllBytes(Paths.get("src/test/resources/member_clean.sql"))),
 			new HashMap<>()
 		);
 	}
