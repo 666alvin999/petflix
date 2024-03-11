@@ -8,8 +8,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.domain.port.AdoptionPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,8 +64,8 @@ class GetAllAdoptionsTest {
 
 	private static List<Adoption> createAdoptions(Adopter adopter, Animal animal, Animal secondAnimal) {
 		return List.of(
-			new Adoption(new Id(0), adopter, animal, LocalDate.of(2024, 2, 29)),
-			new Adoption(new Id(1), adopter, secondAnimal, LocalDate.of(2024, 2, 29))
+			new Adoption(animal, adopter, LocalDate.of(2024, 2, 29)),
+			new Adoption(secondAnimal, adopter, LocalDate.of(2024, 2, 29))
 		);
 	}
 
@@ -75,10 +75,10 @@ class GetAllAdoptionsTest {
 			animalName,
 			new AnimalType("chat"),
 			age,
-			new Url("https://www.url1.com"),
+			new VideoId("id1"),
 			managingMember,
-			LocalDate.of(2024, 3, 8),
-			null);
+			LocalDate.of(2024, 3, 8)
+		);
 	}
 
 	private static Member createMember() {

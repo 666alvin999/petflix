@@ -32,7 +32,7 @@ class SubmitPresentationVideoTest {
 	@Test
 	public void shouldReturnActionSuccess() {
 		//Arrange
-		PresentationVideo presentationVideo = new PresentationVideo(new VideoId("1"), new Url("https://www.url1.com/"), "title1", "description1", LocalDate.of(2024, 2, 29));
+		PresentationVideo presentationVideo = new PresentationVideo(new VideoId("1"), "title1", "description1", LocalDate.of(2024, 2, 29));
 
 		when(this.videoAdapter.submitPresentationVideo(presentationVideo)).thenReturn(new ActionSuccess(true));
 

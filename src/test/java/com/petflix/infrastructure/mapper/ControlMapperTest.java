@@ -5,8 +5,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dto.ControlDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class ControlMapperTest {
 		ControlDTO controlDTO = createControlDTOs().get(0);
 
 		//Act
-		Control actualControl = this.controlMapper.mapToDomain(controlDTO, createAdoption());
+		Control actualControl = this.controlMapper.mapToDomain(controlDTO, createAdoptions().get(0));
 
 		//Assert
 		Control expectedControl = createControls().get(0);
@@ -45,7 +45,7 @@ class ControlMapperTest {
 		List<ControlDTO> controlDTOs = createControlDTOs();
 
 		//Act
-		List<Control> actualControl = this.controlMapper.mapAllToDomain(controlDTOs, List.of(createAdoption()));
+		List<Control> actualControl = this.controlMapper.mapAllToDomain(controlDTOs, createAdoptions());
 
 		//Assert
 		List<Control> expectedControls = createControls();
@@ -70,13 +70,11 @@ class ControlMapperTest {
 	private List<Control> createControls() {
 		return List.of(
 			new Control(
-				new Id(0),
-				createAdoption(),
+				createAdoptions().get(0),
 				LocalDate.of(2024, 3, 8)
 			),
 			new Control(
-				new Id(1),
-				createAdoption(),
+				createAdoptions().get(1),
 				LocalDate.of(2024, 3, 8)
 			)
 		);
@@ -84,12 +82,12 @@ class ControlMapperTest {
 
 	private static List<ControlDTO> createControlDTOs() {
 		return List.of(
-			new ControlDTO(0, 0, "2024-03-08"),
-			new ControlDTO(1, 0, "2024-03-08")
+			new ControlDTO(0, "2024-03-08"),
+			new ControlDTO(0, "2024-03-08")
 		);
 	}
 
-	private Adoption createAdoption() {
+	private List<Adoption> createAdoptions() {
 		Member managingMember = new Member(
 			new Id(0),
 			new FirstName("Citanimal"),
@@ -104,10 +102,9 @@ class ControlMapperTest {
 			"Oslo",
 			new AnimalType("chat"),
 			3,
-			new Url("https://www.url1.com"),
+			new VideoId("id1"),
 			managingMember,
-			LocalDate.of(2024, 3, 8),
-			null
+			LocalDate.of(2024, 3, 8)
 		);
 
 		Adopter adopter = new Adopter(
@@ -118,11 +115,17 @@ class ControlMapperTest {
 			"alvin.hamaide@mail-ecv.fr"
 		);
 
-		return new Adoption(
-			new Id(0),
-			adopter,
-			animal,
-			LocalDate.of(2024, 2, 29)
+		return List.of(
+			new Adoption(
+				animal,
+				adopter,
+				LocalDate.of(2024, 2, 29)
+			),
+			new Adoption(
+				animal,
+				adopter,
+				LocalDate.of(2024, 2, 29)
+			)
 		);
 	}
 

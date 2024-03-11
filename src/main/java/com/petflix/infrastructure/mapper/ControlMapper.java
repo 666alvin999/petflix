@@ -2,7 +2,6 @@ package com.petflix.infrastructure.mapper;
 
 import com.petflix.domain.bean.Adoption;
 import com.petflix.domain.bean.Control;
-import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.infrastructure.dto.ControlDTO;
 import org.springframework.stereotype.Component;
 
@@ -17,16 +16,14 @@ public class ControlMapper {
 
 	public Control mapToDomain(ControlDTO controlDTO, Adoption adoption) {
 		return new Control(
-			new Id(controlDTO.getId()),
 			adoption,
-			LocalDate.parse(controlDTO.getDate(), this.dateFormatter)
+			LocalDate.parse(controlDTO.getControlDate(), this.dateFormatter)
 		);
 	}
 
 	public ControlDTO mapToDTO(Control control) {
 		return new ControlDTO(
-			control.id().value(),
-			control.adoption().id().value(),
+			control.adoption().animal().id().value(),
 			this.dateFormatter.format(control.date())
 		);
 	}
@@ -41,7 +38,7 @@ public class ControlMapper {
 
 	private Adoption findAdoption(List<Adoption> adoptions, ControlDTO controlDTO) {
 		for (Adoption adoption : adoptions) {
-			if (adoption.id().value() == controlDTO.getAdoptionId()) {
+			if (adoption.animal().id().value() == controlDTO.getAnimalId()) {
 				return adoption;
 			}
 		}

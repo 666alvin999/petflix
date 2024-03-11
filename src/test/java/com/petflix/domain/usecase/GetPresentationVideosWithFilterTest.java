@@ -32,7 +32,7 @@ class GetPresentationVideosWithFilterTest {
 	@Test
 	public void shouldReturnPresentationVideos_whenTypeIsDogAndCityIsParis() {
 		//Arrange
-		List<PresentationVideo> videos = List.of(new PresentationVideo(new VideoId("1"), new Url("https://www.url1.com/"), "title1", "description1", LocalDate.of(2024, 2, 29)));
+		List<PresentationVideo> videos = List.of(new PresentationVideo(new VideoId("1"), "title1", "description1", LocalDate.of(2024, 2, 29)));
 
 		when(this.presentationVideoPort.getPresentationVideosWithFilter("dog", "paris")).thenReturn(videos);
 
@@ -40,7 +40,7 @@ class GetPresentationVideosWithFilterTest {
 		List<PresentationVideo> actualVideos = this.getPresentationVideosWithFilter.execute("dog", "paris");
 
 		//Assert
-		List<PresentationVideo> expectedVideos = List.of(new PresentationVideo(new VideoId("1"), new Url("https://www.url1.com/"), "title1", "description1", LocalDate.of(2024, 2, 29)));
+		List<PresentationVideo> expectedVideos = List.of(new PresentationVideo(new VideoId("1"), "title1", "description1", LocalDate.of(2024, 2, 29)));
 
 		assertThat(actualVideos).isEqualTo(expectedVideos);
 	}

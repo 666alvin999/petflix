@@ -5,8 +5,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.domain.port.ControlPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,10 +64,9 @@ class GetAllControlsTest {
 			"Oslo",
 			new AnimalType("chat"),
 			3,
-			new Url("https://www.url1.com"),
+			new VideoId("id1"),
 			managingMember,
-			LocalDate.of(2024, 3, 8),
-			null
+			LocalDate.of(2024, 3, 8)
 		);
 
 		Adopter adopter = new Adopter(
@@ -79,20 +78,17 @@ class GetAllControlsTest {
 		);
 
 		Adoption adoption = new Adoption(
-			new Id(0),
-			adopter,
 			animal,
+			adopter,
 			LocalDate.of(2024, 2, 29)
 		);
 
 		return List.of(
 			new Control(
-				new Id(0),
 				adoption,
 				LocalDate.of(2024, 2, 29)
 			),
 			new Control(
-				new Id(1),
 				adoption,
 				LocalDate.of(2024, 3, 8)
 			)

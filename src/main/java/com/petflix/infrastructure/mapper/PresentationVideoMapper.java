@@ -1,7 +1,6 @@
 package com.petflix.infrastructure.mapper;
 
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
 import org.springframework.stereotype.Component;
@@ -18,10 +17,9 @@ public class PresentationVideoMapper {
 	public PresentationVideo mapToDomain(PresentationVideoDTO presentationVideoDTO) {
 		return new PresentationVideo(
 			new VideoId(presentationVideoDTO.getId()),
-			new Url(presentationVideoDTO.getUrl()),
 			presentationVideoDTO.getTitle(),
 			presentationVideoDTO.getDescription(),
-			LocalDate.parse(presentationVideoDTO.getPostingDate(), this.dateFormatter)
+			LocalDate.parse(presentationVideoDTO.getUploadDate(), this.dateFormatter)
 		);
 	}
 
@@ -32,10 +30,9 @@ public class PresentationVideoMapper {
 	public PresentationVideoDTO mapToDTO(PresentationVideo presentationVideo) {
 		return new PresentationVideoDTO(
 			presentationVideo.id().value(),
-			presentationVideo.url().value(),
 			presentationVideo.title(),
 			presentationVideo.description(),
-			this.dateFormatter.format(presentationVideo.postingDate())
+			this.dateFormatter.format(presentationVideo.uploadDate())
 		);
 	}
 

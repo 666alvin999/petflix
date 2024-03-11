@@ -69,8 +69,8 @@ class AdoptionDaoTest {
 
 	private static List<AdoptionDTO> createAdoptionDTOs() {
 		return List.of(
-			new AdoptionDTO(0, 0, 0, "2024-03-08"),
-			new AdoptionDTO(1, 0, 1, "2024-03-08")
+			new AdoptionDTO(0, 0, "2024-03-08"),
+			new AdoptionDTO(1, 1, "2024-03-08")
 		);
 	}
 

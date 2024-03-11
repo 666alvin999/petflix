@@ -49,7 +49,7 @@ class PresentationVideoDaoTest {
 	@Test
 	public void shouldReturnPresentationVideoDTOs() {
 		//Act
-		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getPresentationVideoById(1);
+		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getPresentationVideoById("id1");
 
 		//Assert
 		PresentationVideoDTO expectedPresentationVideo = createPresentationVideoDTOs().get(0);
@@ -60,10 +60,10 @@ class PresentationVideoDaoTest {
 	@Test
 	public void shouldReturnPresentationVideosWithUrls() {
 		//Act
-		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByUrls(Set.of("https://www.url1.com", "https://www.url2.com"));
+		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByIds(Set.of("id1", "id2"));
 
 		//Assert
-		List<PresentationVideoDTO> expectedPresentationVideoDTOs = this.createPresentationVideoDTOs();
+		List<PresentationVideoDTO> expectedPresentationVideoDTOs = createPresentationVideoDTOs();
 
 		assertThat(actualPresentationVideosDTO).isEqualTo(expectedPresentationVideoDTOs);
 	}
@@ -71,7 +71,7 @@ class PresentationVideoDaoTest {
 	@Test
 	public void shouldSubmitPresentationVideoDTO() {
 		//Arrange
-		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO("3", "https://www.url3.com", "title", "description", "2024-03-08");
+		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO("3", "title", "description", "2024-03-08");
 
 		//Act
 		ActionSuccess actualActionSuccess = this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO);
@@ -93,15 +93,13 @@ class PresentationVideoDaoTest {
 	private static List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
-				"1",
-				"https://www.url1.com",
+				"id1",
 				"title1",
 				"description1",
 				"2024-03-08"
 			),
 			new PresentationVideoDTO(
-				"2",
-				"https://www.url2.com",
+				"id2",
 				"title2",
 				"description2",
 				"2024-03-08"

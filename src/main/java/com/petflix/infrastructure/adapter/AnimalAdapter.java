@@ -57,8 +57,8 @@ public class AnimalAdapter implements AnimalPort {
 	}
 
 	@Override
-	public List<Animal> getAnimalsByPresentationVideoUrl(String url) {
-		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByPresentationVideoUrl(url);
+	public List<Animal> getAnimalsByPresentationVideoId(String videoId) {
+		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByPresentationVideoId(videoId);
 		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getMemberId).collect(toSet());
 		List<Member> members = this.memberAdapter.getMembersByIds(memberIds);
 
@@ -66,8 +66,8 @@ public class AnimalAdapter implements AnimalPort {
 	}
 
 	@Override
-	public List<AnimalType> getAnimalTypesByPresentationVideoUrl(String url) {
-		List<String> animalTypeDTOs = this.animalDao.getTypesByPresentationVideoUrl(url);
+	public List<AnimalType> getAnimalTypesByPresentationVideoId(String videoId) {
+		List<String> animalTypeDTOs = this.animalDao.getTypesByPresentationVideoId(videoId);
 
 		return this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs);
 	}

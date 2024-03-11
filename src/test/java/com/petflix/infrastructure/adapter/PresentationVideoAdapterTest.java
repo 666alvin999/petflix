@@ -2,7 +2,6 @@ package com.petflix.infrastructure.adapter;
 
 import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dao.AnimalDao;
 import com.petflix.infrastructure.dao.PresentationVideoDao;
@@ -50,11 +49,11 @@ class PresentationVideoAdapterTest {
 		//Arrange
 		PresentationVideoDTO presentationVideoDTO = this.createPresentationVideoDTOs().get(0);
 
-		when(this.presentationVideoDao.getPresentationVideoById(0)).thenReturn(List.of(presentationVideoDTO));
+		when(this.presentationVideoDao.getPresentationVideoById("0")).thenReturn(List.of(presentationVideoDTO));
 		when(this.presentationVideoMapper.mapToDomain(presentationVideoDTO)).thenReturn(this.createPresentationVideos().get(0));
 
 		//Act
-		PresentationVideo actualPresentationVideo = this.presentationVideoAdapter.getPresentationVideoById(0);
+		PresentationVideo actualPresentationVideo = this.presentationVideoAdapter.getPresentationVideoById("0");
 
 		//Assert
 		PresentationVideo expectedPresentationVideo = this.createPresentationVideos().get(0);
@@ -68,7 +67,7 @@ class PresentationVideoAdapterTest {
 		List<AnimalDTO> animalDTOs = createAnimalsDTO();
 
 		when(this.animalDao.getAnimalsByTypeAndMemberCity("chat", "Valenciennes")).thenReturn(animalDTOs);
-		when(this.presentationVideoDao.getPresentationVideosByUrls(Set.of("https://www.url1.com", "https://www.url2.com"))).thenReturn(createPresentationVideoDTOs());
+		when(this.presentationVideoDao.getPresentationVideosByIds(Set.of("id1", "id2"))).thenReturn(createPresentationVideoDTOs());
 		when(this.presentationVideoMapper.mapAllToDomain(createPresentationVideoDTOs())).thenReturn(createPresentationVideos());
 
 		//Act
@@ -100,8 +99,8 @@ class PresentationVideoAdapterTest {
 
 	private static List<AnimalDTO> createAnimalsDTO() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "2024-03-08", null),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url2.com", 0, "2024-03-08", null)
+			new AnimalDTO(0, "Oslo", "chat", 3, "id1", 0, "2024-03-08"),
+			new AnimalDTO(1, "Uta", "chat", 1, "id2", 0, "2024-03-08")
 		);
 	}
 
@@ -109,14 +108,12 @@ class PresentationVideoAdapterTest {
 		return List.of(
 			new PresentationVideoDTO(
 				"0",
-				"https://www.url1.com",
 				"title",
 				"description",
 				"2024-03-08"
 			),
 			new PresentationVideoDTO(
 				"1",
-				"https://www.url2.com",
 				"title",
 				"description",
 				"2024-03-08"
@@ -128,14 +125,12 @@ class PresentationVideoAdapterTest {
 		return List.of(
 			new PresentationVideo(
 				new VideoId("0"),
-				new Url("https://www.url1.com"),
 				"title",
 				"description",
 				LocalDate.of(2024, 3, 1)
 			),
 			new PresentationVideo(
 				new VideoId("1"),
-				new Url("https://www.url2.com"),
 				"title",
 				"description",
 				LocalDate.of(2024, 3, 1)

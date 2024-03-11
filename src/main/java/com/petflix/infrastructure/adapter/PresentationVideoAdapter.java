@@ -8,13 +8,11 @@ import com.petflix.infrastructure.dao.PresentationVideoDao;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
 import com.petflix.infrastructure.mapper.PresentationVideoMapper;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -33,7 +31,7 @@ public class PresentationVideoAdapter implements PresentationVideoPort {
 	}
 
 	@Override
-	public PresentationVideo getPresentationVideoById(int id) {
+	public PresentationVideo getPresentationVideoById(String id) {
 		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideoById(id);
 
 		return this.presentationVideoMapper.mapToDomain(presentationVideoDTOs.get(0));
@@ -43,9 +41,9 @@ public class PresentationVideoAdapter implements PresentationVideoPort {
 	public List<PresentationVideo> getPresentationVideosWithFilter(String animalType, String city) {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByTypeAndMemberCity(animalType, city);
 
-		Set<String> urls = animalDTOs.stream().map(AnimalDTO::getPresentationVideoUrl).collect(toSet());
+		Set<String> urls = animalDTOs.stream().map(AnimalDTO::getPresentationVideoId).collect(toSet());
 
-		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideosByUrls(urls);
+		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideosByIds(urls);
 
 		return this.presentationVideoMapper.mapAllToDomain(presentationVideoDTOs);
 	}

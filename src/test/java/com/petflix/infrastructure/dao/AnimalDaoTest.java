@@ -40,9 +40,9 @@ class AnimalDaoTest {
 	}
 
 	@Test
-	public void shouldReturnAnimalsByPresentationUrl() {
+	public void shouldReturnAnimalsByPresentationId() {
 		//Act
-		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoUrl("https://www.url1.com");
+		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoId("id1");
 
 		//Assert
 		List<AnimalDTO> expectedAnimals = createAnimals();
@@ -86,7 +86,7 @@ class AnimalDaoTest {
 	@Test
 	public void shouldReturnTypesByUrl() {
 	    //Act
-		List<String> actualTypes = this.animalDao.getTypesByPresentationVideoUrl("https://www.url1.com");
+		List<String> actualTypes = this.animalDao.getTypesByPresentationVideoId("https://www.url1.com");
 
 	    //Assert
 	    List<String> expectedTypes = List.of("chien", "chat");
@@ -114,9 +114,9 @@ class AnimalDaoTest {
 
 	private static List<AnimalDTO> createAnimals() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "2024-03-08", null),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "2024-03-08", null),
-			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "2024-03-08", null)
+			new AnimalDTO(0, "Oslo", "chat", 3, "id1", 0, "2024-03-08"),
+			new AnimalDTO(1, "Uta", "chat", 1, "id1", 0, "2024-03-08"),
+			new AnimalDTO(2, "Maul", "chien", 4, "id1", 0, "2024-03-08")
 		);
 	}
 

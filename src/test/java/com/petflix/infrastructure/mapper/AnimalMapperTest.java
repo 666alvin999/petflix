@@ -6,8 +6,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,10 +75,9 @@ class AnimalMapperTest {
 			"Oslo",
 			new AnimalType("chat"),
 			3,
-			new Url("https://www.url1.com"),
+			new VideoId("id1"),
 			createMember(),
-			LocalDate.of(2024, 3, 8),
-			null
+			LocalDate.of(2024, 3, 8)
 		);
 	}
 
@@ -88,10 +87,9 @@ class AnimalMapperTest {
 			"Oslo",
 			"chat",
 			3,
-			"https://www.url1.com",
+			"id1",
 			0,
-			"2024-03-08",
-			null
+			"2024-03-08"
 		);
 	}
 

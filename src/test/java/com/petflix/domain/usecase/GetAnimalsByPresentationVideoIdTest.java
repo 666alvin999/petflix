@@ -6,8 +6,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.domain.port.AnimalPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,28 +22,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetAnimalsByPresentationVideoUrlTest {
+class GetAnimalsByPresentationVideoIdTest {
 
-	private GetAnimalsByPresentationVideoUrl getAnimalsByPresentationVideoUrl;
+	private GetAnimalsByPresentationVideoId getAnimalsByPresentationVideoId;
 
 	@Mock
 	private AnimalPort animalPort;
 
 	@BeforeEach
 	public void setUp() {
-		this.getAnimalsByPresentationVideoUrl = new GetAnimalsByPresentationVideoUrl(animalPort);
+		this.getAnimalsByPresentationVideoId = new GetAnimalsByPresentationVideoId(animalPort);
 	}
 
 	@Test
 	public void shouldReturnAnimals() {
 		//Arrange
-		Url url = createUrl();
+		VideoId videoId = createVideoId();
 		Animal animal = createAnimal();
 
-		when(this.animalPort.getAnimalsByPresentationVideoUrl(url.value())).thenReturn(List.of(animal));
+		when(this.animalPort.getAnimalsByPresentationVideoId(videoId.value())).thenReturn(List.of(animal));
 
 		//Act
-		List<Animal> actualAnimal = this.getAnimalsByPresentationVideoUrl.execute(url);
+		List<Animal> actualAnimal = this.getAnimalsByPresentationVideoId.execute(videoId);
 
 		//Assert
 		List<Animal> expectedAnimals = List.of(createAnimal());
@@ -51,8 +51,8 @@ class GetAnimalsByPresentationVideoUrlTest {
 		assertThat(actualAnimal).isEqualTo(expectedAnimals);
 	}
 
-	private static Url createUrl() {
-		return new Url("https://www.url1.com/");
+	private static VideoId createVideoId() {
+		return new VideoId("id1");
 	}
 
 	private static Member createMember() {
@@ -65,10 +65,10 @@ class GetAnimalsByPresentationVideoUrlTest {
 			"Oslo",
 			new AnimalType("chat"),
 			2,
-			createUrl(),
+			createVideoId(),
 			createMember(),
-			LocalDate.of(2024, 3, 8),
-			null);
+			LocalDate.of(2024, 3, 8)
+		);
 	}
 
 }

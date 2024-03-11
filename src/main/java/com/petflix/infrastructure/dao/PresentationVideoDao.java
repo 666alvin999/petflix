@@ -23,9 +23,9 @@ public class PresentationVideoDao {
 
 	private final String GET_ALL_PRESENTATION_VIDEOS = "SELECT * FROM VIDEO;";
 	private final String GET_PRESENTATION_VIDEO_BY_ID = "SELECT * FROM VIDEO WHERE ID = :id;";
-	private final String GET_PRESENTATION_VIDEOS_BY_URLS = "SELECT * FROM VIDEO WHERE URL IN (:urls);";
+	private final String GET_PRESENTATION_VIDEOS_BY_IDS = "SELECT * FROM VIDEO WHERE ID IN (:ids);";
 
-	private final String INSERT = "INSERT INTO VIDEO VALUES (:id, :url, :title, :description, :postingDate);";
+	private final String INSERT = "INSERT INTO VIDEO VALUES (:id, :title, :description, :uploadDate);";
 
 	public PresentationVideoDao() {
 	}
@@ -34,8 +34,8 @@ public class PresentationVideoDao {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<PresentationVideoDTO> getPresentationVideoById(int id) {
-		Map<String, Integer> parameters = Map.of("id", id);
+	public List<PresentationVideoDTO> getPresentationVideoById(String id) {
+		Map<String, String> parameters = Map.of("id", id);
 
 		return this.jdbcTemplate.query(GET_PRESENTATION_VIDEO_BY_ID, parameters, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
 	}
@@ -44,19 +44,18 @@ public class PresentationVideoDao {
 		return this.jdbcTemplate.query(GET_ALL_PRESENTATION_VIDEOS, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
 	}
 
-	public List<PresentationVideoDTO> getPresentationVideosByUrls(Set<String> urls) {
-		Map<String, Set<String>> parameters = Map.of("urls", urls);
+	public List<PresentationVideoDTO> getPresentationVideosByIds(Set<String> ids) {
+		Map<String, Set<String>> parameters = Map.of("ids", ids);
 
-		return this.jdbcTemplate.query(GET_PRESENTATION_VIDEOS_BY_URLS, parameters, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
+		return this.jdbcTemplate.query(GET_PRESENTATION_VIDEOS_BY_IDS, parameters, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
 	}
 
 	public ActionSuccess submitPresentationDTO(PresentationVideoDTO presentationVideoDTO) {
 		Map<String, Object> parameters = Map.of(
 			"id", presentationVideoDTO.getId(),
-			"url", presentationVideoDTO.getUrl(),
 			"title", presentationVideoDTO.getTitle(),
 			"description", presentationVideoDTO.getDescription(),
-			"postingDate", presentationVideoDTO.getPostingDate()
+			"uploadDate", presentationVideoDTO.getUploadDate()
 		);
 
 		try {

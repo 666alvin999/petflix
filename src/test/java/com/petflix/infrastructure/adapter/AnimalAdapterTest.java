@@ -6,8 +6,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dao.AnimalDao;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.mapper.AnimalMapper;
@@ -66,17 +66,16 @@ class AnimalAdapterTest {
 	    //Arrange
 		AnimalDTO animalDTO = createAnimalDTOs().get(0);
 		Member member = createMember();
-		String url = "https://www.url1.com";
 
 	    when(this.animalDao.getAnimalById(0)).thenReturn(List.of(animalDTO));
-		when(this.animalMapper.mapToDomain(animalDTO, member)).thenReturn(createAnimals(url, member).get(0));
+		when(this.animalMapper.mapToDomain(animalDTO, member)).thenReturn(createAnimals(member).get(0));
 		when(this.memberAdapter.getMemberById(0)).thenReturn(member);
 
 	    //Act
 		Animal actualAnimal = this.animalAdapter.getAnimalById(0);
 
 	    //Assert
-		Animal expectedAnimal = createAnimals(url, member).get(0);
+		Animal expectedAnimal = createAnimals(member).get(0);
 
 		assertThat(actualAnimal).isEqualTo(expectedAnimal);
 	}
@@ -89,14 +88,14 @@ class AnimalAdapterTest {
 		String url = "https://www.url1.com";
 
 		when(this.animalDao.getAnimalsByIds(Set.of(0, 1))).thenReturn(animalDTOs);
-		when(this.animalMapper.mapAllToDomain(animalDTOs, List.of(member))).thenReturn(createAnimals(url, member));
+		when(this.animalMapper.mapAllToDomain(animalDTOs, List.of(member))).thenReturn(createAnimals(member));
 		when(this.memberAdapter.getMembersByIds(Set.of(0))).thenReturn(List.of(member));
 
 		//Act
 		List<Animal> actualAnimals = this.animalAdapter.getAnimalsByIds(Set.of(0, 1));
 
 		//Assert
-		List<Animal> expectedAnimals = createAnimals(url, member);
+		List<Animal> expectedAnimals = createAnimals(member);
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
@@ -104,21 +103,21 @@ class AnimalAdapterTest {
 	@Test
 	public void shouldReturnAnimalsByUrl() {
 	    //Arrange
-		String url = "https://www.url1.com";
+		String videoId = "id1";
 
 		List<Member> members = List.of(createMember());
 		List<AnimalDTO> animalDTOs = createAnimalDTOs();
-		List<Animal> animals = createAnimals(url, members.get(0));
+		List<Animal> animals = createAnimals(members.get(0));
 
-		when(this.animalDao.getAnimalsByPresentationVideoUrl(url)).thenReturn(animalDTOs);
+		when(this.animalDao.getAnimalsByPresentationVideoId(videoId)).thenReturn(animalDTOs);
 		when(this.memberAdapter.getMembersByIds(Set.of(0))).thenReturn(members);
 		when(this.animalMapper.mapAllToDomain(animalDTOs, members)).thenReturn(animals);
 
 	    //Act
-		List<Animal> actualAnimals = this.animalAdapter.getAnimalsByPresentationVideoUrl(url);
+		List<Animal> actualAnimals = this.animalAdapter.getAnimalsByPresentationVideoId(videoId);
 
 	    //Assert
-		List<Animal> expectedAnimals = createAnimals(url, createMember());
+		List<Animal> expectedAnimals = createAnimals(createMember());
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
@@ -129,11 +128,11 @@ class AnimalAdapterTest {
 		List<String> animalTypeDTOs = createAnimalTypeDTOs();
 		List<AnimalType> animalTypes = createAnimalTypes();
 
-		when(this.animalDao.getTypesByPresentationVideoUrl("https://www.url1.com")).thenReturn(animalTypeDTOs);
+		when(this.animalDao.getTypesByPresentationVideoId("https://www.url1.com")).thenReturn(animalTypeDTOs);
 		when(this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs)).thenReturn(animalTypes);
 
 	    //Act
-		List<AnimalType> actualAnimalTypes = this.animalAdapter.getAnimalTypesByPresentationVideoUrl("https://www.url1.com");
+		List<AnimalType> actualAnimalTypes = this.animalAdapter.getAnimalTypesByPresentationVideoId("https://www.url1.com");
 
 	    //Assert
 		List<AnimalType> expectedAnimalTypes = createAnimalTypes();
@@ -141,45 +140,42 @@ class AnimalAdapterTest {
 		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
 	}
 
-	private static List<Animal> createAnimals(String url, Member member) {
+	private static List<Animal> createAnimals(Member member) {
 		return List.of(
 			new Animal(new Id(0),
 				"Oslo",
 				new AnimalType("chat"),
 				3,
-				new Url(url),
+				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8),
-				null
+				LocalDate.of(2024, 3, 8)
 			),
 			new Animal(
-				new Id(0),
+				new Id(1),
 				"Uta",
 				new AnimalType("chat"),
 				1,
-				new Url(url),
+				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8),
-				null
+				LocalDate.of(2024, 3, 8)
 			),
 			new Animal(
-				new Id(0),
+				new Id(2),
 				"Maul",
 				new AnimalType("chien"),
 				4,
-				new Url(url),
+				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8),
-				null
+				LocalDate.of(2024, 3, 8)
 			)
 		);
 	}
 
 	private static List<AnimalDTO> createAnimalDTOs() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "2024-03-08", null),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "2024-03-08", null),
-			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "2024-03-08", null)
+			new AnimalDTO(0, "Oslo", "chat", 3, "id1", 0, "2024-03-08"),
+			new AnimalDTO(1, "Uta", "chat", 1, "id1", 0, "2024-03-08"),
+			new AnimalDTO(2, "Maul", "chien", 4, "id1", 0, "2024-03-08")
 		);
 	}
 

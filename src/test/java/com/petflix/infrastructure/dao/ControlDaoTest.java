@@ -39,7 +39,7 @@ class ControlDaoTest {
 		List<ControlDTO> actualControlDTO = this.controlDao.getControlById(0);
 
 		//Assert
-		ControlDTO expectedControlDTO = new ControlDTO(0, 0, "2024-03-08");
+		ControlDTO expectedControlDTO = new ControlDTO(0, "2024-03-08");
 
 		assertThat(actualControlDTO).isEqualTo(List.of(expectedControlDTO));
 	}
@@ -51,8 +51,8 @@ class ControlDaoTest {
 
 		//Assert
 		List<ControlDTO> expectedControlDTOs = List.of(
-			new ControlDTO(0, 0, "2024-03-08"),
-			new ControlDTO(1, 1, "2024-03-08")
+			new ControlDTO(0, "2024-03-08"),
+			new ControlDTO(1, "2024-03-08")
 		);
 
 		assertThat(actualControlDTOs).isEqualTo(expectedControlDTOs);

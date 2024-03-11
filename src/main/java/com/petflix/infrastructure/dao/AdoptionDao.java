@@ -18,8 +18,8 @@ public class AdoptionDao {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_ALL_ADOPTIONS = "SELECT * FROM ADOPTION;";
-	private final String GET_BY_ID = "SELECT * FROM ADOPTION WHERE ID = :id;";
-	private final String GET_BY_IDS = "SELECT * FROM ADOPTION WHERE ID IN (:ids);";
+	private final String GET_BY_ID = "SELECT * FROM ADOPTION WHERE ANIMAL_ID = :id;";
+	private final String GET_BY_IDS = "SELECT * FROM ADOPTION WHERE ANIMAL_ID IN (:ids);";
 
 	public AdoptionDao() {
 	}

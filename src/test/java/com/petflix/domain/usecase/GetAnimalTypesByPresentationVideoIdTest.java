@@ -2,6 +2,7 @@ package com.petflix.domain.usecase;
 
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.domain.port.AnimalPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,16 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetAnimalTypesByPresentationVideoUrlTest {
+class GetAnimalTypesByPresentationVideoIdTest {
 
-	private GetAnimalTypesByPresentationVideoUrl getAnimalTypesByPresentationVideoUrl;
+	private GetAnimalTypesByPresentationVideoId getAnimalTypesByPresentationVideoId;
 
 	@Mock
 	private AnimalPort animalPort;
 
 	@BeforeEach
 	public void setUp() {
-		this.getAnimalTypesByPresentationVideoUrl = new GetAnimalTypesByPresentationVideoUrl(this.animalPort);
+		this.getAnimalTypesByPresentationVideoId = new GetAnimalTypesByPresentationVideoId(this.animalPort);
 	}
 
 	@Test
@@ -32,10 +33,10 @@ class GetAnimalTypesByPresentationVideoUrlTest {
 	    //Arrange
 		List<AnimalType> animalTypes = createAnimalTypes();
 
-		when(this.animalPort.getAnimalTypesByPresentationVideoUrl("https://www.url1.com")).thenReturn(animalTypes);
+		when(this.animalPort.getAnimalTypesByPresentationVideoId("id1")).thenReturn(animalTypes);
 
 	    //Act
-	    List<AnimalType> actualAnimalTypes = this.getAnimalTypesByPresentationVideoUrl.execute(new Url("https://www.url1.com"));
+	    List<AnimalType> actualAnimalTypes = this.getAnimalTypesByPresentationVideoId.execute(new VideoId("id1"));
 
 	    //Assert
 		List<AnimalType> expectedAnimalTypes = createAnimalTypes();
