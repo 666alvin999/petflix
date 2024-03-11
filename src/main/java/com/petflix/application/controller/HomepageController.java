@@ -53,7 +53,7 @@ public class HomepageController {
 	}
 
 	@GetMapping("getFilters")
-	@CrossOrigin(origins = {"localhost:5173", "https://ecv-petflix.netlify.app/"})
+	@CrossOrigin(origins = {"http://localhost:5173", "https://ecv-petflix.netlify.app/"})
 	public ResponseEntity<String> getFilters() {
 		PresentationVideoFilters presentationVideoFilters = this.getAllVideoFilters.execute();
 		PresentationVideoFiltersViewModel presentationVideoFiltersViewModel = this.presentationVideoFiltersMapper.mapToViewModel(presentationVideoFilters);
@@ -61,7 +61,8 @@ public class HomepageController {
 		return this.presentationVideoFiltersPresenter.present(presentationVideoFiltersViewModel);
 	}
 
-	@GetMapping("getAllVideoOverViews")
+	@GetMapping("getAllVideoOverviews")
+	@CrossOrigin(origins = {"http://localhost:5173", "https://ecv-petflix.netlify.app/"})
 	public ResponseEntity<String> getAllVideoOverviews() {
 		List<PresentationVideo> presentationVideos = this.getPresentationVideosWithFilter.execute(null, null);
 		Set<VideoId> presentationVideoIds = presentationVideos.stream().map(PresentationVideo::id).collect(toSet());
