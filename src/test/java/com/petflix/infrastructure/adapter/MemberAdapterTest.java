@@ -38,16 +38,16 @@ class MemberAdapterTest {
 
 	@Test
 	public void shouldReturnAllCities() {
-		//Arrange
+		// Arrange
 		List<String> cities = List.of("Valenciennes", "Lille");
 
 		when(this.memberDao.getAllCities()).thenReturn(cities);
 		when(this.memberMapper.mapCities(cities)).thenReturn(List.of(new MemberCity("Valenciennes"), new MemberCity("Lille")));
 
-		//Act
+		// Act
 		List<MemberCity> actualCities = this.memberAdapter.getAllMembersCity();
 
-		//Assert
+		// Assert
 		List<MemberCity> expectedCities = List.of(new MemberCity("Valenciennes"), new MemberCity("Lille"));
 
 		assertThat(actualCities).isEqualTo(expectedCities);
@@ -55,17 +55,17 @@ class MemberAdapterTest {
 
 	@Test
 	public void shouldReturnMemberById() {
-		//Arrange
+		// Arrange
 		MemberDTO memberDTO = createMemberDTOs().get(0);
 		Member member = createMembers().get(0);
 
 		when(this.memberDao.getMemberById(0)).thenReturn(List.of(memberDTO));
 		when(this.memberMapper.mapToDomain(memberDTO)).thenReturn(member);
 
-		//Act
+		// Act
 		Member actualMember = this.memberAdapter.getMemberById(0);
 
-		//Assert
+		// Assert
 		Member expectedMember = createMembers().get(0);
 
 		assertThat(actualMember).isEqualTo(expectedMember);
@@ -73,17 +73,17 @@ class MemberAdapterTest {
 
 	@Test
 	public void shouldReturnMembersByIds() {
-		//Arrange
+		// Arrange
 		List<MemberDTO> memberDTOs = createMemberDTOs();
 		List<Member> members = createMembers();
 
 		when(this.memberDao.getMembersByIds(Set.of(0, 1))).thenReturn(memberDTOs);
 		when(this.memberMapper.mapAllToDomain(memberDTOs)).thenReturn(members);
 
-		//Act
+		// Act
 		List<Member> actualMembers = this.memberAdapter.getMembersByIds(Set.of(0, 1));
 
-		//Assert
+		// Assert
 		List<Member> expectedMembers = createMembers();
 
 		assertThat(actualMembers).isEqualTo(expectedMembers);

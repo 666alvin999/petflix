@@ -36,10 +36,10 @@ class MemberDaoTest {
 
 	@Test
 	public void shouldReturnMemberDTO() {
-		//Act
+		// Act
 		List<MemberDTO> actualMemberDTO = this.memberDao.getMemberById(0);
 
-		//Assert
+		// Assert
 		MemberDTO expectedMemberDTO = createMemberDTOs().get(0);
 
 		assertThat(actualMemberDTO).isEqualTo(List.of(expectedMemberDTO));
@@ -47,10 +47,10 @@ class MemberDaoTest {
 
 	@Test
 	public void shouldReturnMemberDTOs() {
-		//Act
+		// Act
 		List<MemberDTO> actualMemberDTOs = this.memberDao.getMembersByIds(Set.of(0, 1));
 
-		//Assert
+		// Assert
 		List<MemberDTO> expectedMemberDTOs = createMemberDTOs();
 
 		assertThat(actualMemberDTOs).isEqualTo(expectedMemberDTOs);
@@ -58,10 +58,10 @@ class MemberDaoTest {
 
 	@Test
 	public void shouldReturnAllCities() {
-		//Act
+		// Act
 		List<String> actualCities = this.memberDao.getAllCities();
 
-		//Assert
+		// Assert
 		List<String> expectedCities = List.of("Valenciennes");
 
 		assertThat(actualCities).isEqualTo(expectedCities);

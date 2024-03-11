@@ -11,7 +11,7 @@ public class GetPresentationVideoById {
 		this.presentationVideoPort = presentationVideoPort;
 	}
 
-	public PresentationVideo execute(int id) {
+	public PresentationVideo execute(String id) {
 		return presentationVideoPort.getPresentationVideoById(id);
 	}
 

@@ -18,7 +18,7 @@ public class ControlDao {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final String GET_ALL = "SELECT * FROM CONTROL;";
-	private final String GET_BY_ID = "SELECT * FROM CONTROL WHERE ID = :id;";
+	private final String GET_BY_ID = "SELECT * FROM CONTROL WHERE ANIMAL_ID = :id;";
 
 	public ControlDao() {
 	}

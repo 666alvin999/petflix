@@ -2,8 +2,7 @@ package com.petflix.infrastructure.adapter;
 
 import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.bean.generalfields.Id;
-import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dao.AnimalDao;
 import com.petflix.infrastructure.dao.PresentationVideoDao;
 import com.petflix.infrastructure.dto.AnimalDTO;
@@ -47,16 +46,16 @@ class PresentationVideoAdapterTest {
 
 	@Test
 	public void shouldReturnPresentationVideoById() {
-		//Arrange
+		// Arrange
 		PresentationVideoDTO presentationVideoDTO = this.createPresentationVideoDTOs().get(0);
 
-		when(this.presentationVideoDao.getPresentationVideoById(0)).thenReturn(List.of(presentationVideoDTO));
+		when(this.presentationVideoDao.getPresentationVideoById("0")).thenReturn(List.of(presentationVideoDTO));
 		when(this.presentationVideoMapper.mapToDomain(presentationVideoDTO)).thenReturn(this.createPresentationVideos().get(0));
 
-		//Act
-		PresentationVideo actualPresentationVideo = this.presentationVideoAdapter.getPresentationVideoById(0);
+		// Act
+		PresentationVideo actualPresentationVideo = this.presentationVideoAdapter.getPresentationVideoById("0");
 
-		//Assert
+		// Assert
 		PresentationVideo expectedPresentationVideo = this.createPresentationVideos().get(0);
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
@@ -64,17 +63,17 @@ class PresentationVideoAdapterTest {
 
 	@Test
 	public void shouldReturnPresentationVideosWithAnimalTypeFilter() {
-		//Arrange
+		// Arrange
 		List<AnimalDTO> animalDTOs = createAnimalsDTO();
 
 		when(this.animalDao.getAnimalsByTypeAndMemberCity("chat", "Valenciennes")).thenReturn(animalDTOs);
-		when(this.presentationVideoDao.getPresentationVideosByUrls(Set.of("https://www.url1.com", "https://www.url2.com"))).thenReturn(createPresentationVideoDTOs());
+		when(this.presentationVideoDao.getPresentationVideosByIds(Set.of("id1", "id2"))).thenReturn(createPresentationVideoDTOs());
 		when(this.presentationVideoMapper.mapAllToDomain(createPresentationVideoDTOs())).thenReturn(createPresentationVideos());
 
-		//Act
+		// Act
 		List<PresentationVideo> actualPresentationVideos = this.presentationVideoAdapter.getPresentationVideosWithFilter("chat", "Valenciennes");
 
-		//Assert
+		// Assert
 		List<PresentationVideo> expectedPresentationVideos = createPresentationVideos();
 
 		assertThat(actualPresentationVideos).isEqualTo(expectedPresentationVideos);
@@ -82,17 +81,17 @@ class PresentationVideoAdapterTest {
 
 	@Test
 	public void shouldReturnActionSuccess() {
-		//Arrange
+		// Arrange
 		PresentationVideoDTO presentationVideoDTO = createPresentationVideoDTOs().get(0);
 		PresentationVideo presentationVideo = createPresentationVideos().get(0);
 
 		when(this.presentationVideoMapper.mapToDTO(presentationVideo)).thenReturn(presentationVideoDTO);
 		when(this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO)).thenReturn(new ActionSuccess(true));
 
-		//Act
+		// Act
 		ActionSuccess actualActionSuccess = this.presentationVideoAdapter.submitPresentationVideo(presentationVideo);
 
-		//Assert
+		// Assert
 		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
 
 		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
@@ -100,26 +99,24 @@ class PresentationVideoAdapterTest {
 
 	private static List<AnimalDTO> createAnimalsDTO() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "08-03-2024", null),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url2.com", 0, "08-03-2024", null)
+			new AnimalDTO(0, "Oslo", "chat", 3, "id1", 0, "2024-03-08"),
+			new AnimalDTO(1, "Uta", "chat", 1, "id2", 0, "2024-03-08")
 		);
 	}
 
 	private static List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
-				0,
-				"https://www.url1.com",
+				"0",
 				"title",
 				"description",
-				"01-03-2024"
+				"2024-03-08"
 			),
 			new PresentationVideoDTO(
-				1,
-				"https://www.url2.com",
+				"1",
 				"title",
 				"description",
-				"01-03-2024"
+				"2024-03-08"
 			)
 		);
 	}
@@ -127,15 +124,13 @@ class PresentationVideoAdapterTest {
 	private static List<PresentationVideo> createPresentationVideos() {
 		return List.of(
 			new PresentationVideo(
-				new Id(0),
-				new Url("https://www.url1.com"),
+				new VideoId("0"),
 				"title",
 				"description",
 				LocalDate.of(2024, 3, 1)
 			),
 			new PresentationVideo(
-				new Id(1),
-				new Url("https://www.url2.com"),
+				new VideoId("1"),
 				"title",
 				"description",
 				LocalDate.of(2024, 3, 1)

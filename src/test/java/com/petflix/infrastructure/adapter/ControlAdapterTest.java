@@ -5,8 +5,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dao.ControlDao;
 import com.petflix.infrastructure.dto.ControlDTO;
 import com.petflix.infrastructure.mapper.ControlMapper;
@@ -44,17 +44,17 @@ class ControlAdapterTest {
 
 	@Test
 	public void shouldReturnControlById() {
-	    //Arrange
+	    // Arrange
 		ControlDTO controlDTO = createControlDTO();
 
 		when(this.controlDao.getControlById(0)).thenReturn(List.of(controlDTO));
 		when(this.adoptionAdapter.getAdoptionById(0)).thenReturn(createAdoption());
 		when(this.controlMapper.mapToDomain(controlDTO, createAdoption())).thenReturn(createControl());
 
-	    //Act
+	    // Act
 	    Control actualControl = this.controlAdapter.getControlById(0);
 
-	    //Assert
+	    // Assert
 	    Control expectedControl = createControl();
 
 		assertThat(actualControl).isEqualTo(expectedControl);
@@ -62,7 +62,7 @@ class ControlAdapterTest {
 
 	@Test
 	public void shouldReturnAllControls() {
-		//Arrange
+		// Arrange
 		List<ControlDTO> controlDTOs = List.of(createControlDTO());
 		List<Adoption> adoptions = List.of(createAdoption());
 
@@ -70,10 +70,10 @@ class ControlAdapterTest {
 		when(this.adoptionAdapter.getAdoptionsByIds(Set.of(0))).thenReturn(adoptions);
 		when(this.controlMapper.mapAllToDomain(controlDTOs, adoptions)).thenReturn(List.of(createControl()));
 
-		//Act
+		// Act
 		List<Control> actualControls = this.controlAdapter.getAllControls();
 
-		//Assert
+		// Assert
 		List<Control> expectedControls = List.of(createControl());
 
 		assertThat(actualControls).isEqualTo(expectedControls);
@@ -81,14 +81,13 @@ class ControlAdapterTest {
 
 	private Control createControl() {
 		return new Control(
-			new Id(0),
 			createAdoption(),
 			LocalDate.of(2024, 2, 29)
 		);
 	}
 
 	private static ControlDTO createControlDTO() {
-		return new ControlDTO(0, 0, "29-02-2024");
+		return new ControlDTO(0, "2024-03-08");
 	}
 
 	private Adoption createAdoption() {
@@ -106,10 +105,9 @@ class ControlAdapterTest {
 			"Oslo",
 			new AnimalType("chat"),
 			3,
-			new Url("https://www.url1.com"),
+			new VideoId("id1"),
 			managingMember,
-			LocalDate.of(2024, 3, 8),
-			null
+			LocalDate.of(2024, 3, 8)
 		);
 
 		Adopter adopter = new Adopter(
@@ -121,9 +119,8 @@ class ControlAdapterTest {
 		);
 
 		return new Adoption(
-			new Id(0),
-			adopter,
 			animal,
+			adopter,
 			LocalDate.of(2024, 2, 29)
 		);
 	}

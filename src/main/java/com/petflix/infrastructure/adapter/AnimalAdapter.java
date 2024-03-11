@@ -3,14 +3,17 @@ package com.petflix.infrastructure.adapter;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.animalfields.AnimalType;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.domain.port.AnimalPort;
 import com.petflix.infrastructure.dao.AnimalDao;
 import com.petflix.infrastructure.dto.AnimalDTO;
+import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import com.petflix.infrastructure.mapper.AnimalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
@@ -57,11 +60,26 @@ public class AnimalAdapter implements AnimalPort {
 	}
 
 	@Override
-	public List<Animal> getAnimalsByPresentationVideoUrl(String url) {
-		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByPresentationVideoUrl(url);
+	public List<Animal> getAnimalsByPresentationVideoId(String videoId) {
+		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByPresentationVideoId(videoId);
 		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getMemberId).collect(toSet());
 		List<Member> members = this.memberAdapter.getMembersByIds(memberIds);
 
 		return this.animalMapper.mapAllToDomain(animalDTOs, members);
 	}
+
+	@Override
+	public List<AnimalType> getAnimalTypesByPresentationVideoId(String videoId) {
+		List<String> animalTypeDTOs = this.animalDao.getTypesByPresentationVideoId(videoId);
+
+		return this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs);
+	}
+
+	@Override
+	public Map<VideoId, List<AnimalType>> getAnimalTypesByPresentationVideoIds(Set<String> videoIds) {
+		List<AnimalTypesByPresentationVideoIdDTO> animalTypesByPresentationVideoIdDTOs = this.animalDao.getAnimalTypesGroupByPresentationVideoIds(videoIds);
+		
+		return this.animalMapper.mapToAnimalTypesByPresentationVideoIds(animalTypesByPresentationVideoIdDTOs);
+	}
+
 }

@@ -1,8 +1,7 @@
 package com.petflix.infrastructure.mapper;
 
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.bean.generalfields.Id;
-import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dto.PresentationVideoDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,13 +22,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-		//Arrange
+		// Arrange
 		PresentationVideoDTO presentationVideoDTO = createPresentationVideoDTOs().get(0);
 
-		//Act
+		// Act
 		PresentationVideo actualPresentationVideo = this.presentationVideoMapper.mapToDomain(presentationVideoDTO);
 
-		//Assert
+		// Assert
 		PresentationVideo expectedPresentationVideo = createPresentationVideos().get(0);
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
@@ -37,13 +36,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapAllDtosToDomain() {
-		//Arrange
+		// Arrange
 		List<PresentationVideoDTO> presentationVideoDTOs = createPresentationVideoDTOs();
 
-		//Act
+		// Act
 		List<PresentationVideo> actualPresentationVideos = this.presentationVideoMapper.mapAllToDomain(presentationVideoDTOs);
 
-		//Assert
+		// Assert
 		List<PresentationVideo> expectedPresentationVideos = createPresentationVideos();
 
 		assertThat(actualPresentationVideos).isEqualTo(expectedPresentationVideos);
@@ -51,13 +50,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapDomainToDTO() {
-		//Arrange
+		// Arrange
 		PresentationVideo presentationVideos = createPresentationVideos().get(0);
 
-		//Act
+		// Act
 		PresentationVideoDTO actualPresentationVideoDTO = this.presentationVideoMapper.mapToDTO(presentationVideos);
 
-		//Assert
+		// Assert
 		PresentationVideoDTO expectedPresentationVideoDTO = createPresentationVideoDTOs().get(0);
 
 		assertThat(actualPresentationVideoDTO).isEqualTo(expectedPresentationVideoDTO);
@@ -65,13 +64,13 @@ class PresentationVideoMapperTest {
 
 	@Test
 	public void shouldMapAllDomainToDTO() {
-		//Arrange
+		// Arrange
 		List<PresentationVideo> presentationVideos = createPresentationVideos();
 
-		//Act
+		// Act
 		List<PresentationVideoDTO> actualPresentationVideoDTOs = this.presentationVideoMapper.mapAllToDTO(presentationVideos);
 
-		//Assert
+		// Assert
 		List<PresentationVideoDTO> expectedPresentationVideoDTOs = createPresentationVideoDTOs();
 
 		assertThat(actualPresentationVideoDTOs).isEqualTo(expectedPresentationVideoDTOs);
@@ -80,18 +79,16 @@ class PresentationVideoMapperTest {
 	private List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
-				0,
-				"https://www.url1.com",
+				"0",
 				"title",
 				"description",
-				"01-03-2024"
+				"2024-03-08"
 			),
 			new PresentationVideoDTO(
-				1,
-				"https://www.url2.com",
+				"1",
 				"title",
 				"description",
-				"01-03-2024"
+				"2024-03-08"
 			)
 		);
 	}
@@ -99,18 +96,16 @@ class PresentationVideoMapperTest {
 	private List<PresentationVideo> createPresentationVideos() {
 		return List.of(
 			new PresentationVideo(
-				new Id(0),
-				new Url("https://www.url1.com"),
+				new VideoId("0"),
 				"title",
 				"description",
-				LocalDate.of(2024, 3, 1)
+				LocalDate.of(2024, 3, 8)
 			),
 			new PresentationVideo(
-				new Id(1),
-				new Url("https://www.url2.com"),
+				new VideoId("1"),
 				"title",
 				"description",
-				LocalDate.of(2024, 3, 1)
+				LocalDate.of(2024, 3, 8)
 			)
 		);
 	}

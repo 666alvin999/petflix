@@ -8,8 +8,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dao.AdoptionDao;
 import com.petflix.infrastructure.dto.AdoptionDTO;
 import com.petflix.infrastructure.mapper.AdoptionMapper;
@@ -22,7 +22,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,7 +51,7 @@ class AdoptionAdapterTest {
 
 	@Test
 	public void shouldReturnAllAdoptions() {
-		//Arrange
+		// Arrange
 		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
 		List<Adoption> adoptions = createAdoptions();
 		List<Animal> animals = createAnimals();
@@ -66,10 +65,10 @@ class AdoptionAdapterTest {
 		when(this.animalAdapter.getAnimalsByIds(animalsIds)).thenReturn(animals);
 		when(this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals)).thenReturn(adoptions);
 
-		//Act
+		// Act
 		List<Adoption> actualAdoptions = this.adoptionAdapter.getAllAdoptions();
 
-		//Assert
+		// Assert
 		List<Adoption> expectedAdoptions = createAdoptions();
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
@@ -77,7 +76,7 @@ class AdoptionAdapterTest {
 
 	@Test
 	public void shouldReturnAdoptionById() {
-		//Arrange
+		// Arrange
 		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
 		Adoption adoption = createAdoptions().get(0);
 		Animal animal = createAnimals().get(0);
@@ -88,10 +87,10 @@ class AdoptionAdapterTest {
 		when(this.animalAdapter.getAnimalById(0)).thenReturn(animal);
 		when(this.adoptionMapper.mapToDomain(adoptionDTOs.get(0), adopter, animal)).thenReturn(adoption);
 
-		//Act
+		// Act
 		Adoption actualAdoption = this.adoptionAdapter.getAdoptionById(0);
 
-		//Assert
+		// Assert
 		Adoption expectedAdoption = createAdoptions().get(0);
 
 		assertThat(actualAdoption).isEqualTo(expectedAdoption);
@@ -99,7 +98,7 @@ class AdoptionAdapterTest {
 
 	@Test
 	public void shouldReturnAdoptionsByIds() {
-		//Arrange
+		// Arrange
 		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
 		List<Adopter> adopters = createAdopters();
 		List<Animal> animals = createAnimals();
@@ -111,10 +110,10 @@ class AdoptionAdapterTest {
 		when(this.animalAdapter.getAnimalsByIds(Set.of(0, 1))).thenReturn(animals);
 		when(this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals)).thenReturn(adoptions);
 
-		//Act
+		// Act
 		List<Adoption> actualAdoptions = this.adoptionAdapter.getAdoptionsByIds(Set.of(0, 1));
 
-		//Assert
+		// Assert
 		List<Adoption> expectedAdoptions = createAdoptions();
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
@@ -123,15 +122,13 @@ class AdoptionAdapterTest {
 	private static List<Adoption> createAdoptions() {
 		return List.of(
 			new Adoption(
-				new Id(0),
-				createAdopters().get(0),
 				createAnimals().get(0),
+				createAdopters().get(0),
 				LocalDate.of(2024, 3, 3)
 			),
 			new Adoption(
-				new Id(1),
-				createAdopters().get(1),
 				createAnimals().get(1),
+				createAdopters().get(1),
 				LocalDate.of(2024, 3, 3)
 			)
 		);
@@ -139,8 +136,8 @@ class AdoptionAdapterTest {
 
 	private static List<AdoptionDTO> createAdoptionDTOs() {
 		return List.of(
-			new AdoptionDTO(0, 0, 0, "03-03-2024"),
-			new AdoptionDTO(1, 1, 1, "03-03-2024")
+			new AdoptionDTO(0, 0, "2024-03-08"),
+			new AdoptionDTO(1, 1, "2024-03-08")
 		);
 	}
 
@@ -164,8 +161,14 @@ class AdoptionAdapterTest {
 	}
 
 	private static List<Animal> createAnimals() {
-		Url url = new Url("https://www.url1.com");
-		Member member = new Member(new Id(0), new FirstName("Alvin"), new LastName("Hamaide"), new MemberCity("Valenciennes"), "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX");
+		Member member = new Member(
+			new Id(0),
+			new FirstName("Alvin"),
+			new LastName("Hamaide"),
+			new MemberCity("Valenciennes"),
+			"alvin.hamaide@mail-ecv.fr",
+			"06XXXXXXXX"
+		);
 
 		return List.of(
 			new Animal(
@@ -173,20 +176,18 @@ class AdoptionAdapterTest {
 				"Oslo",
 				new AnimalType("chat"),
 				3,
-				url,
+				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8),
-				null
+				LocalDate.of(2024, 3, 8)
 			),
 			new Animal(
 				new Id(1),
 				"Uta",
 				new AnimalType("chat"),
 				1,
-				url,
+				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8),
-				null
+				LocalDate.of(2024, 3, 8)
 			)
 		);
 	}

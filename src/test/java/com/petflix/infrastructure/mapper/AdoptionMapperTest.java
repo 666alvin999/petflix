@@ -8,8 +8,8 @@ import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.memberfield.MemberCity;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dto.AdoptionDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,13 +30,13 @@ class AdoptionMapperTest {
 
 	@Test
 	public void shouldMapDtoToDomain() {
-		//Arrange
+		// Arrange
 		AdoptionDTO adoptionDTO = createAdoptionDTOs().get(0);
 
-		//Act
+		// Act
 		Adoption actualAdoption = this.adoptionMapper.mapToDomain(adoptionDTO, createAdopters().get(0), createAnimals().get(0));
 
-		//Assert
+		// Assert
 		Adoption expectedAdoption = createAdoptions().get(0);
 
 		assertThat(actualAdoption).isEqualTo(expectedAdoption);
@@ -44,13 +44,13 @@ class AdoptionMapperTest {
 
 	@Test
 	public void shouldMapAllDtosToDomain() {
-		//Arrange
+		// Arrange
 		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
 
-		//Act
+		// Act
 		List<Adoption> actualAdoptions = this.adoptionMapper.mapAllToDomain(adoptionDTOs, createAdopters(), createAnimals());
 
-		//Assert
+		// Assert
 		List<Adoption> expectedAdoptions = createAdoptions();
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
@@ -58,13 +58,13 @@ class AdoptionMapperTest {
 
 	@Test
 	public void shouldMapDomainToDto() {
-		//Arrange
+		// Arrange
 		Adoption adoption = createAdoptions().get(0);
 
-		//Act
+		// Act
 		AdoptionDTO actualAdoptionDTO = this.adoptionMapper.mapToDTO(adoption);
 
-		//Assert
+		// Assert
 		AdoptionDTO expectedAdoptionDTO = createAdoptionDTOs().get(0);
 
 		assertThat(actualAdoptionDTO).isEqualTo(expectedAdoptionDTO);
@@ -73,21 +73,22 @@ class AdoptionMapperTest {
 	private static List<Adoption> createAdoptions() {
 		return List.of(
 			new Adoption(
-				new Id(0),
-				createAdopters().get(0),
 				createAnimals().get(0),
-				LocalDate.of(2024, 3, 3)
+				createAdopters().get(0),
+				LocalDate.of(2024, 3, 8)
 			),
 			new Adoption(
-				new Id(1),
-				createAdopters().get(1),
 				createAnimals().get(1),
-				LocalDate.of(2024, 3, 3)
+				createAdopters().get(1),
+				LocalDate.of(2024, 3, 8)
 			));
 	}
 
 	private static List<AdoptionDTO> createAdoptionDTOs() {
-		return List.of(new AdoptionDTO(0, 0, 0, "03-03-2024"), new AdoptionDTO(1, 1, 1, "03-03-2024"));
+		return List.of(
+			new AdoptionDTO(0, 0, "2024-03-08"),
+			new AdoptionDTO(1, 1, "2024-03-08")
+		);
 	}
 
 	private static List<Adopter> createAdopters() {
@@ -110,7 +111,6 @@ class AdoptionMapperTest {
 	}
 
 	private static List<Animal> createAnimals() {
-		Url url = new Url("https://www.url1.com");
 		Member member = new Member(
 			new Id(0),
 			new FirstName("Alvin"),
@@ -126,20 +126,18 @@ class AdoptionMapperTest {
 				"Oslo",
 				new AnimalType("chat"),
 				3,
-				url,
+				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8),
-				null
+				LocalDate.of(2024, 3, 8)
 			),
 			new Animal(
 				new Id(1),
 				"Uta",
 				new AnimalType("chat"),
 				1,
-				url,
+				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8),
-				null
+				LocalDate.of(2024, 3, 8)
 			)
 		);
 	}

@@ -36,10 +36,10 @@ class AdopterDaoTest {
 
 	@Test
 	public void shouldReturnAdopter() {
-		//Act
+		// Act
 		List<AdopterDTO> actualAdopter = this.adopterDao.getAdopterById(0);
 
-		//Assert
+		// Assert
 		AdopterDTO expectedAdopter = createAdopters().get(0);
 
 		assertThat(actualAdopter).isEqualTo(List.of(expectedAdopter));
@@ -47,10 +47,10 @@ class AdopterDaoTest {
 
 	@Test
 	public void shouldReturnAdopters() {
-		//Act
+		// Act
 		List<AdopterDTO> actualAdopters = this.adopterDao.getAdoptersByIds(Set.of(0, 1));
 
-		//Assert
+		// Assert
 		List<AdopterDTO> expectedAdopters = createAdopters();
 
 		assertThat(actualAdopters).isEqualTo(expectedAdopters);

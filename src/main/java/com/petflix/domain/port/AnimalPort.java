@@ -2,8 +2,10 @@ package com.petflix.domain.port;
 
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.animalfields.AnimalType;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface AnimalPort {
@@ -14,6 +16,9 @@ public interface AnimalPort {
 
 	List<AnimalType> getAllTypes();
 
-	List<Animal> getAnimalsByPresentationVideoUrl(String url);
+	List<Animal> getAnimalsByPresentationVideoId(String videoId);
 
+	List<AnimalType> getAnimalTypesByPresentationVideoId(String videoId);
+
+	Map<VideoId, List<AnimalType>> getAnimalTypesByPresentationVideoIds(Set<String> videoIds);
 }

@@ -35,11 +35,11 @@ class ControlDaoTest {
 
 	@Test
 	public void shouldReturnControl() {
-		//Act
+		// Act
 		List<ControlDTO> actualControlDTO = this.controlDao.getControlById(0);
 
-		//Assert
-		ControlDTO expectedControlDTO = new ControlDTO(0, 0, "27-02-2024");
+		// Assert
+		ControlDTO expectedControlDTO = new ControlDTO(0, "2024-03-08");
 
 		assertThat(actualControlDTO).isEqualTo(List.of(expectedControlDTO));
 	}
@@ -49,10 +49,10 @@ class ControlDaoTest {
 		// Act
 		List<ControlDTO> actualControlDTOs = this.controlDao.getAllControls();
 
-		//Assert
+		// Assert
 		List<ControlDTO> expectedControlDTOs = List.of(
-			new ControlDTO(0, 0, "27-02-2024"),
-			new ControlDTO(1, 1, "08-03-2024")
+			new ControlDTO(0, "2024-03-08"),
+			new ControlDTO(1, "2024-03-08")
 		);
 
 		assertThat(actualControlDTOs).isEqualTo(expectedControlDTOs);

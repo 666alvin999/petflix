@@ -32,7 +32,7 @@ public class ControlAdapter implements ControlPort {
 	public Control getControlById(int id) {
 		List<ControlDTO> controlDTOs = this.controlDao.getControlById(id);
 
-		int adoptionId = controlDTOs.get(0).getAdoptionId();
+		int adoptionId = controlDTOs.get(0).getAnimalId();
 		Adoption adoption = this.adoptionAdapter.getAdoptionById(adoptionId);
 
 		return this.controlMapper.mapToDomain(controlDTOs.get(0), adoption);
@@ -42,7 +42,7 @@ public class ControlAdapter implements ControlPort {
 	public List<Control> getAllControls() {
 		List<ControlDTO> controlDTOs = this.controlDao.getAllControls();
 
-		Set<Integer> adoptionIds = controlDTOs.stream().map(ControlDTO::getAdoptionId).collect(toSet());
+		Set<Integer> adoptionIds = controlDTOs.stream().map(ControlDTO::getAnimalId).collect(toSet());
 		List<Adoption> adoptions = this.adoptionAdapter.getAdoptionsByIds(adoptionIds);
 
 		return this.controlMapper.mapAllToDomain(controlDTOs, adoptions);

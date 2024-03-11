@@ -1,6 +1,7 @@
 package com.petflix.infrastructure.dao;
 
 import com.petflix.infrastructure.dto.AnimalDTO;
+import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
@@ -40,22 +41,22 @@ class AnimalDaoTest {
 	}
 
 	@Test
-	public void shouldReturnAnimalsByPresentationUrl() {
-		//Act
-		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoUrl("https://www.url1.com");
+	public void shouldReturnAnimalsByPresentationId() {
+		// Act
+		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByPresentationVideoId("id1");
 
-		//Assert
-		List<AnimalDTO> expectedAnimals = createAnimals();
+		// Assert
+		List<AnimalDTO> expectedAnimals = List.of(createAnimals().get(0), createAnimals().get(1));
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
 
 	@Test
 	public void shouldReturnAnimal() {
-		//Act
+		// Act
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalById(0);
 
-		//Assert
+		// Assert
 		List<AnimalDTO> expectedAnimals = List.of(createAnimals().get(0));
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
@@ -63,10 +64,10 @@ class AnimalDaoTest {
 
 	@Test
 	public void shouldReturnAnimals() {
-		//Act
+		// Act
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByIds(Set.of(0, 1, 2));
 
-		//Assert
+		// Assert
 		List<AnimalDTO> expectedAnimals = createAnimals();
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
@@ -74,22 +75,52 @@ class AnimalDaoTest {
 
 	@Test
 	public void shouldReturnAllTypes() {
-		//Act
+		// Act
 		List<String> actualTypes = this.animalDao.getAllTypes();
 
-		//Assert
+		// Assert
 		List<String> expectedTypes = List.of("chat", "chien");
 
 		assertThat(actualTypes).isEqualTo(expectedTypes);
 	}
 
+	@Test
+	public void shouldReturnTypesByUrl() {
+	    // Act
+		List<String> actualTypes = this.animalDao.getTypesByPresentationVideoId("https://www.url1.com");
+
+	    // Assert
+	    List<String> expectedTypes = List.of("chien", "chat");
+	}
+
+	@Test
+	public void shouldReturnMap() {
+	    // Arrange
+		Set<String> videoIds = Set.of("id1", "id2");
+
+	    // Act
+		List<AnimalTypesByPresentationVideoIdDTO> actualList = this.animalDao.getAnimalTypesGroupByPresentationVideoIds(videoIds);
+
+	    // Assert
+		List<AnimalTypesByPresentationVideoIdDTO> expectedList = createAnimalTypesByPresentationVideoIdDTO();
+
+		assertThat(actualList).isEqualTo(expectedList);
+	}
+
+	private static List<AnimalTypesByPresentationVideoIdDTO> createAnimalTypesByPresentationVideoIdDTO() {
+		return List.of(
+			new AnimalTypesByPresentationVideoIdDTO("id1", "chat"),
+			new AnimalTypesByPresentationVideoIdDTO("id2", "chien")
+		);
+	}
+
 	@ParameterizedTest
 	@MethodSource("getTestsData")
 	public void shouldGetAnimalByTypeAndMemberCity(String type, String city, List<AnimalDTO> expectedAnimalDTOs) {
-		//Act
+		// Act
 		List<AnimalDTO> actualAnimalDTOs = this.animalDao.getAnimalsByTypeAndMemberCity(type, city);
 
-		//Assert
+		// Assert
 		assertThat(actualAnimalDTOs).isEqualTo(expectedAnimalDTOs);
 	}
 
@@ -105,9 +136,9 @@ class AnimalDaoTest {
 
 	private static List<AnimalDTO> createAnimals() {
 		return List.of(
-			new AnimalDTO(0, "Oslo", "chat", 3, "https://www.url1.com", 0, "08-03-2024", null),
-			new AnimalDTO(1, "Uta", "chat", 1, "https://www.url1.com", 0, "08-03-2024", null),
-			new AnimalDTO(2, "Maul", "chien", 4, "https://www.url1.com", 0, "08-03-2024", null)
+			new AnimalDTO(0, "Oslo", "chat", 3, "id1", 0, "2024-03-08"),
+			new AnimalDTO(1, "Uta", "chat", 1, "id1", 0, "2024-03-08"),
+			new AnimalDTO(2, "Maul", "chien", 4, "id2", 0, "2024-03-08")
 		);
 	}
 

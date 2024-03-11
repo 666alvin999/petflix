@@ -37,10 +37,10 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldReturnAllPresentationVideoDTOs() {
-		//Act
+		// Act
 		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getAllPresentationVideos();
 
-		//Assert
+		// Assert
 		List<PresentationVideoDTO> expectedPresentationVideo = createPresentationVideoDTOs();
 
 		assertThat(presentationVideo).isEqualTo(expectedPresentationVideo);
@@ -48,10 +48,10 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldReturnPresentationVideoDTOs() {
-		//Act
-		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getPresentationVideoById(1);
+		// Act
+		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getPresentationVideoById("id1");
 
-		//Assert
+		// Assert
 		PresentationVideoDTO expectedPresentationVideo = createPresentationVideoDTOs().get(0);
 
 		assertThat(presentationVideo).isEqualTo(List.of(expectedPresentationVideo));
@@ -59,24 +59,24 @@ class PresentationVideoDaoTest {
 
 	@Test
 	public void shouldReturnPresentationVideosWithUrls() {
-		//Act
-		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByUrls(Set.of("https://www.url1.com", "https://www.url2.com"));
+		// Act
+		List<PresentationVideoDTO> actualPresentationVideosDTO = this.presentationVideoDao.getPresentationVideosByIds(Set.of("id1", "id2"));
 
-		//Assert
-		List<PresentationVideoDTO> expectedPresentationVideoDTOs = this.createPresentationVideoDTOs();
+		// Assert
+		List<PresentationVideoDTO> expectedPresentationVideoDTOs = createPresentationVideoDTOs();
 
 		assertThat(actualPresentationVideosDTO).isEqualTo(expectedPresentationVideoDTOs);
 	}
 
 	@Test
 	public void shouldSubmitPresentationVideoDTO() {
-		//Arrange
-		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO(3, "https://www.url3.com", "title", "description", "01-03-2024");
+		// Arrange
+		PresentationVideoDTO presentationVideoDTO = new PresentationVideoDTO("3", "title", "description", "2024-03-08");
 
-		//Act
+		// Act
 		ActionSuccess actualActionSuccess = this.presentationVideoDao.submitPresentationDTO(presentationVideoDTO);
 
-		//Assert
+		// Assert
 		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
 
 		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
@@ -93,18 +93,16 @@ class PresentationVideoDaoTest {
 	private static List<PresentationVideoDTO> createPresentationVideoDTOs() {
 		return List.of(
 			new PresentationVideoDTO(
-				1,
-				"https://www.url1.com",
+				"id1",
 				"title1",
 				"description1",
-				"26-02-2024"
+				"2024-03-08"
 			),
 			new PresentationVideoDTO(
-				2,
-				"https://www.url2.com",
+				"id2",
 				"title2",
 				"description2",
-				"26-02-2024"
+				"2024-03-08"
 			)
 		);
 	}

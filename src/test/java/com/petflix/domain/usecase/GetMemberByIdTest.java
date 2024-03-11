@@ -30,15 +30,15 @@ class GetMemberByIdTest {
 
 	@Test
 	public void shouldGetMember() {
-		//Arrange
+		// Arrange
 		Member member = createMember();
 
 		when(this.memberPort.getMemberById(1)).thenReturn(member);
 
-		//Act
+		// Act
 		Member actualMember = this.getMemberById.execute(1);
 
-		//Assert
+		// Assert
 		Member expectedMember = createMember();
 
 		assertThat(actualMember).isEqualTo(expectedMember);

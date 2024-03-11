@@ -4,33 +4,32 @@ import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.Id;
-import com.petflix.domain.bean.generalfields.Url;
+import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.infrastructure.dto.AnimalDTO;
+import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-
-import static java.util.Objects.nonNull;
+import java.util.Map;
 
 @Component
 public class AnimalMapper {
 
-	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public Animal mapToDomain(AnimalDTO animalDTO, Member member) {
-		LocalDate adoptionDate = nonNull(animalDTO.getAdoptionDate()) ? LocalDate.parse(animalDTO.getAdoptionDate(), this.dateFormatter) : null;
-
 		return new Animal(
 			new Id(animalDTO.getId()),
 			animalDTO.getName(),
 			this.mapToAnimalType(animalDTO.getType()),
 			animalDTO.getAge(),
-			new Url(animalDTO.getPresentationVideoUrl()),
+			new VideoId(animalDTO.getPresentationVideoId()),
 			member,
-			LocalDate.parse(animalDTO.getArrivalDate(), this.dateFormatter),
-			adoptionDate
+			LocalDate.parse(animalDTO.getArrivalDate(), this.dateFormatter)
 		);
 	}
 
@@ -43,17 +42,14 @@ public class AnimalMapper {
 	}
 
 	public AnimalDTO mapToDTO(Animal animal) {
-		String adoptionDate = nonNull(animal.adoptionDate()) ? this.dateFormatter.format(animal.adoptionDate()) : null;
-
 		return new AnimalDTO(
 			animal.id().value(),
 			animal.name(),
 			animal.type().value(),
 			animal.age(),
-			animal.presentationUrl().value(),
+			animal.videoId().value(),
 			animal.managingMember().id().value(),
-			this.dateFormatter.format(animal.arrivalDate()),
-			adoptionDate
+			this.dateFormatter.format(animal.arrivalDate())
 		);
 	}
 
@@ -65,10 +61,27 @@ public class AnimalMapper {
 		return animalTypeDTOs.stream().map(this::mapToAnimalType).toList();
 	}
 
-	private Member findMember(List<Member> members, AnimalDTO animalDTO) {
-		Member animalMember = null;
+	public Map<VideoId, List<AnimalType>> mapToAnimalTypesByPresentationVideoIds(List<AnimalTypesByPresentationVideoIdDTO> animalTypesByPresentationVideoIdDTOs) {
+		Map<VideoId, List<AnimalType>> map = new HashMap<>();
 
-		for (Member member: members) {
+		animalTypesByPresentationVideoIdDTOs.forEach(
+			animalTypesByPresentationVideoIdDTO -> map.put(
+				new VideoId(animalTypesByPresentationVideoIdDTO.getPresentationVideoId()),
+				Arrays.stream(
+					      animalTypesByPresentationVideoIdDTO
+						      .getAnimalTypes()
+						      .split(",")
+				      )
+				      .map(AnimalType::new)
+				      .toList()
+			)
+		);
+
+		return map;
+	}
+
+	private Member findMember(List<Member> members, AnimalDTO animalDTO) {
+		for (Member member : members) {
 			if (member.id().value() == animalDTO.getId()) {
 				return member;
 			}
@@ -76,5 +89,4 @@ public class AnimalMapper {
 
 		return null;
 	}
-
 }

@@ -11,6 +11,6 @@ public interface PresentationVideoPort {
 
 	List<PresentationVideo> getPresentationVideosWithFilter(String animalType, String city);
 
-	PresentationVideo getPresentationVideoById(int id);
+	PresentationVideo getPresentationVideoById(String id);
 
 }

@@ -10,10 +10,9 @@ import lombok.*;
 @ToString
 public class PresentationVideoDTO {
 
-	private int id;
-	private String url;
+	private String id;
 	private String title;
 	private String description;
-	private String postingDate;
+	private String uploadDate;
 
 }

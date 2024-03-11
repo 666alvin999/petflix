@@ -14,13 +14,12 @@ import java.util.List;
 @Component
 public class AdoptionMapper {
 
-	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public Adoption mapToDomain(AdoptionDTO adoptionDTO, Adopter adopter, Animal animal) {
 		return new Adoption(
-			new Id(adoptionDTO.getId()),
-			adopter,
 			animal,
+			adopter,
 			LocalDate.parse(adoptionDTO.getAdoptionDate(), this.dateFormatter)
 		);
 	}
@@ -36,9 +35,8 @@ public class AdoptionMapper {
 
 	public AdoptionDTO mapToDTO(Adoption adoption) {
 		return new AdoptionDTO(
-			adoption.id().value(),
-			adoption.adopter().id().value(),
 			adoption.animal().id().value(),
+			adoption.adopter().id().value(),
 			this.dateFormatter.format(adoption.date())
 		);
 	}

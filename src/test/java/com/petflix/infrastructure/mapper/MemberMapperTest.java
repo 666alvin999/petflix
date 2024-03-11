@@ -66,13 +66,13 @@ class MemberMapperTest {
 
 	@Test
 	public void shouldReturnMemberCities() {
-		//Arrange
+		// Arrange
 		List<String> cities = List.of("Valenciennes", "Lille");
 
-		//Act
+		// Act
 		List<MemberCity> actualCities = this.memberMapper.mapCities(cities);
 
-		//Assert
+		// Assert
 		List<MemberCity> expectedMemberCity = List.of(new MemberCity("Valenciennes"), new MemberCity("Lille"));
 
 		assertThat(actualCities).isEqualTo(expectedMemberCity);
