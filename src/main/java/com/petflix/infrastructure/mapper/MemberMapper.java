@@ -19,7 +19,7 @@ public class MemberMapper {
 			new FirstName(memberDTO.getFirstName()),
 			new LastName(memberDTO.getLastName()),
 			new MemberCity(memberDTO.getCity()),
-			memberDTO.getEmail(),
+			memberDTO.getMail(),
 			memberDTO.getPhone()
 		);
 	}
