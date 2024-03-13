@@ -21,9 +21,8 @@ public class PresentationVideoDao {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	private final String GET_ALL_PRESENTATION_VIDEOS = "SELECT * FROM VIDEO;";
 	private final String GET_PRESENTATION_VIDEO_BY_ID = "SELECT * FROM VIDEO WHERE ID = :id;";
-	private final String GET_PRESENTATION_VIDEOS_BY_IDS = "SELECT * FROM VIDEO WHERE ID IN (:ids);";
+	private final String GET_PRESENTATION_VIDEOS_BY_IDS = "SELECT * FROM VIDEO WHERE ID IN (:ids) ORDER BY UPLOAD_DATE;";
 
 	private final String INSERT = "INSERT INTO VIDEO VALUES (:id, :title, :description, :uploadDate);";
 
@@ -38,10 +37,6 @@ public class PresentationVideoDao {
 		Map<String, String> parameters = Map.of("id", id);
 
 		return this.jdbcTemplate.query(GET_PRESENTATION_VIDEO_BY_ID, parameters, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
-	}
-
-	public List<PresentationVideoDTO> getAllPresentationVideos() {
-		return this.jdbcTemplate.query(GET_ALL_PRESENTATION_VIDEOS, new BeanPropertyRowMapper<>(PresentationVideoDTO.class));
 	}
 
 	public List<PresentationVideoDTO> getPresentationVideosByIds(Set<String> ids) {

@@ -9,7 +9,7 @@ CREATE TABLE PUBLIC.VIDEO
 (
     ID          CHARACTER VARYING(255) PRIMARY KEY,
     TITLE       CHARACTER VARYING(128)  NOT NULL,
-    DESCRIPTION CHARACTER VARYING(1024) NOT NULL,
+    DESCRIPTION CHARACTER VARYING(512) NOT NULL,
     UPLOAD_DATE CHARACTER VARYING(10)   NOT NULL
 );
 
@@ -63,10 +63,10 @@ CREATE TABLE PUBLIC.CONTROL
 
 INSERT INTO VIDEO
 VALUES ('z6EchXyieos', 'Igor et Pikachu, un lapin et un chien amis',
-        'necessitatibus sed nisi reformidans arcu adipiscing dolorem luctus partiendo saepe facilis vix non fuisset nobis doming pro contentiones nam parturient consul platonem intellegat nulla maluisset faucibus porta per ad ridiculus eu aptent eirmod hendrerit definiebas felis causae nullam magna sollicitudin mentitum dicta tincidunt diam salutatus hac efficitur natum vituperata posidonium liber alia novum nibh tale vocent sonet finibus constituto labores nulla omittantur adolescens scripserit quis errem tristique volutpat detraxit iudicabit intellegat auctor auctor at fringilla vituperata antiopam maiorum pro percipit pericula torquent faucibus parturient iuvaret non ludus tractatos ultrices quidam referrentur diam sea pertinax ridiculus mollis dolorum aliquip signiferumque cursus',
+        'necessitatibus sed nisi reformidans arcu adipiscing dolorem luctus partiendo saepe facilis vix non fuisset nobis doming pro contentiones nam parturient consul platonem intellegat nulla maluisset faucibus porta per ad ridiculus eu aptent eirmod hendrerit definiebas felis causae nullam magna sollicitudin mentitum dicta tincidunt diam salutatus hac efficitur natum vituperata posidonium liber alia novum nibh tale vocent sonet ',
         '2024-03-13'),
        ('DHfRfU3XUEo', 'Rencontrez Uta et Oslo notre duo de chats, et Maul leur compagnon canin',
-        'necessitatibus sed nisi reformidans arcu adipiscing dolorem luctus partiendo saepe facilis vix non fuisset nobis doming pro contentiones nam parturient consul platonem intellegat nulla maluisset faucibus porta per ad ridiculus eu aptent eirmod hendrerit definiebas felis causae nullam magna sollicitudin mentitum dicta tincidunt diam salutatus hac efficitur natum vituperata posidonium liber alia novum nibh tale vocent sonet finibus constituto labores nulla omittantur adolescens scripserit quis errem tristique volutpat detraxit iudicabit intellegat auctor auctor at fringilla vituperata antiopam maiorum pro percipit pericula torquent faucibus parturient iuvaret non ludus tractatos ultrices quidam referrentur diam sea pertinax ridiculus mollis dolorum aliquip signiferumque cursus',
+        'necessitatibus sed nisi reformidans arcu adipiscing dolorem luctus partiendo saepe facilis vix non fuisset nobis doming pro contentiones nam parturient consul platonem intellegat nulla maluisset faucibus porta per ad ridiculus eu aptent eirmod hendrerit definiebas felis causae nullam magna sollicitudin mentitum dicta tincidunt diam salutatus hac efficitur natum vituperata posidonium liber alia novum nibh tale vocent sonet ',
         '2024-03-14');
 
 INSERT INTO MEMBER (FIRST_NAME, LAST_NAME, CITY, MAIL, PHONE)

@@ -41,9 +41,9 @@ public class PresentationVideoAdapter implements PresentationVideoPort {
 	public List<PresentationVideo> getPresentationVideosWithFilter(String animalType, String city) {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByTypeAndMemberCity(animalType, city);
 
-		Set<String> urls = animalDTOs.stream().map(AnimalDTO::getPresentationVideoId).collect(toSet());
+		Set<String> ids = animalDTOs.stream().map(AnimalDTO::getPresentationVideoId).collect(toSet());
 
-		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideosByIds(urls);
+		List<PresentationVideoDTO> presentationVideoDTOs = this.presentationVideoDao.getPresentationVideosByIds(ids);
 
 		return this.presentationVideoMapper.mapAllToDomain(presentationVideoDTOs);
 	}

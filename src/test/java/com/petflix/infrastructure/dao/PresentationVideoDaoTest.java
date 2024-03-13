@@ -42,17 +42,6 @@ class PresentationVideoDaoTest {
 	}
 
 	@Test
-	public void shouldReturnAllPresentationVideoDTOs() {
-		// Act
-		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getAllPresentationVideos();
-
-		// Assert
-		List<PresentationVideoDTO> expectedPresentationVideo = createPresentationVideoDTOs();
-
-		assertThat(presentationVideo).isEqualTo(expectedPresentationVideo);
-	}
-
-	@Test
 	public void shouldReturnPresentationVideoDTOs() {
 		// Act
 		List<PresentationVideoDTO> presentationVideo = this.presentationVideoDao.getPresentationVideoById("id1");
