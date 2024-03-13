@@ -1326,3 +1326,12 @@ Invalid value "1" for parameter "parameterIndex" [90008-224]
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-03-13 02:04:02.541903+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La table "VIDEO" existe déjà
+Table "VIDEO" already exists; SQL statement:
+CREATE TABLE PUBLIC.VIDEO (
+                              ID CHARACTER VARYING(255) PRIMARY KEY,
+                              TITLE CHARACTER VARYING(128) NOT NULL,
+                              DESCRIPTION CHARACTER VARYING(1024) NOT NULL,
+                              UPLOAD_DATE CHARACTER VARYING(10) NOT NULL
+) [42101-224]
