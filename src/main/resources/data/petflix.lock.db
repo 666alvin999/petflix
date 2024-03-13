@@ -1,0 +1,6 @@
+#FileLock
+#Wed Mar 13 01:55:50 CET 2024
+hostName=air-de-alvin.home
+id=18e354ef3abe0d7bfc27aafa609a31b31db677fefde
+method=file
+server=192.168.1.16\:55417
