@@ -18,7 +18,5 @@ public interface AnimalPort {
 
 	List<Animal> getAnimalsByPresentationVideoId(String videoId);
 
-	List<AnimalType> getAnimalTypesByPresentationVideoId(String videoId);
-
 	Map<VideoId, List<AnimalType>> getAnimalTypesByPresentationVideoIds(Set<String> videoIds);
 }

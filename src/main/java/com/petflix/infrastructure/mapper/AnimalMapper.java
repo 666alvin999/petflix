@@ -5,6 +5,7 @@ import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
+import com.petflix.infrastructure.dto.AdoptionDTO;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class AnimalMapper {
 
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	public Animal mapToDomain(AnimalDTO animalDTO, Member member) {
+	public Animal mapToDomain(AnimalDTO animalDTO, Member member, List<AdoptionDTO> adoptionDTOs) {
 		return new Animal(
 			new Id(animalDTO.getId()),
 			animalDTO.getName(),
@@ -29,15 +30,16 @@ public class AnimalMapper {
 			animalDTO.getAge(),
 			new VideoId(animalDTO.getPresentationVideoId()),
 			member,
-			LocalDate.parse(animalDTO.getArrivalDate(), this.dateFormatter)
+			LocalDate.parse(animalDTO.getArrivalDate(), this.dateFormatter),
+			adoptionDTOs.stream().anyMatch(adoptionDTO -> adoptionDTO.getAnimalId() == animalDTO.getId())
 		);
 	}
 
-	public List<Animal> mapAllToDomain(List<AnimalDTO> animalDTOs, List<Member> members) {
+	public List<Animal> mapAllToDomain(List<AnimalDTO> animalDTOs, List<Member> members, List<AdoptionDTO> adoptionDTOs) {
 		return animalDTOs.stream().map(animalDTO -> {
 			Member member = this.findMember(members, animalDTO);
 
-			return mapToDomain(animalDTO, member);
+			return mapToDomain(animalDTO, member, adoptionDTOs);
 		}).toList();
 	}
 

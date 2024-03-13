@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AnimalMapperTest {
@@ -35,7 +36,7 @@ class AnimalMapperTest {
 		AnimalDTO animalDTO = createAnimalDTO();
 
 		// Act
-		Animal actualAnimal = this.animalMapper.mapToDomain(animalDTO, member);
+		Animal actualAnimal = this.animalMapper.mapToDomain(animalDTO, member, emptyList());
 
 		// Assert
 		Animal expectedAnimal = createAnimal();
@@ -98,7 +99,8 @@ class AnimalMapperTest {
 			3,
 			new VideoId("id1"),
 			createMember(),
-			LocalDate.of(2024, 3, 8)
+			LocalDate.of(2024, 3, 8),
+			false
 		);
 	}
 

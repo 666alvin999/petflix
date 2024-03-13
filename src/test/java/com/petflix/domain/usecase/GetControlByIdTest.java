@@ -65,7 +65,8 @@ class GetControlByIdTest {
 			3,
 			new VideoId("id1"),
 			managingMember,
-			LocalDate.of(2024, 3, 8)
+			LocalDate.of(2024, 3, 8),
+			false
 		);
 
 		Adopter adopter = new Adopter(

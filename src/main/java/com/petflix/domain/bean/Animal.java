@@ -6,6 +6,6 @@ import com.petflix.domain.bean.presentationvideofields.VideoId;
 
 import java.time.LocalDate;
 
-public record Animal(Id id, String name, AnimalType type, int age, VideoId videoId, Member managingMember, LocalDate arrivalDate) {
+public record Animal(Id id, String name, AnimalType type, int age, VideoId videoId, Member managingMember, LocalDate arrivalDate, boolean adopted) {
 }
 

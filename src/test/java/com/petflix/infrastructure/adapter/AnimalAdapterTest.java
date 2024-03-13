@@ -8,6 +8,7 @@ import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.domain.bean.generalfields.LastName;
 import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
+import com.petflix.infrastructure.dao.AdoptionDao;
 import com.petflix.infrastructure.dao.AnimalDao;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
@@ -23,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -35,14 +38,18 @@ class AnimalAdapterTest {
 	private AnimalDao animalDao;
 
 	@Mock
+	private AdoptionDao adoptionDao;
+
+	@Mock
 	private AnimalMapper animalMapper;
 
 	@Mock
 	private MemberAdapter memberAdapter;
+	private Set<Integer> animalIds;
 
 	@BeforeEach
 	public void setUp() {
-		this.animalAdapter = new AnimalAdapter(this.animalDao, this.memberAdapter, this.animalMapper);
+		this.animalAdapter = new AnimalAdapter(this.animalDao, this.adoptionDao, this.memberAdapter, this.animalMapper);
 	}
 
 	@Test
@@ -70,7 +77,8 @@ class AnimalAdapterTest {
 		Member member = createMember();
 
 	    when(this.animalDao.getAnimalById(0)).thenReturn(List.of(animalDTO));
-		when(this.animalMapper.mapToDomain(animalDTO, member)).thenReturn(createAnimals(member).get(0));
+		when(this.adoptionDao.getAdoptionById(0)).thenReturn(emptyList());
+		when(this.animalMapper.mapToDomain(animalDTO, member, emptyList())).thenReturn(createAnimals(member).get(0));
 		when(this.memberAdapter.getMemberById(0)).thenReturn(member);
 
 	    // Act
@@ -87,14 +95,15 @@ class AnimalAdapterTest {
 		// Arrange
 		List<AnimalDTO> animalDTOs = createAnimalDTOs();
 		Member member = createMember();
-		String url = "https://www.url1.com";
+		animalIds = animalDTOs.stream().map(AnimalDTO::getId).collect(toSet());
 
-		when(this.animalDao.getAnimalsByIds(Set.of(0, 1))).thenReturn(animalDTOs);
-		when(this.animalMapper.mapAllToDomain(animalDTOs, List.of(member))).thenReturn(createAnimals(member));
+		when(this.animalDao.getAnimalsByIds(animalIds)).thenReturn(animalDTOs);
+		when(this.adoptionDao.getAdoptionsByIds(animalIds)).thenReturn(emptyList());
+		when(this.animalMapper.mapAllToDomain(animalDTOs, List.of(member), emptyList())).thenReturn(createAnimals(member));
 		when(this.memberAdapter.getMembersByIds(Set.of(0))).thenReturn(List.of(member));
 
 		// Act
-		List<Animal> actualAnimals = this.animalAdapter.getAnimalsByIds(Set.of(0, 1));
+		List<Animal> actualAnimals = this.animalAdapter.getAnimalsByIds(animalIds);
 
 		// Assert
 		List<Animal> expectedAnimals = createAnimals(member);
@@ -103,7 +112,7 @@ class AnimalAdapterTest {
 	}
 
 	@Test
-	public void shouldReturnAnimalsByUrl() {
+	public void shouldReturnAnimalsByPresentationVideoId() {
 	    // Arrange
 		String videoId = "id1";
 
@@ -111,9 +120,12 @@ class AnimalAdapterTest {
 		List<AnimalDTO> animalDTOs = createAnimalDTOs();
 		List<Animal> animals = createAnimals(members.get(0));
 
+		Set<Integer> animalIds = animalDTOs.stream().map(AnimalDTO::getId).collect(toSet());
+
 		when(this.animalDao.getAnimalsByPresentationVideoId(videoId)).thenReturn(animalDTOs);
+		when(this.adoptionDao.getAdoptionsByIds(animalIds)).thenReturn(emptyList());
 		when(this.memberAdapter.getMembersByIds(Set.of(0))).thenReturn(members);
-		when(this.animalMapper.mapAllToDomain(animalDTOs, members)).thenReturn(animals);
+		when(this.animalMapper.mapAllToDomain(animalDTOs, members, emptyList())).thenReturn(animals);
 
 	    // Act
 		List<Animal> actualAnimals = this.animalAdapter.getAnimalsByPresentationVideoId(videoId);
@@ -123,27 +135,9 @@ class AnimalAdapterTest {
 
 		assertThat(actualAnimals).isEqualTo(expectedAnimals);
 	}
-
-	@Test
-	public void shouldReturnAnimalTypesByUrl() {
-	    // Arrange
-		List<String> animalTypeDTOs = createAnimalTypeDTOs();
-		List<AnimalType> animalTypes = createAnimalTypes();
-
-		when(this.animalDao.getTypesByPresentationVideoId("https://www.url1.com")).thenReturn(animalTypeDTOs);
-		when(this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs)).thenReturn(animalTypes);
-
-	    // Act
-		List<AnimalType> actualAnimalTypes = this.animalAdapter.getAnimalTypesByPresentationVideoId("https://www.url1.com");
-
-	    // Assert
-		List<AnimalType> expectedAnimalTypes = createAnimalTypes();
-
-		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
-	}
 	
 	@Test
-	public void shouldGetAnimalTypesByPresentationVideoIdMap() {
+	public void shouldGetAnimalTypesByPresentationVideoIds() {
 	    // Arrange
 		Set<String> videoIds = Set.of("id1", "id2");
 		
@@ -174,13 +168,15 @@ class AnimalAdapterTest {
 
 	private static List<Animal> createAnimals(Member member) {
 		return List.of(
-			new Animal(new Id(0),
+			new Animal(
+				new Id(0),
 				"Oslo",
 				new AnimalType("chat"),
 				3,
 				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8)
+				LocalDate.of(2024, 3, 8),
+				false
 			),
 			new Animal(
 				new Id(1),
@@ -189,7 +185,8 @@ class AnimalAdapterTest {
 				1,
 				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8)
+				LocalDate.of(2024, 3, 8),
+				false
 			),
 			new Animal(
 				new Id(2),
@@ -198,7 +195,8 @@ class AnimalAdapterTest {
 				4,
 				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8)
+				LocalDate.of(2024, 3, 8),
+				false
 			)
 		);
 	}

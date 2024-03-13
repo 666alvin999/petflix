@@ -67,7 +67,8 @@ class GetAnimalsByPresentationVideoIdTest {
 			2,
 			createVideoId(),
 			createMember(),
-			LocalDate.of(2024, 3, 8)
+			LocalDate.of(2024, 3, 8),
+			false
 		);
 	}
 

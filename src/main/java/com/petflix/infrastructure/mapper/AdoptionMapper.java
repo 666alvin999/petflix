@@ -3,7 +3,6 @@ package com.petflix.infrastructure.mapper;
 import com.petflix.domain.bean.Adopter;
 import com.petflix.domain.bean.Adoption;
 import com.petflix.domain.bean.Animal;
-import com.petflix.domain.bean.generalfields.Id;
 import com.petflix.infrastructure.dto.AdoptionDTO;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +41,7 @@ public class AdoptionMapper {
 	}
 
 	private Adopter findAdoptionAdopter(List<Adopter> adopters, AdoptionDTO adoptionDTO) {
-		for (Adopter adopter: adopters) {
+		for (Adopter adopter : adopters) {
 			if (adopter.id().value() == adoptionDTO.getAdopterId()) {
 				return adopter;
 			}
@@ -52,7 +51,7 @@ public class AdoptionMapper {
 	}
 
 	private Animal findAdoptionAnimal(List<Animal> animals, AdoptionDTO adoptionDTO) {
-		for (Animal animal: animals) {
+		for (Animal animal : animals) {
 			if (animal.id().value() == adoptionDTO.getAnimalId()) {
 				return animal;
 			}

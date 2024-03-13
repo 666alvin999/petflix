@@ -178,7 +178,8 @@ class AdoptionAdapterTest {
 				3,
 				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8)
+				LocalDate.of(2024, 3, 8),
+				false
 			),
 			new Animal(
 				new Id(1),
@@ -187,7 +188,8 @@ class AdoptionAdapterTest {
 				1,
 				new VideoId("id1"),
 				member,
-				LocalDate.of(2024, 3, 8)
+				LocalDate.of(2024, 3, 8),
+				false
 			)
 		);
 	}

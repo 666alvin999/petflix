@@ -5,7 +5,9 @@ import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.domain.port.AnimalPort;
+import com.petflix.infrastructure.dao.AdoptionDao;
 import com.petflix.infrastructure.dao.AnimalDao;
+import com.petflix.infrastructure.dto.AdoptionDTO;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import com.petflix.infrastructure.mapper.AnimalMapper;
@@ -22,12 +24,14 @@ import static java.util.stream.Collectors.toSet;
 public class AnimalAdapter implements AnimalPort {
 
 	private final AnimalDao animalDao;
+	private final AdoptionDao adoptionDao;
 	private final MemberAdapter memberAdapter;
 	private final AnimalMapper animalMapper;
 
 	@Autowired
-	public AnimalAdapter(AnimalDao animalDao, MemberAdapter memberAdapter, AnimalMapper animalMapper) {
+	public AnimalAdapter(AnimalDao animalDao, AdoptionDao adoptionDao, MemberAdapter memberAdapter, AnimalMapper animalMapper) {
 		this.animalDao = animalDao;
+		this.adoptionDao = adoptionDao;
 		this.memberAdapter = memberAdapter;
 		this.animalMapper = animalMapper;
 	}
@@ -35,21 +39,23 @@ public class AnimalAdapter implements AnimalPort {
 	@Override
 	public Animal getAnimalById(int id) {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalById(id);
-
+		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionById(animalDTOs.get(0).getId());
 		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getMemberId());
 
-		return this.animalMapper.mapToDomain(animalDTOs.get(0), member);
+		return this.animalMapper.mapToDomain(animalDTOs.get(0), member, adoptionDTOs);
 	}
 
 	@Override
 	public List<Animal> getAnimalsByIds(Set<Integer> ids) {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByIds(ids);
 
+		Set<Integer> animalIds = animalDTOs.stream().map(AnimalDTO::getId).collect(toSet());
 		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getMemberId).collect(toSet());
 
+		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionsByIds(animalIds);
 		List<Member> members = this.memberAdapter.getMembersByIds(memberIds);
 
-		return this.animalMapper.mapAllToDomain(animalDTOs, members);
+		return this.animalMapper.mapAllToDomain(animalDTOs, members, adoptionDTOs);
 	}
 
 	@Override
@@ -62,17 +68,14 @@ public class AnimalAdapter implements AnimalPort {
 	@Override
 	public List<Animal> getAnimalsByPresentationVideoId(String videoId) {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByPresentationVideoId(videoId);
+		Set<Integer> animalIds = animalDTOs.stream().map(AnimalDTO::getId).collect(toSet());
+
+		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionsByIds(animalIds);
+
 		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getMemberId).collect(toSet());
 		List<Member> members = this.memberAdapter.getMembersByIds(memberIds);
 
-		return this.animalMapper.mapAllToDomain(animalDTOs, members);
-	}
-
-	@Override
-	public List<AnimalType> getAnimalTypesByPresentationVideoId(String videoId) {
-		List<String> animalTypeDTOs = this.animalDao.getTypesByPresentationVideoId(videoId);
-
-		return this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs);
+		return this.animalMapper.mapAllToDomain(animalDTOs, members, adoptionDTOs);
 	}
 
 	@Override
