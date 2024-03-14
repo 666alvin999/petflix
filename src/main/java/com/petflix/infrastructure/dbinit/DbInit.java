@@ -1,4 +1,4 @@
-package com.petflix;
+package com.petflix.infrastructure.dbinit;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +22,7 @@ public class DbInit {
 	@PostConstruct
 	public void init() throws IOException {
 		this.jdbcTemplate.execute(
-			new String(readAllBytes(Paths.get("src/main/resources/data_init.sql")))
+			new String(readAllBytes(Paths.get("src/main/java/com/petflix/infrastructure/dbinit/data_init.sql")))
 		);
 	}
 
