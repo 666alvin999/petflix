@@ -73,6 +73,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
     </build>
 
 </project>
