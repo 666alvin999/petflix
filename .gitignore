@@ -33,3 +33,6 @@ build/
 .vscode/
 
 .DS_STORE
+
+### Project specific ###
+src/main/resources/data
