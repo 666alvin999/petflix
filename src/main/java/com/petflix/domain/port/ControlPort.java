@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface ControlPort {
 
-	Control getControlById(int id);
-
 	List<Control> getAllControls();
 
 }

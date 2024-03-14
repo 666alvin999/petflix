@@ -43,24 +43,6 @@ class ControlAdapterTest {
 	}
 
 	@Test
-	public void shouldReturnControlById() {
-	    // Arrange
-		ControlDTO controlDTO = createControlDTO();
-
-		when(this.controlDao.getControlById(0)).thenReturn(List.of(controlDTO));
-		when(this.adoptionAdapter.getAdoptionById(0)).thenReturn(createAdoption());
-		when(this.controlMapper.mapToDomain(controlDTO, createAdoption())).thenReturn(createControl());
-
-	    // Act
-	    Control actualControl = this.controlAdapter.getControlById(0);
-
-	    // Assert
-	    Control expectedControl = createControl();
-
-		assertThat(actualControl).isEqualTo(expectedControl);
-	}
-
-	@Test
 	public void shouldReturnAllControls() {
 		// Arrange
 		List<ControlDTO> controlDTOs = List.of(createControlDTO());

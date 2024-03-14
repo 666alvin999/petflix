@@ -29,16 +29,6 @@ public class ControlAdapter implements ControlPort {
 	}
 
 	@Override
-	public Control getControlById(int id) {
-		List<ControlDTO> controlDTOs = this.controlDao.getControlById(id);
-
-		int adoptionId = controlDTOs.get(0).getAnimalId();
-		Adoption adoption = this.adoptionAdapter.getAdoptionById(adoptionId);
-
-		return this.controlMapper.mapToDomain(controlDTOs.get(0), adoption);
-	}
-
-	@Override
 	public List<Control> getAllControls() {
 		List<ControlDTO> controlDTOs = this.controlDao.getAllControls();
 

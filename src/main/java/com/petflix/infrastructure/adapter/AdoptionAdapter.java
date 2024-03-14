@@ -3,7 +3,6 @@ package com.petflix.infrastructure.adapter;
 import com.petflix.domain.bean.Adopter;
 import com.petflix.domain.bean.Adoption;
 import com.petflix.domain.bean.Animal;
-import com.petflix.domain.port.AdoptionPort;
 import com.petflix.infrastructure.dao.AdoptionDao;
 import com.petflix.infrastructure.dto.AdoptionDTO;
 import com.petflix.infrastructure.mapper.AdoptionMapper;
@@ -16,7 +15,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 @Repository
-public class AdoptionAdapter implements AdoptionPort {
+public class AdoptionAdapter {
 
 	private final AdoptionDao adoptionDao;
 	private final AnimalAdapter animalAdapter;
@@ -31,7 +30,6 @@ public class AdoptionAdapter implements AdoptionPort {
 		this.adoptionMapper = adoptionMapper;
 	}
 
-	@Override
 	public List<Adoption> getAllAdoptions() {
 		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAllAdoptions();
 		Set<Integer> animalsIds = adoptionDTOs.stream().map(AdoptionDTO::getAnimalId).collect(toSet());
@@ -43,7 +41,6 @@ public class AdoptionAdapter implements AdoptionPort {
 		return this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals);
 	}
 
-	@Override
 	public Adoption getAdoptionById(int id) {
 		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionById(id);
 

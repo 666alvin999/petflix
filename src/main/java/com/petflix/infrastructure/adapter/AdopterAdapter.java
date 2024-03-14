@@ -1,7 +1,6 @@
 package com.petflix.infrastructure.adapter;
 
 import com.petflix.domain.bean.Adopter;
-import com.petflix.domain.port.AdopterPort;
 import com.petflix.infrastructure.dao.AdopterDao;
 import com.petflix.infrastructure.dto.AdopterDTO;
 import com.petflix.infrastructure.mapper.AdopterMapper;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public class AdopterAdapter implements AdopterPort {
+public class AdopterAdapter {
 
 	private final AdopterDao adopterDao;
 	private final AdopterMapper adopterMapper;
@@ -23,14 +22,12 @@ public class AdopterAdapter implements AdopterPort {
 		this.adopterMapper = adopterMapper;
 	}
 
-	@Override
 	public Adopter getAdopterById(int id) {
 		List<AdopterDTO> adopterDTOs = this.adopterDao.getAdopterById(id);
 
 		return this.adopterMapper.mapToDomain(adopterDTOs.get(0));
 	}
 
-	@Override
 	public List<Adopter> getAdoptersByIds(Set<Integer> ids) {
 		List<AdopterDTO> adopterDTOs = this.adopterDao.getAdoptersByIds(ids);
 
