@@ -10,9 +10,10 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class PresentationVideoAndAnimalTypesViewModel {
+public class PresentationVideoAndAnimalsAndMemberViewModel {
 
 	private PresentationVideoViewModel presentationVideo;
-	private List<String> animalTypes;
+	private List<AnimalViewModel> animals;
+	private MemberViewModel member;
 
 }

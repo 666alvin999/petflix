@@ -40,7 +40,7 @@ public class AnimalAdapter implements AnimalPort {
 	public Animal getAnimalById(int id) {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalById(id);
 		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionById(animalDTOs.get(0).getId());
-		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getMemberId());
+		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getManagingMember());
 
 		return this.animalMapper.mapToDomain(animalDTOs.get(0), member, adoptionDTOs);
 	}
@@ -50,7 +50,7 @@ public class AnimalAdapter implements AnimalPort {
 		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalsByIds(ids);
 
 		Set<Integer> animalIds = animalDTOs.stream().map(AnimalDTO::getId).collect(toSet());
-		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getMemberId).collect(toSet());
+		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getManagingMember).collect(toSet());
 
 		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionsByIds(animalIds);
 		List<Member> members = this.memberAdapter.getMembersByIds(memberIds);
@@ -72,7 +72,7 @@ public class AnimalAdapter implements AnimalPort {
 
 		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionsByIds(animalIds);
 
-		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getMemberId).collect(toSet());
+		Set<Integer> memberIds = animalDTOs.stream().map(AnimalDTO::getManagingMember).collect(toSet());
 		List<Member> members = this.memberAdapter.getMembersByIds(memberIds);
 
 		return this.animalMapper.mapAllToDomain(animalDTOs, members, adoptionDTOs);

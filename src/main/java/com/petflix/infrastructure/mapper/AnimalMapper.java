@@ -84,7 +84,7 @@ public class AnimalMapper {
 
 	private Member findMember(List<Member> members, AnimalDTO animalDTO) {
 		for (Member member : members) {
-			if (member.id().value() == animalDTO.getId()) {
+			if (member.id().value() == animalDTO.getManagingMember()) {
 				return member;
 			}
 		}

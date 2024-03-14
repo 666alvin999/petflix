@@ -1,6 +1,7 @@
 package com.petflix.application.mapper;
 
 import com.petflix.application.dto.PresentationVideoAndAnimalTypesViewModel;
+import com.petflix.application.dto.PresentationVideoViewModel;
 import com.petflix.domain.bean.PresentationVideo;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
@@ -17,10 +18,12 @@ public class PresentationVideoAndAnimalTypesMapper {
 
 	public PresentationVideoAndAnimalTypesViewModel mapToViewModel(PresentationVideo presentationVideo, List<AnimalType> animalTypes) {
 		return new PresentationVideoAndAnimalTypesViewModel(
-			presentationVideo.id().value(),
-			presentationVideo.title(),
-			presentationVideo.description(),
-			this.dateFormatter.format(presentationVideo.uploadDate()),
+			new PresentationVideoViewModel(
+				presentationVideo.id().value(),
+				presentationVideo.title(),
+				presentationVideo.description(),
+				this.dateFormatter.format(presentationVideo.uploadDate())
+			),
 			animalTypes.stream().map(AnimalType::value).toList()
 		);
 	}

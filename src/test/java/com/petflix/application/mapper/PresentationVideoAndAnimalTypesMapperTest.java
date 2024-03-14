@@ -1,6 +1,7 @@
 package com.petflix.application.mapper;
 
 import com.petflix.application.dto.PresentationVideoAndAnimalTypesViewModel;
+import com.petflix.application.dto.PresentationVideoViewModel;
 import com.petflix.domain.bean.PresentationVideo;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
@@ -54,8 +55,14 @@ class PresentationVideoAndAnimalTypesMapperTest {
 
 	private static List<PresentationVideoAndAnimalTypesViewModel> createViewModels() {
 		return List.of(
-			new PresentationVideoAndAnimalTypesViewModel("id1", "title", "description", "2024-03-11", List.of("chien", "chat")),
-			new PresentationVideoAndAnimalTypesViewModel("id2", "title", "description", "2024-03-11", List.of("chien", "chat"))
+			new PresentationVideoAndAnimalTypesViewModel(
+				new PresentationVideoViewModel("id1", "title", "description", "2024-03-11"),
+				List.of("chien", "chat")
+			),
+			new PresentationVideoAndAnimalTypesViewModel(
+				new PresentationVideoViewModel("id2", "title", "description", "2024-03-11"),
+				List.of("chien", "chat")
+			)
 		);
 	}
 
