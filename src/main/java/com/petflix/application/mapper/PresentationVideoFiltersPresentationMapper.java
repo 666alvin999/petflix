@@ -7,7 +7,7 @@ import com.petflix.domain.bean.memberfield.MemberCity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PresentationVideoFiltersMapper {
+public class PresentationVideoFiltersPresentationMapper {
 
 	public PresentationVideoFiltersViewModel mapToViewModel(PresentationVideoFilters presentationVideoFilters) {
 		return new PresentationVideoFiltersViewModel(

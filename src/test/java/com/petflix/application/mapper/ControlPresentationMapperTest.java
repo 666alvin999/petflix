@@ -19,13 +19,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ControlMapperTest {
+class ControlPresentationMapperTest {
 
-	private ControlMapper controlMapper;
+	private ControlPresentationMapper controlPresentationMapper;
 
 	@BeforeEach
 	public void setUp() {
-		this.controlMapper = new ControlMapper();
+		this.controlPresentationMapper = new ControlPresentationMapper();
 	}
 
 	@Test
@@ -34,7 +34,7 @@ class ControlMapperTest {
 	    Control control = createControls().get(0);
 
 	    // Act
-		ControlViewModel actualControlViewModel = this.controlMapper.mapToViewModel(control);
+		ControlViewModel actualControlViewModel = this.controlPresentationMapper.mapToViewModel(control);
 
 	    // Assert
 	    ControlViewModel expectedControlViewModel = createControlViewModels().get(0);
@@ -48,7 +48,7 @@ class ControlMapperTest {
 		Control control = createControls().get(0);
 
 		// Act
-		ControlViewModel actualControlViewModel = this.controlMapper.mapToViewModel(control);
+		ControlViewModel actualControlViewModel = this.controlPresentationMapper.mapToViewModel(control);
 
 		// Assert
 		ControlViewModel expectedControlViewModel = createControlViewModels().get(0);
@@ -75,7 +75,6 @@ class ControlMapperTest {
 		);
 
 		AdopterViewModel adopter = new AdopterViewModel(
-			0,
 			"Alvin",
 			"Hamaide",
 			"Valenciennes",

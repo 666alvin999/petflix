@@ -2,8 +2,8 @@ package com.petflix.application.controller;
 
 import com.petflix.application.dto.PresentationVideoAndAnimalTypesViewModel;
 import com.petflix.application.dto.PresentationVideoFiltersViewModel;
-import com.petflix.application.mapper.PresentationVideoAndAnimalTypesMapper;
-import com.petflix.application.mapper.PresentationVideoFiltersMapper;
+import com.petflix.application.mapper.PresentationVideoAndAnimalTypesPresentationMapper;
+import com.petflix.application.mapper.PresentationVideoFiltersPresentationMapper;
 import com.petflix.application.presenter.PresentationVideoAndAnimalTypesPresenter;
 import com.petflix.application.presenter.PresentationVideoFiltersPresenter;
 import com.petflix.domain.bean.PresentationVideo;
@@ -37,18 +37,18 @@ public class HomepageController {
 	private final GetAnimalTypesByPresentationVideoIds getAnimalTypesByPresentationVideoIds;
 	private final GetPresentationVideosWithFilter getPresentationVideosWithFilter;
 
-	private final PresentationVideoAndAnimalTypesMapper presentationVideoAndAnimalTypesMapper;
-	private final PresentationVideoFiltersMapper presentationVideoFiltersMapper;
+	private final PresentationVideoAndAnimalTypesPresentationMapper presentationVideoAndAnimalTypesPresentationMapper;
+	private final PresentationVideoFiltersPresentationMapper presentationVideoFiltersPresentationMapper;
 
 	private final PresentationVideoAndAnimalTypesPresenter presentationVideoAndAnimalTypesPresenter;
 	private final PresentationVideoFiltersPresenter presentationVideoFiltersPresenter;
 
-	public HomepageController(PresentationVideoAndAnimalTypesMapper presentationVideoAndAnimalTypesMapper, PresentationVideoFiltersMapper presentationVideoFiltersMapper, PresentationVideoAndAnimalTypesPresenter presentationVideoAndAnimalTypesPresenter, PresentationVideoFiltersPresenter presentationVideoFiltersPresenter, AnimalPort animalPort, MemberPort memberPort, PresentationVideoPort presentationVideoPort) {
+	public HomepageController(PresentationVideoAndAnimalTypesPresentationMapper presentationVideoAndAnimalTypesPresentationMapper, PresentationVideoFiltersPresentationMapper presentationVideoFiltersPresentationMapper, PresentationVideoAndAnimalTypesPresenter presentationVideoAndAnimalTypesPresenter, PresentationVideoFiltersPresenter presentationVideoFiltersPresenter, AnimalPort animalPort, MemberPort memberPort, PresentationVideoPort presentationVideoPort) {
 		this.getAllVideoFilters = new GetAllVideoFilters(animalPort, memberPort);
 		this.getAnimalTypesByPresentationVideoIds = new GetAnimalTypesByPresentationVideoIds(animalPort);
 		this.getPresentationVideosWithFilter = new GetPresentationVideosWithFilter(presentationVideoPort);
-		this.presentationVideoAndAnimalTypesMapper = presentationVideoAndAnimalTypesMapper;
-		this.presentationVideoFiltersMapper = presentationVideoFiltersMapper;
+		this.presentationVideoAndAnimalTypesPresentationMapper = presentationVideoAndAnimalTypesPresentationMapper;
+		this.presentationVideoFiltersPresentationMapper = presentationVideoFiltersPresentationMapper;
 		this.presentationVideoAndAnimalTypesPresenter = presentationVideoAndAnimalTypesPresenter;
 		this.presentationVideoFiltersPresenter = presentationVideoFiltersPresenter;
 	}
@@ -57,7 +57,7 @@ public class HomepageController {
 	@CrossOrigin(origins = {"http://localhost:5173", "https://ecv-petflix.netlify.app/"})
 	public ResponseEntity<String> getFilters() {
 		PresentationVideoFilters presentationVideoFilters = this.getAllVideoFilters.execute();
-		PresentationVideoFiltersViewModel presentationVideoFiltersViewModel = this.presentationVideoFiltersMapper.mapToViewModel(presentationVideoFilters);
+		PresentationVideoFiltersViewModel presentationVideoFiltersViewModel = this.presentationVideoFiltersPresentationMapper.mapToViewModel(presentationVideoFilters);
 
 		return this.presentationVideoFiltersPresenter.present(presentationVideoFiltersViewModel);
 	}
@@ -70,7 +70,7 @@ public class HomepageController {
 		Set<VideoId> presentationVideoIds = presentationVideos.stream().map(PresentationVideo::id).collect(toSet());
 		Map<VideoId, List<AnimalType>> animalTypesByPresentationVideoIds = this.getAnimalTypesByPresentationVideoIds.execute(presentationVideoIds);
 
-		List<PresentationVideoAndAnimalTypesViewModel> presentationVideoAndAnimalTypesViewModels = this.presentationVideoAndAnimalTypesMapper.mapAllToViewModel(presentationVideos, animalTypesByPresentationVideoIds);
+		List<PresentationVideoAndAnimalTypesViewModel> presentationVideoAndAnimalTypesViewModels = this.presentationVideoAndAnimalTypesPresentationMapper.mapAllToViewModel(presentationVideos, animalTypesByPresentationVideoIds);
 
 		return this.presentationVideoAndAnimalTypesPresenter.presentAll(presentationVideoAndAnimalTypesViewModels);
 	}

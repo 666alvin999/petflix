@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class PresentationVideoAndAnimalTypesMapper {
+public class PresentationVideoAndAnimalTypesPresentationMapper {
 
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

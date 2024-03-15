@@ -11,13 +11,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PresentationVideoFiltersMapperTest {
+class PresentationVideoFiltersPresentationMapperTest {
 
-	private PresentationVideoFiltersMapper presentationVideoFiltersMapper;
+	private PresentationVideoFiltersPresentationMapper presentationVideoFiltersPresentationMapper;
 
 	@BeforeEach
 	public void setUp() {
-		this.presentationVideoFiltersMapper = new PresentationVideoFiltersMapper();
+		this.presentationVideoFiltersPresentationMapper = new PresentationVideoFiltersPresentationMapper();
 	}
 
 	@Test
@@ -35,7 +35,7 @@ class PresentationVideoFiltersMapperTest {
 		);
 
 	    // Act
-		PresentationVideoFiltersViewModel actualViewModel = this.presentationVideoFiltersMapper.mapToViewModel(presentationVideoFilters);
+		PresentationVideoFiltersViewModel actualViewModel = this.presentationVideoFiltersPresentationMapper.mapToViewModel(presentationVideoFilters);
 
 	    // Assert
 		PresentationVideoFiltersViewModel expectedViewModel = new PresentationVideoFiltersViewModel(

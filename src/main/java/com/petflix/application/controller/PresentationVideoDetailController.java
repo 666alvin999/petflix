@@ -1,7 +1,7 @@
 package com.petflix.application.controller;
 
 import com.petflix.application.dto.PresentationVideoAndAnimalsAndMemberViewModel;
-import com.petflix.application.mapper.PresentationVideoAndAnimalsAndMemberMapper;
+import com.petflix.application.mapper.PresentationVideoAndAnimalsAndMemberPresentationMapper;
 import com.petflix.application.presenter.PresentationVideoAndAnimalsAndMemberPresenter;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.PresentationVideo;
@@ -27,14 +27,14 @@ public class PresentationVideoDetailController {
 	private final GetAnimalsByPresentationVideoId getAnimalsByPresentationVideoId;
 	private final GetPresentationVideoById getPresentationVideoById;
 
-	private final PresentationVideoAndAnimalsAndMemberMapper presentationVideoAndAnimalsAndMemberMapper;
+	private final PresentationVideoAndAnimalsAndMemberPresentationMapper presentationVideoAndAnimalsAndMemberPresentationMapper;
 	private final PresentationVideoAndAnimalsAndMemberPresenter presentationVideoAndAnimalsAndMemberPresenter;
 
 	@Autowired
-	public PresentationVideoDetailController(PresentationVideoAndAnimalsAndMemberMapper presentationVideoAndAnimalsAndMemberMapper, PresentationVideoAndAnimalsAndMemberPresenter presentationVideoAndAnimalsAndMemberPresenter, AnimalPort animalPort, PresentationVideoPort presentationVideoPort) {
+	public PresentationVideoDetailController(PresentationVideoAndAnimalsAndMemberPresentationMapper presentationVideoAndAnimalsAndMemberPresentationMapper, PresentationVideoAndAnimalsAndMemberPresenter presentationVideoAndAnimalsAndMemberPresenter, AnimalPort animalPort, PresentationVideoPort presentationVideoPort) {
 		this.getAnimalsByPresentationVideoId = new GetAnimalsByPresentationVideoId(animalPort);
 		this.getPresentationVideoById = new GetPresentationVideoById(presentationVideoPort);
-		this.presentationVideoAndAnimalsAndMemberMapper = presentationVideoAndAnimalsAndMemberMapper;
+		this.presentationVideoAndAnimalsAndMemberPresentationMapper = presentationVideoAndAnimalsAndMemberPresentationMapper;
 		this.presentationVideoAndAnimalsAndMemberPresenter = presentationVideoAndAnimalsAndMemberPresenter;
 	}
 
@@ -44,7 +44,7 @@ public class PresentationVideoDetailController {
 		List<Animal> animals = this.getAnimalsByPresentationVideoId.execute(new VideoId(presentationVideoId));
 		PresentationVideo presentationVideo = this.getPresentationVideoById.execute(presentationVideoId);
 
-		PresentationVideoAndAnimalsAndMemberViewModel viewModel = this.presentationVideoAndAnimalsAndMemberMapper.mapToViewModel(presentationVideo, animals);
+		PresentationVideoAndAnimalsAndMemberViewModel viewModel = this.presentationVideoAndAnimalsAndMemberPresentationMapper.mapToViewModel(presentationVideo, animals);
 
 		return this.presentationVideoAndAnimalsAndMemberPresenter.present(viewModel);
 	}

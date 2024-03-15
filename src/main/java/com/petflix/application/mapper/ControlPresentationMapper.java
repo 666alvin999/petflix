@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
-public class ControlMapper {
+public class ControlPresentationMapper {
 
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -40,7 +40,6 @@ public class ControlMapper {
 				member.phone()
 			),
 			new AdopterViewModel(
-				adopter.id().value(),
 				adopter.firstName().value(),
 				adopter.lastName().value(),
 				adopter.address(),

@@ -14,13 +14,13 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PresentationVideoAndAnimalTypesMapperTest {
+class PresentationVideoAndAnimalTypesPresentationMapperTest {
 
-	private PresentationVideoAndAnimalTypesMapper mapper;
+	private PresentationVideoAndAnimalTypesPresentationMapper mapper;
 
 	@BeforeEach
 	public void setUp() {
-		this.mapper = new PresentationVideoAndAnimalTypesMapper();
+		this.mapper = new PresentationVideoAndAnimalTypesPresentationMapper();
 	}
 
 	@Test

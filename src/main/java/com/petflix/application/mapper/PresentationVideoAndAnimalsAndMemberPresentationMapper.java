@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
-public class PresentationVideoAndAnimalsAndMemberMapper {
+public class PresentationVideoAndAnimalsAndMemberPresentationMapper {
 
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

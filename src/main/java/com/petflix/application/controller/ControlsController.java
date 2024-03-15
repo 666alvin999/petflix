@@ -1,6 +1,6 @@
 package com.petflix.application.controller;
 
-import com.petflix.application.mapper.ControlMapper;
+import com.petflix.application.mapper.ControlPresentationMapper;
 import com.petflix.application.presenter.ControlPresenter;
 import com.petflix.domain.bean.Control;
 import com.petflix.domain.port.ControlPort;
@@ -19,13 +19,13 @@ import java.util.List;
 public class ControlsController {
 
 	private final GetAllControls getAllControls;
-	private final ControlMapper controlMapper;
+	private final ControlPresentationMapper controlPresentationMapper;
 	private final ControlPresenter controlPresenter;
 
 	@Autowired
-	public ControlsController(ControlMapper controlMapper, ControlPresenter controlPresenter, ControlPort controlPort) {
+	public ControlsController(ControlPresentationMapper controlPresentationMapper, ControlPresenter controlPresenter, ControlPort controlPort) {
 		this.getAllControls = new GetAllControls(controlPort);
-		this.controlMapper = controlMapper;
+		this.controlPresentationMapper = controlPresentationMapper;
 		this.controlPresenter = controlPresenter;
 	}
 
@@ -34,7 +34,7 @@ public class ControlsController {
 	public ResponseEntity<String> getControls() {
 		List<Control> controls = this.getAllControls.execute();
 
-		return this.controlPresenter.presentAll(this.controlMapper.mapAllToViewModel(controls));
+		return this.controlPresenter.presentAll(this.controlPresentationMapper.mapAllToViewModel(controls));
 	}
 
 }

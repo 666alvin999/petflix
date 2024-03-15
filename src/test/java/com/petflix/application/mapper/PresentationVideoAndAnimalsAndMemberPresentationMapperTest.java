@@ -21,19 +21,19 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PresentationVideoAndAnimalsAndMemberMapperTest {
+class PresentationVideoAndAnimalsAndMemberPresentationMapperTest {
 
-	private PresentationVideoAndAnimalsAndMemberMapper presentationVideoAndAnimalsAndMemberMapper;
+	private PresentationVideoAndAnimalsAndMemberPresentationMapper presentationVideoAndAnimalsAndMemberPresentationMapper;
 
 	@BeforeEach
 	public void setUp() {
-		this.presentationVideoAndAnimalsAndMemberMapper = new PresentationVideoAndAnimalsAndMemberMapper();
+		this.presentationVideoAndAnimalsAndMemberPresentationMapper = new PresentationVideoAndAnimalsAndMemberPresentationMapper();
 	}
 
 	@Test
 	public void shouldMapToViewModel() {
 	    // Act
-		PresentationVideoAndAnimalsAndMemberViewModel actualPresentationVideoAndAnimalsAndMemberViewModel = this.presentationVideoAndAnimalsAndMemberMapper.mapToViewModel(createPresentationVideo(), createAnimals());
+		PresentationVideoAndAnimalsAndMemberViewModel actualPresentationVideoAndAnimalsAndMemberViewModel = this.presentationVideoAndAnimalsAndMemberPresentationMapper.mapToViewModel(createPresentationVideo(), createAnimals());
 
 	    // Assert
 		PresentationVideoAndAnimalsAndMemberViewModel expectedPresentationVideoAndAnimalsAndMemberViewModel = createViewModel();
