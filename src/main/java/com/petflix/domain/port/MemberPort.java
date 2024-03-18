@@ -8,10 +8,10 @@ import java.util.Set;
 
 public interface MemberPort {
 
-	List<MemberCity> getAllMembersCity();
-
-	Member getMemberById(int id);
+	List<Member> getAllMembers();
 
 	List<Member> getMembersByIds(Set<Integer> ids);
+
+	List<MemberCity> getAllMembersCity();
 
 }

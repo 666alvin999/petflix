@@ -20,17 +20,6 @@ class PresentationVideoAndAnimalTypesPresenterTest {
 	}
 
 	@Test
-	public void shouldReturnPresentedViewModel() {
-		// Act
-		ResponseEntity<String> actualPresented = this.presentationVideoAndAnimalTypesPresenter.present(createViewModels().get(0));
-
-		// Assert
-		ResponseEntity<String> expectedPresented = ResponseEntity.ok(createPresented());
-
-		assertThat(actualPresented).isEqualTo(expectedPresented);
-	}
-
-	@Test
 	public void shouldReturnPresentedViewModels() {
 		// Act
 		ResponseEntity<String> actualPresented = this.presentationVideoAndAnimalTypesPresenter.presentAll(createViewModels());

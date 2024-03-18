@@ -1,8 +1,8 @@
 package com.petflix.application.mapper;
 
 import com.petflix.application.dto.AnimalViewModel;
-import com.petflix.application.dto.PresentationVideoAndAnimalsAndMemberViewModel;
 import com.petflix.application.dto.MemberViewModel;
+import com.petflix.application.dto.PresentationVideoAndAnimalsAndMemberViewModel;
 import com.petflix.application.dto.PresentationVideoViewModel;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.Member;
@@ -32,10 +32,10 @@ class PresentationVideoAndAnimalsAndMemberPresentationMapperTest {
 
 	@Test
 	public void shouldMapToViewModel() {
-	    // Act
+		// Act
 		PresentationVideoAndAnimalsAndMemberViewModel actualPresentationVideoAndAnimalsAndMemberViewModel = this.presentationVideoAndAnimalsAndMemberPresentationMapper.mapToViewModel(createPresentationVideo(), createAnimals());
 
-	    // Assert
+		// Assert
 		PresentationVideoAndAnimalsAndMemberViewModel expectedPresentationVideoAndAnimalsAndMemberViewModel = createViewModel();
 
 		assertThat(actualPresentationVideoAndAnimalsAndMemberViewModel).isEqualTo(expectedPresentationVideoAndAnimalsAndMemberViewModel);
@@ -53,7 +53,7 @@ class PresentationVideoAndAnimalsAndMemberPresentationMapperTest {
 				new AnimalViewModel("Oslo", "chat", 3, "id1", "2024-03-13", false),
 				new AnimalViewModel("Uta", "chat", 1, "id1", "2024-03-13", false)
 			),
-			new MemberViewModel("Alvin", "Hamaide", "Valenciennes", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX")
+			new MemberViewModel(0, "Alvin", "Hamaide", "Valenciennes", "alvin.hamaide@mail-ecv.fr", "06XXXXXXXX")
 		);
 	}
 

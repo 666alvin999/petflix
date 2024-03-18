@@ -23,7 +23,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -47,53 +46,6 @@ class AdoptionAdapterTest {
 	@BeforeEach
 	public void setUp() {
 		this.adoptionAdapter = new AdoptionAdapter(this.adoptionDao, this.animalAdapter, this.adopterAdapter, this.adoptionMapper);
-	}
-
-	@Test
-	public void shouldReturnAllAdoptions() {
-		// Arrange
-		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
-		List<Adoption> adoptions = createAdoptions();
-		List<Animal> animals = createAnimals();
-		List<Adopter> adopters = createAdopters();
-
-		Set<Integer> adoptersIds = adopters.stream().map(adopter -> adopter.id().value()).collect(toSet());
-		Set<Integer> animalsIds = animals.stream().map(animal -> animal.id().value()).collect(toSet());
-
-		when(this.adoptionDao.getAllAdoptions()).thenReturn(adoptionDTOs);
-		when(this.adopterAdapter.getAdoptersByIds(adoptersIds)).thenReturn(adopters);
-		when(this.animalAdapter.getAnimalsByIds(animalsIds)).thenReturn(animals);
-		when(this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals)).thenReturn(adoptions);
-
-		// Act
-		List<Adoption> actualAdoptions = this.adoptionAdapter.getAllAdoptions();
-
-		// Assert
-		List<Adoption> expectedAdoptions = createAdoptions();
-
-		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
-	}
-
-	@Test
-	public void shouldReturnAdoptionById() {
-		// Arrange
-		List<AdoptionDTO> adoptionDTOs = createAdoptionDTOs();
-		Adoption adoption = createAdoptions().get(0);
-		Animal animal = createAnimals().get(0);
-		Adopter adopter = createAdopters().get(0);
-
-		when(this.adoptionDao.getAdoptionById(0)).thenReturn(List.of(adoptionDTOs.get(0)));
-		when(this.adopterAdapter.getAdopterById(0)).thenReturn(adopter);
-		when(this.animalAdapter.getAnimalById(0)).thenReturn(animal);
-		when(this.adoptionMapper.mapToDomain(adoptionDTOs.get(0), adopter, animal)).thenReturn(adoption);
-
-		// Act
-		Adoption actualAdoption = this.adoptionAdapter.getAdoptionById(0);
-
-		// Assert
-		Adoption expectedAdoption = createAdoptions().get(0);
-
-		assertThat(actualAdoption).isEqualTo(expectedAdoption);
 	}
 
 	@Test

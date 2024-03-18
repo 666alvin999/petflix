@@ -49,20 +49,6 @@ class AdopterMapperTest {
 		assertThat(actualAdopters).isEqualTo(expectedAdopters);
 	}
 
-	@Test
-	public void shouldMapDomaintoDto() {
-		// Arrange
-		Adopter adopter = createAdopters().get(0);
-
-		// Act
-		AdopterDTO actualAdopterDTO = this.adopterMapper.mapToDTO(adopter);
-
-		// Assert
-		AdopterDTO expectedAdopterDTO = createAdopterDTOs().get(0);
-
-		assertThat(actualAdopterDTO).isEqualTo(expectedAdopterDTO);
-	}
-
 	private static List<Adopter> createAdopters() {
 		return List.of(
 			new Adopter(

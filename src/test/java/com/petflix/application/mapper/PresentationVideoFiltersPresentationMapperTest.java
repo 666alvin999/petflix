@@ -22,7 +22,7 @@ class PresentationVideoFiltersPresentationMapperTest {
 
 	@Test
 	public void shouldMapToViewModel() {
-	    // Arrange
+		// Arrange
 		PresentationVideoFilters presentationVideoFilters = new PresentationVideoFilters(
 			List.of(
 				new AnimalType("chat"),
@@ -34,10 +34,10 @@ class PresentationVideoFiltersPresentationMapperTest {
 			)
 		);
 
-	    // Act
+		// Act
 		PresentationVideoFiltersViewModel actualViewModel = this.presentationVideoFiltersPresentationMapper.mapToViewModel(presentationVideoFilters);
 
-	    // Assert
+		// Assert
 		PresentationVideoFiltersViewModel expectedViewModel = new PresentationVideoFiltersViewModel(
 			List.of("chat", "chien"),
 			List.of("Valenciennes", "Lille")

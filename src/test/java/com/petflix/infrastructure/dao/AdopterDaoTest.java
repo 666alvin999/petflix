@@ -4,8 +4,8 @@ import com.petflix.infrastructure.dto.AdopterDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -38,17 +38,6 @@ class AdopterDaoTest {
 	@AfterEach
 	public void clean() {
 		dropTables();
-	}
-
-	@Test
-	public void shouldReturnAdopter() {
-		// Act
-		List<AdopterDTO> actualAdopter = this.adopterDao.getAdopterById(0);
-
-		// Assert
-		AdopterDTO expectedAdopter = createAdopters().get(0);
-
-		assertThat(actualAdopter).isEqualTo(List.of(expectedAdopter));
 	}
 
 	@Test

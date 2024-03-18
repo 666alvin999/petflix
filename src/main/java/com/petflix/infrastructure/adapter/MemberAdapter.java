@@ -25,17 +25,10 @@ public class MemberAdapter implements MemberPort {
 	}
 
 	@Override
-	public List<MemberCity> getAllMembersCity() {
-		List<String> citiesData = this.memberDao.getAllCities();
+	public List<Member> getAllMembers() {
+		List<MemberDTO> memberDTOs = this.memberDao.getAllMembers();
 
-		return this.memberMapper.mapCities(citiesData);
-	}
-
-	@Override
-	public Member getMemberById(int id) {
-		List<MemberDTO> memberDTOs = this.memberDao.getMemberById(id);
-
-		return this.memberMapper.mapToDomain(memberDTOs.get(0));
+		return this.memberMapper.mapAllToDomain(memberDTOs);
 	}
 
 	@Override
@@ -43,5 +36,12 @@ public class MemberAdapter implements MemberPort {
 		List<MemberDTO> memberDTOs = this.memberDao.getMembersByIds(ids);
 
 		return this.memberMapper.mapAllToDomain(memberDTOs);
+	}
+
+	@Override
+	public List<MemberCity> getAllMembersCity() {
+		List<String> citiesData = this.memberDao.getAllCities();
+
+		return this.memberMapper.mapCities(citiesData);
 	}
 }

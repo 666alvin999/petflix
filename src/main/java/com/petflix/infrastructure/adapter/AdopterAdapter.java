@@ -22,12 +22,6 @@ public class AdopterAdapter {
 		this.adopterMapper = adopterMapper;
 	}
 
-	public Adopter getAdopterById(int id) {
-		List<AdopterDTO> adopterDTOs = this.adopterDao.getAdopterById(id);
-
-		return this.adopterMapper.mapToDomain(adopterDTOs.get(0));
-	}
-
 	public List<Adopter> getAdoptersByIds(Set<Integer> ids) {
 		List<AdopterDTO> adopterDTOs = this.adopterDao.getAdoptersByIds(ids);
 

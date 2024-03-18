@@ -10,10 +10,6 @@ import java.util.List;
 @Component
 public class PresentationVideoAndAnimalTypesPresenter {
 
-	public ResponseEntity<String> present(PresentationVideoAndAnimalTypesViewModel presentationVideoAndAnimalTypesViewModel) {
-		return ResponseEntity.ok(new Gson().toJson(presentationVideoAndAnimalTypesViewModel));
-	}
-
 	public ResponseEntity<String> presentAll(List<PresentationVideoAndAnimalTypesViewModel> presentationVideoAndAnimalTypesViewModels) {
 		return ResponseEntity.ok(new Gson().toJson(presentationVideoAndAnimalTypesViewModels));
 	}

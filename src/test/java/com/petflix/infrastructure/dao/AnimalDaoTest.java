@@ -1,12 +1,13 @@
 package com.petflix.infrastructure.dao;
 
+import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,6 +23,7 @@ import java.util.stream.Stream;
 
 import static java.nio.file.Files.readAllBytes;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
@@ -58,17 +60,6 @@ class AnimalDaoTest {
 	}
 
 	@Test
-	public void shouldReturnAnimal() {
-		// Act
-		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalById(0);
-
-		// Assert
-		List<AnimalDTO> expectedAnimals = List.of(createAnimals().get(0));
-
-		assertThat(actualAnimals).isEqualTo(expectedAnimals);
-	}
-
-	@Test
 	public void shouldReturnAnimals() {
 		// Act
 		List<AnimalDTO> actualAnimals = this.animalDao.getAnimalsByIds(Set.of(0, 1, 2));
@@ -91,26 +82,33 @@ class AnimalDaoTest {
 	}
 
 	@Test
-	public void shouldReturnTypesByUrl() {
-	    // Act
-		List<String> actualTypes = this.animalDao.getTypesByPresentationVideoId("https://www.url1.com");
-
-	    // Assert
-	    List<String> expectedTypes = List.of("chien", "chat");
-	}
-
-	@Test
 	public void shouldReturnMap() {
-	    // Arrange
+		// Arrange
 		Set<String> videoIds = Set.of("id1", "id2");
 
-	    // Act
+		// Act
 		List<AnimalTypesByPresentationVideoIdDTO> actualList = this.animalDao.getAnimalTypesGroupByPresentationVideoIds(videoIds);
 
-	    // Assert
+		// Assert
 		List<AnimalTypesByPresentationVideoIdDTO> expectedList = createAnimalTypesByPresentationVideoIdDTO();
 
 		assertThat(actualList).isEqualTo(expectedList);
+	}
+
+	@Test
+	public void shouldSubmitAllAnimals() {
+		// Arrange
+		List<AnimalDTO> animalDTOs = createAnimals();
+
+		this.jdbcTemplate.update("DELETE FROM ANIMAL WHERE ID IN (0,1,2);", emptyMap());
+
+		// Act
+		ActionSuccess actualActionSuccess = this.animalDao.submitAnimals(animalDTOs);
+
+		// Assert
+		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
+
+		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
 	private static List<AnimalTypesByPresentationVideoIdDTO> createAnimalTypesByPresentationVideoIdDTO() {

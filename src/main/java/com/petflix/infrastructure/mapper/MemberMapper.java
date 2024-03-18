@@ -28,17 +28,6 @@ public class MemberMapper {
 		return memberDTOs.stream().map(this::mapToDomain).toList();
 	}
 
-	public MemberDTO mapToDTO(Member member) {
-		return new MemberDTO(
-			member.id().value(),
-			member.firstName().value(),
-			member.lastName().value(),
-			member.city().value(),
-			member.mail(),
-			member.phone()
-		);
-	}
-
 	public List<MemberCity> mapCities(List<String> cities) {
 		return cities.stream().map(MemberCity::new).toList();
 	}

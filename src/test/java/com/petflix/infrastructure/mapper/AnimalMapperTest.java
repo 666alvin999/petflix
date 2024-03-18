@@ -60,13 +60,13 @@ class AnimalMapperTest {
 
 	@Test
 	public void shouldMapAnimalTypeDTOsToDomain() {
-	    // Arrange
+		// Arrange
 		List<String> animalTypeDTOs = List.of("chat", "chien");
 
-	    // Act
+		// Act
 		List<AnimalType> actualAnimalTypes = this.animalMapper.mapAllToAnimalTypes(animalTypeDTOs);
 
-	    // Assert
+		// Assert
 		List<AnimalType> expectedAnimalTypes = List.of(new AnimalType("chat"), new AnimalType("chien"));
 
 		assertThat(actualAnimalTypes).isEqualTo(expectedAnimalTypes);
@@ -89,6 +89,20 @@ class AnimalMapperTest {
 		);
 
 		assertThat(actualMap).isEqualTo(expectedMap);
+	}
+
+	@Test
+	public void shouldMapAllDomainToDTO() {
+		// Arrange
+		List<Animal> animals = List.of(createAnimal());
+
+		// Act
+		List<AnimalDTO> actualAnimalDTOs = this.animalMapper.mapAllToDTO(animals);
+
+		// Assert
+		List<AnimalDTO> expectedAnimalDTOs = List.of(createAnimalDTO());
+
+		assertThat(actualAnimalDTOs).isEqualTo(expectedAnimalDTOs);
 	}
 
 	private static Animal createAnimal() {

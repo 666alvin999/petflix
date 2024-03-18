@@ -33,6 +33,7 @@ public class ControlPresentationMapper {
 				animal.adopted()
 			),
 			new MemberViewModel(
+				member.id().value(),
 				member.firstName().value(),
 				member.lastName().value(),
 				member.city().value(),

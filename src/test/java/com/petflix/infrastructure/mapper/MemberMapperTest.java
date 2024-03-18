@@ -51,20 +51,6 @@ class MemberMapperTest {
 	}
 
 	@Test
-	public void shouldMapDomainToDTO() {
-		// Arrange
-		Member member = createMembers().get(0);
-
-		// Act
-		MemberDTO actualMemberDTO = this.memberMapper.mapToDTO(member);
-
-		// Assert
-		MemberDTO expectedMemberDTO = createMemberDTOs().get(0);
-
-		assertThat(actualMemberDTO).isEqualTo(expectedMemberDTO);
-	}
-
-	@Test
 	public void shouldReturnMemberCities() {
 		// Arrange
 		List<String> cities = List.of("Valenciennes", "Lille");

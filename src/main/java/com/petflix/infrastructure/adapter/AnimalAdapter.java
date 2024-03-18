@@ -1,5 +1,6 @@
 package com.petflix.infrastructure.adapter;
 
+import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.animalfields.AnimalType;
@@ -34,15 +35,6 @@ public class AnimalAdapter implements AnimalPort {
 		this.adoptionDao = adoptionDao;
 		this.memberAdapter = memberAdapter;
 		this.animalMapper = animalMapper;
-	}
-
-	@Override
-	public Animal getAnimalById(int id) {
-		List<AnimalDTO> animalDTOs = this.animalDao.getAnimalById(id);
-		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionById(animalDTOs.get(0).getId());
-		Member member = this.memberAdapter.getMemberById(animalDTOs.get(0).getManagingMember());
-
-		return this.animalMapper.mapToDomain(animalDTOs.get(0), member, adoptionDTOs);
 	}
 
 	@Override
@@ -81,8 +73,15 @@ public class AnimalAdapter implements AnimalPort {
 	@Override
 	public Map<VideoId, List<AnimalType>> getAnimalTypesByPresentationVideoIds(Set<String> videoIds) {
 		List<AnimalTypesByPresentationVideoIdDTO> animalTypesByPresentationVideoIdDTOs = this.animalDao.getAnimalTypesGroupByPresentationVideoIds(videoIds);
-		
+
 		return this.animalMapper.mapToAnimalTypesByPresentationVideoIds(animalTypesByPresentationVideoIdDTOs);
+	}
+
+	@Override
+	public ActionSuccess submitAnimals(List<Animal> animals) {
+		List<AnimalDTO> animalDTOs = this.animalMapper.mapAllToDTO(animals);
+
+		return this.animalDao.submitAnimals(animalDTOs);
 	}
 
 }

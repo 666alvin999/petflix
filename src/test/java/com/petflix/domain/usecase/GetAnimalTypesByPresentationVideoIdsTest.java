@@ -31,15 +31,15 @@ class GetAnimalTypesByPresentationVideoIdsTest {
 
 	@Test
 	public void shouldReturnMapOfVideoIdAndAnimalTypes() {
-	    // Arrange
+		// Arrange
 		Map<VideoId, List<AnimalType>> map = createMap();
 
 		when(this.animalPort.getAnimalTypesByPresentationVideoIds(Set.of("id1", "id2"))).thenReturn(map);
 
-	    // Act
+		// Act
 		Map<VideoId, List<AnimalType>> actualMap = this.usecase.execute(createIds());
 
-	    // Assert
+		// Assert
 		Map<VideoId, List<AnimalType>> expectedMap = createMap();
 
 		assertThat(actualMap).isEqualTo(expectedMap);

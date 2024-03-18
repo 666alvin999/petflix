@@ -22,17 +22,6 @@ class ControlPresenterTest {
 	}
 
 	@Test
-	public void shouldReturnPresentedViewModel() {
-		// Act
-		ResponseEntity<String> actualPresented = this.controlPresenter.present(createViewModels().get(0));
-
-		// Assert
-		ResponseEntity<String> expectedPresented = ResponseEntity.ok(createPresented());
-
-		assertThat(actualPresented).isEqualTo(expectedPresented);
-	}
-
-	@Test
 	public void shouldReturnPresentedViewModels() {
 		// Act
 		ResponseEntity<String> actualPresented = this.controlPresenter.presentAll(createViewModels());
@@ -43,16 +32,12 @@ class ControlPresenterTest {
 		assertThat(actualPresented).isEqualTo(expectedPresented);
 	}
 
-	private static String createPresented() {
-		return "{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-02-29\",\"controlDate\":\"2024-08-29\"}";
-	}
-
 	private static String createAllPresented() {
-		return "[{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-02-29\",\"controlDate\":\"2024-08-29\"},{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-03-14\",\"controlDate\":\"20224-09-14\"}]";
+		return "[{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"id\":0,\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-02-29\",\"controlDate\":\"2024-08-29\"},{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"id\":0,\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-03-14\",\"controlDate\":\"20224-09-14\"}]";
 	}
 
 	private static List<ControlViewModel> createViewModels() {
-		AnimalViewModel animal =  new AnimalViewModel(
+		AnimalViewModel animal = new AnimalViewModel(
 			"Oslo",
 			"chat",
 			3,
@@ -62,6 +47,7 @@ class ControlPresenterTest {
 		);
 
 		MemberViewModel member = new MemberViewModel(
+			0,
 			"Citanimal",
 			"Asso",
 			"Valenciennes",

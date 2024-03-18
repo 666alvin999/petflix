@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 public class MemberViewModel {
 
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String city;

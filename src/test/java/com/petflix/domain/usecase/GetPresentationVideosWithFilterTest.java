@@ -1,7 +1,6 @@
 package com.petflix.domain.usecase;
 
 import com.petflix.domain.bean.PresentationVideo;
-import com.petflix.domain.bean.generalfields.Url;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
 import com.petflix.domain.port.PresentationVideoPort;
 import org.junit.jupiter.api.BeforeEach;

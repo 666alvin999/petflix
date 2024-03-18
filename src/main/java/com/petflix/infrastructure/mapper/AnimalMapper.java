@@ -91,4 +91,9 @@ public class AnimalMapper {
 
 		return null;
 	}
+
+	public List<AnimalDTO> mapAllToDTO(List<Animal> animals) {
+		return animals.stream().map(this::mapToDTO).toList();
+	}
+
 }

@@ -1,8 +1,8 @@
 package com.petflix.application.mapper;
 
 import com.petflix.application.dto.AnimalViewModel;
-import com.petflix.application.dto.PresentationVideoAndAnimalsAndMemberViewModel;
 import com.petflix.application.dto.MemberViewModel;
+import com.petflix.application.dto.PresentationVideoAndAnimalsAndMemberViewModel;
 import com.petflix.application.dto.PresentationVideoViewModel;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.Member;
@@ -29,6 +29,7 @@ public class PresentationVideoAndAnimalsAndMemberPresentationMapper {
 			),
 			animals.stream().map(this::mapAnimalToViewModel).toList(),
 			new MemberViewModel(
+				member.id().value(),
 				member.firstName().value(),
 				member.lastName().value(),
 				member.city().value(),
@@ -47,6 +48,6 @@ public class PresentationVideoAndAnimalsAndMemberPresentationMapper {
 			this.dateFormatter.format(animal.arrivalDate()),
 			animal.adopted()
 		);
-	};
+	}
 
 }

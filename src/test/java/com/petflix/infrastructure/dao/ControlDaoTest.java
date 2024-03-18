@@ -4,8 +4,8 @@ import com.petflix.infrastructure.dto.ControlDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -37,17 +37,6 @@ class ControlDaoTest {
 	@AfterEach()
 	public void clean() {
 		dropTables();
-	}
-
-	@Test
-	public void shouldReturnControl() {
-		// Act
-		List<ControlDTO> actualControlDTO = this.controlDao.getControlById(0);
-
-		// Assert
-		ControlDTO expectedControlDTO = new ControlDTO(0, "2024-03-08");
-
-		assertThat(actualControlDTO).isEqualTo(List.of(expectedControlDTO));
 	}
 
 	@Test

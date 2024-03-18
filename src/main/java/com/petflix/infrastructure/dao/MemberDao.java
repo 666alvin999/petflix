@@ -16,34 +16,32 @@ import java.util.Set;
 @Component
 public class MemberDao {
 
-	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	private final String GET_BY_ID = "SELECT * FROM MEMBER WHERE ID = :id;";
-	private final String GET_ALL_CITIES = "SELECT DISTINCT CITY FROM MEMBER";
+	private final String GET_ALL = "SELECT * FROM MEMBER";
 	private final String GET_BY_IDS = "SELECT * FROM MEMBER WHERE ID IN (:ids);";
+	private final String GET_ALL_CITIES = "SELECT DISTINCT CITY FROM MEMBER";
 
 	public MemberDao() {
 	}
 
+	@Autowired
 	public MemberDao(@Qualifier(value = "dataSource") DataSource dataSource) {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<MemberDTO> getMemberById(int id) {
-		Map<String, Integer> parameters = Map.of("id", id);
-
-		return jdbcTemplate.query(GET_BY_ID, parameters, new BeanPropertyRowMapper<>(MemberDTO.class));
-	}
-
-	public List<String> getAllCities() {
-		return this.jdbcTemplate.queryForList(GET_ALL_CITIES, new HashMap<>(), String.class);
+	public List<MemberDTO> getAllMembers() {
+		return this.jdbcTemplate.query(GET_ALL, new HashMap<>(), new BeanPropertyRowMapper<>(MemberDTO.class));
 	}
 
 	public List<MemberDTO> getMembersByIds(Set<Integer> ids) {
 		Map<String, Set<Integer>> parameters = Map.of("ids", ids);
 
 		return this.jdbcTemplate.query(GET_BY_IDS, parameters, new BeanPropertyRowMapper<>(MemberDTO.class));
+	}
+
+	public List<String> getAllCities() {
+		return this.jdbcTemplate.queryForList(GET_ALL_CITIES, new HashMap<>(), String.class);
 	}
 
 }

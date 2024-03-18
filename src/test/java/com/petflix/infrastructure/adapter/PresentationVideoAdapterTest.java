@@ -47,16 +47,16 @@ class PresentationVideoAdapterTest {
 	@Test
 	public void shouldReturnPresentationVideoById() {
 		// Arrange
-		PresentationVideoDTO presentationVideoDTO = this.createPresentationVideoDTOs().get(0);
+		PresentationVideoDTO presentationVideoDTO = createPresentationVideoDTOs().get(0);
 
 		when(this.presentationVideoDao.getPresentationVideoById("0")).thenReturn(List.of(presentationVideoDTO));
-		when(this.presentationVideoMapper.mapToDomain(presentationVideoDTO)).thenReturn(this.createPresentationVideos().get(0));
+		when(this.presentationVideoMapper.mapToDomain(presentationVideoDTO)).thenReturn(createPresentationVideos().get(0));
 
 		// Act
 		PresentationVideo actualPresentationVideo = this.presentationVideoAdapter.getPresentationVideoById("0");
 
 		// Assert
-		PresentationVideo expectedPresentationVideo = this.createPresentationVideos().get(0);
+		PresentationVideo expectedPresentationVideo = createPresentationVideos().get(0);
 
 		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
 	}

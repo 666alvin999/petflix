@@ -4,8 +4,8 @@ import com.petflix.infrastructure.dto.MemberDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -41,14 +41,14 @@ class MemberDaoTest {
 	}
 
 	@Test
-	public void shouldReturnMemberDTO() {
+	public void shouldReturnAllMembers() {
 		// Act
-		List<MemberDTO> actualMemberDTO = this.memberDao.getMemberById(0);
+		List<MemberDTO> actualMemberDTOs = this.memberDao.getAllMembers();
 
 		// Assert
-		MemberDTO expectedMemberDTO = createMemberDTOs().get(0);
+		List<MemberDTO> expectedMemberDTOs = createMemberDTOs();
 
-		assertThat(actualMemberDTO).isEqualTo(List.of(expectedMemberDTO));
+		assertThat(actualMemberDTOs).isEqualTo(expectedMemberDTOs);
 	}
 
 	@Test

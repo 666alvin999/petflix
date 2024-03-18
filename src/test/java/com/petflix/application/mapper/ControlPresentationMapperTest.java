@@ -30,14 +30,14 @@ class ControlPresentationMapperTest {
 
 	@Test
 	public void shouldMapToControlViewModel() {
-	    // Arrange
-	    Control control = createControls().get(0);
+		// Arrange
+		Control control = createControls().get(0);
 
-	    // Act
+		// Act
 		ControlViewModel actualControlViewModel = this.controlPresentationMapper.mapToViewModel(control);
 
-	    // Assert
-	    ControlViewModel expectedControlViewModel = createControlViewModels().get(0);
+		// Assert
+		ControlViewModel expectedControlViewModel = createControlViewModels().get(0);
 
 		assertThat(actualControlViewModel).isEqualTo(expectedControlViewModel);
 	}
@@ -57,7 +57,7 @@ class ControlPresentationMapperTest {
 	}
 
 	private static List<ControlViewModel> createControlViewModels() {
-		AnimalViewModel animal =  new AnimalViewModel(
+		AnimalViewModel animal = new AnimalViewModel(
 			"Oslo",
 			"chat",
 			3,
@@ -67,6 +67,7 @@ class ControlPresentationMapperTest {
 		);
 
 		MemberViewModel member = new MemberViewModel(
+			0,
 			"Citanimal",
 			"Asso",
 			"Valenciennes",

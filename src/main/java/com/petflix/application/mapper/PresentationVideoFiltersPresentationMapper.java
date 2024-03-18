@@ -11,8 +11,8 @@ public class PresentationVideoFiltersPresentationMapper {
 
 	public PresentationVideoFiltersViewModel mapToViewModel(PresentationVideoFilters presentationVideoFilters) {
 		return new PresentationVideoFiltersViewModel(
-			presentationVideoFilters.getAnimalTypes().stream().map(AnimalType::value).toList(),
-			presentationVideoFilters.getMemberCities().stream().map(MemberCity::value).toList()
+			presentationVideoFilters.animalTypes().stream().map(AnimalType::value).toList(),
+			presentationVideoFilters.memberCities().stream().map(MemberCity::value).toList()
 		);
 	}
 

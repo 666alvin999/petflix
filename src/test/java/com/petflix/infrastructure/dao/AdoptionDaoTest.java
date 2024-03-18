@@ -4,8 +4,8 @@ import com.petflix.infrastructure.dto.AdoptionDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -41,31 +41,9 @@ class AdoptionDaoTest {
 	}
 
 	@Test
-	public void shouldReturnAllAdoptions() {
-		// Act
-		List<AdoptionDTO> actualAdoptions = this.adoptionDao.getAllAdoptions();
-
-		// Assert
-		List<AdoptionDTO> expectedAdoptions = createAdoptionDTOs();
-
-		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
-	}
-
-	@Test
-	public void shouldReturnAdoption() {
-	    // Act
-	    List<AdoptionDTO> actualAdoptionDTO = this.adoptionDao.getAdoptionById(0);
-
-	    // Assert
-		List<AdoptionDTO> expectedAdoptionDTO = List.of(createAdoptionDTOs().get(0));
-
-		assertThat(actualAdoptionDTO).isEqualTo(expectedAdoptionDTO);
-	}
-
-	@Test
 	public void shouldReturnAdoptions() {
 		// Act
-		List<AdoptionDTO> actualAdoptionDTOs = this.adoptionDao.getAdoptionsByIds(Set.of(0,1));
+		List<AdoptionDTO> actualAdoptionDTOs = this.adoptionDao.getAdoptionsByIds(Set.of(0, 1));
 
 		// Assert
 		List<AdoptionDTO> expectedAdoptionDTOs = createAdoptionDTOs();

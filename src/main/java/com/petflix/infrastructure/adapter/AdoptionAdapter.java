@@ -30,26 +30,6 @@ public class AdoptionAdapter {
 		this.adoptionMapper = adoptionMapper;
 	}
 
-	public List<Adoption> getAllAdoptions() {
-		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAllAdoptions();
-		Set<Integer> animalsIds = adoptionDTOs.stream().map(AdoptionDTO::getAnimalId).collect(toSet());
-		Set<Integer> adoptersIds = adoptionDTOs.stream().map(AdoptionDTO::getAdopterId).collect(toSet());
-
-		List<Animal> animals = this.animalAdapter.getAnimalsByIds(animalsIds);
-		List<Adopter> adopters = this.adopterAdapter.getAdoptersByIds(adoptersIds);
-
-		return this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals);
-	}
-
-	public Adoption getAdoptionById(int id) {
-		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionById(id);
-
-		Animal animal = this.animalAdapter.getAnimalById(adoptionDTOs.get(0).getAnimalId());
-		Adopter adopter = this.adopterAdapter.getAdopterById(adoptionDTOs.get(0).getAdopterId());
-
-		return this.adoptionMapper.mapToDomain(adoptionDTOs.get(0), adopter, animal);
-	}
-
 	public List<Adoption> getAdoptionsByIds(Set<Integer> ids) {
 		List<AdoptionDTO> adoptionDTOs = this.adoptionDao.getAdoptionsByIds(ids);
 
@@ -61,4 +41,5 @@ public class AdoptionAdapter {
 
 		return this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals);
 	}
+
 }

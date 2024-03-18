@@ -37,38 +37,21 @@ class MemberAdapterTest {
 	}
 
 	@Test
-	public void shouldReturnAllCities() {
+	public void shouldReturnAllMembers() {
 		// Arrange
-		List<String> cities = List.of("Valenciennes", "Lille");
+		List<MemberDTO> memberDTOs = createMemberDTOs();
+		List<Member> members = createMembers();
 
-		when(this.memberDao.getAllCities()).thenReturn(cities);
-		when(this.memberMapper.mapCities(cities)).thenReturn(List.of(new MemberCity("Valenciennes"), new MemberCity("Lille")));
+		when(this.memberDao.getAllMembers()).thenReturn(memberDTOs);
+		when(this.memberMapper.mapAllToDomain(memberDTOs)).thenReturn(members);
 
 		// Act
-		List<MemberCity> actualCities = this.memberAdapter.getAllMembersCity();
+		List<Member> actualMembers = this.memberAdapter.getAllMembers();
 
 		// Assert
-		List<MemberCity> expectedCities = List.of(new MemberCity("Valenciennes"), new MemberCity("Lille"));
+		List<Member> expectedMembers = createMembers();
 
-		assertThat(actualCities).isEqualTo(expectedCities);
-	}
-
-	@Test
-	public void shouldReturnMemberById() {
-		// Arrange
-		MemberDTO memberDTO = createMemberDTOs().get(0);
-		Member member = createMembers().get(0);
-
-		when(this.memberDao.getMemberById(0)).thenReturn(List.of(memberDTO));
-		when(this.memberMapper.mapToDomain(memberDTO)).thenReturn(member);
-
-		// Act
-		Member actualMember = this.memberAdapter.getMemberById(0);
-
-		// Assert
-		Member expectedMember = createMembers().get(0);
-
-		assertThat(actualMember).isEqualTo(expectedMember);
+		assertThat(actualMembers).isEqualTo(expectedMembers);
 	}
 
 	@Test
@@ -87,6 +70,23 @@ class MemberAdapterTest {
 		List<Member> expectedMembers = createMembers();
 
 		assertThat(actualMembers).isEqualTo(expectedMembers);
+	}
+
+	@Test
+	public void shouldReturnAllCities() {
+		// Arrange
+		List<String> cities = List.of("Valenciennes", "Lille");
+
+		when(this.memberDao.getAllCities()).thenReturn(cities);
+		when(this.memberMapper.mapCities(cities)).thenReturn(List.of(new MemberCity("Valenciennes"), new MemberCity("Lille")));
+
+		// Act
+		List<MemberCity> actualCities = this.memberAdapter.getAllMembersCity();
+
+		// Assert
+		List<MemberCity> expectedCities = List.of(new MemberCity("Valenciennes"), new MemberCity("Lille"));
+
+		assertThat(actualCities).isEqualTo(expectedCities);
 	}
 
 	private static List<Member> createMembers() {
