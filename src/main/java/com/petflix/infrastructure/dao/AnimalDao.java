@@ -5,6 +5,7 @@ import com.petflix.infrastructure.dto.AnimalDTO;
 import com.petflix.infrastructure.dto.AnimalTypesByPresentationVideoIdDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.util.*;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Component
@@ -25,7 +25,7 @@ public class AnimalDao {
 	private final String GET_ALL_TYPES = "SELECT DISTINCT TYPE FROM ANIMAL;";
 	private final String GET_BY_TYPE_AND_CITY_BASE = "SELECT * FROM ANIMAL";
 	private final String GET_TYPE_GROUP_BY_PRESENTATION_VIDEO_ID = "SELECT PRESENTATION_VIDEO_ID, GROUP_CONCAT(DISTINCT TYPE) as ANIMAL_TYPES FROM ANIMAL WHERE PRESENTATION_VIDEO_ID IN (:ids) GROUP BY PRESENTATION_VIDEO_ID";
-	private final String SUBMIT_ANIMAL_BASE = "INSERT INTO ANIMAL ";
+	private final String INSERT_BASE = "INSERT INTO ANIMAL ";
 
 	public AnimalDao() {
 	}
@@ -86,11 +86,11 @@ public class AnimalDao {
 
 	public ActionSuccess submitAnimals(List<AnimalDTO> animalDTOs) {
 		Map<String, Object> parameters = new HashMap<>();
-		StringBuilder builder = new StringBuilder(SUBMIT_ANIMAL_BASE);
+		StringBuilder builder = new StringBuilder(INSERT_BASE);
 
 		builder.append("(");
 
-		if (animalDTOs.stream().noneMatch(animalDTO -> isNull(animalDTO.getId()))) {
+		if (animalDTOs.stream().anyMatch(animalDTO -> nonNull(animalDTO.getId()))) {
 			builder.append("ID, ");
 		}
 
@@ -103,7 +103,7 @@ public class AnimalDao {
 
 			if (nonNull(animalDTO.getId())) {
 				parameters.put("id" + animalIndex, animalDTO.getId());
-				builder.append(":id").append(animalIndex);
+				builder.append(":id").append(animalIndex).append(",");
 			}
 
 			parameters.put("name" + animalIndex, animalDTO.getName());
@@ -114,14 +114,14 @@ public class AnimalDao {
 			parameters.put("arrivalDate" + animalIndex, animalDTO.getArrivalDate());
 
 			builder
-				.append(", :name").append(animalIndex)
+				.append(":name").append(animalIndex)
 				.append(", :type").append(animalIndex)
 				.append(", :age").append(animalIndex)
 				.append(", :managingMember").append(animalIndex)
 				.append(", :presentationVideoId").append(animalIndex)
 				.append(", :arrivalDate").append(animalIndex);
 
-			if (animalIndex != animalDTOs.size() - 1) {
+			if (animalIndex != (animalDTOs.size() - 1)) {
 				builder.append("), ");
 			} else {
 				builder.append(");");
@@ -132,7 +132,7 @@ public class AnimalDao {
 			this.jdbcTemplate.update(builder.toString(), parameters);
 
 			return new ActionSuccess(true);
-		} catch (Exception e) {
+		} catch (DataAccessException e) {
 			return new ActionSuccess(false, Optional.of(e.getMessage()));
 		}
 	}

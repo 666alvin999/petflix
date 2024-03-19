@@ -41,6 +41,28 @@ class PresentationVideoAndAnimalsAndMemberPresentationMapperTest {
 		assertThat(actualPresentationVideoAndAnimalsAndMemberViewModel).isEqualTo(expectedPresentationVideoAndAnimalsAndMemberViewModel);
 	}
 
+	@Test
+	public void shouldMapViewModelToPresentationVideo() {
+	    // Act
+		PresentationVideo actualPresentationVideo = this.presentationVideoAndAnimalsAndMemberPresentationMapper.mapViewModelToPresentationVideo(createViewModel());
+
+	    // Assert
+		PresentationVideo expectedPresentationVideo = createPresentationVideo();
+
+		assertThat(actualPresentationVideo).isEqualTo(expectedPresentationVideo);
+	}
+
+	@Test
+	public void shouldMapViewModelToAnimals() {
+		// Act
+		List<Animal> actualAnimals = this.presentationVideoAndAnimalsAndMemberPresentationMapper.mapViewModelToAnimals(createViewModel());
+
+		// Assert
+		List<Animal> expectedAnimals = createAnimals();
+
+		assertThat(actualAnimals).isEqualTo(expectedAnimals);
+	}
+
 	private static PresentationVideoAndAnimalsAndMemberViewModel createViewModel() {
 		return new PresentationVideoAndAnimalsAndMemberViewModel(
 			new PresentationVideoViewModel(
@@ -78,7 +100,7 @@ class PresentationVideoAndAnimalsAndMemberPresentationMapperTest {
 
 		return List.of(
 			new Animal(
-				new Id(0),
+				new Id(null),
 				"Oslo",
 				new AnimalType("chat"),
 				3,
@@ -88,7 +110,7 @@ class PresentationVideoAndAnimalsAndMemberPresentationMapperTest {
 				false
 			),
 			new Animal(
-				new Id(1),
+				new Id(null),
 				"Uta",
 				new AnimalType("chat"),
 				1,

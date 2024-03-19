@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 public class AnimalDTO {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private String type;
 	private int age;
