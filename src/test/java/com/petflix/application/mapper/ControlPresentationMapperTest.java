@@ -13,25 +13,44 @@ import com.petflix.domain.bean.memberfield.MemberCity;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class ControlPresentationMapperTest {
 
 	private ControlPresentationMapper controlPresentationMapper;
 
+	@Mock
+	private AdopterPresentationMapper adopterPresentationMapper;
+
+	@Mock
+	private AnimalPresentationMapper animalPresentationMapper;
+
+	@Mock
+	private MemberPresentationMapper memberPresentationMapper;
+
+
 	@BeforeEach
 	public void setUp() {
-		this.controlPresentationMapper = new ControlPresentationMapper();
+		this.controlPresentationMapper = new ControlPresentationMapper(this.adopterPresentationMapper, this.animalPresentationMapper, this.memberPresentationMapper);
 	}
 
 	@Test
 	public void shouldMapToControlViewModel() {
 		// Arrange
 		Control control = createControls().get(0);
+
+		when(this.animalPresentationMapper.mapToViewModel(createAnimal())).thenReturn(createAnimalViewModel());
+		when(this.memberPresentationMapper.mapToViewModel(createMember())).thenReturn(createMemberViewModel());
+		when(this.adopterPresentationMapper.mapToViewModel(createAdopter())).thenReturn(createAdopterViewModel());
 
 		// Act
 		ControlViewModel actualControlViewModel = this.controlPresentationMapper.mapToViewModel(control);
@@ -45,42 +64,25 @@ class ControlPresentationMapperTest {
 	@Test
 	public void ShouldMapAllToControlViewModel() {
 		// Arrange
-		Control control = createControls().get(0);
+		List<Control> controls = createControls();
+
+		when(this.animalPresentationMapper.mapToViewModel(createAnimal())).thenReturn(createAnimalViewModel());
+		when(this.memberPresentationMapper.mapToViewModel(createMember())).thenReturn(createMemberViewModel());
+		when(this.adopterPresentationMapper.mapToViewModel(createAdopter())).thenReturn(createAdopterViewModel());
 
 		// Act
-		ControlViewModel actualControlViewModel = this.controlPresentationMapper.mapToViewModel(control);
+		List<ControlViewModel> actualControlViewModels = this.controlPresentationMapper.mapAllToViewModels(controls);
 
 		// Assert
-		ControlViewModel expectedControlViewModel = createControlViewModels().get(0);
+		List<ControlViewModel> expectedControlViewModels = createControlViewModels();
 
-		assertThat(actualControlViewModel).isEqualTo(expectedControlViewModel);
+		assertThat(actualControlViewModels).isEqualTo(expectedControlViewModels);
 	}
 
 	private static List<ControlViewModel> createControlViewModels() {
-		AnimalViewModel animal = new AnimalViewModel(
-			"Oslo",
-			"chat",
-			3,
-			"id1",
-			"2024-03-08",
-			true
-		);
-
-		MemberViewModel member = new MemberViewModel(
-			0,
-			"Citanimal",
-			"Asso",
-			"Valenciennes",
-			"citanimal@gmail.com",
-			"06XXXXXXXX"
-		);
-
-		AdopterViewModel adopter = new AdopterViewModel(
-			"Alvin",
-			"Hamaide",
-			"Valenciennes",
-			"alvin.hamaide@mail-ecv.fr"
-		);
+		AnimalViewModel animal = createAnimalViewModel();
+		MemberViewModel member = createMemberViewModel();
+		AdopterViewModel adopter = createAdopterViewModel();
 
 		return List.of(
 			new ControlViewModel(
@@ -95,61 +97,101 @@ class ControlPresentationMapperTest {
 				member,
 				adopter,
 				"2024-03-14",
-				"20224-09-14"
+				"2024-09-14"
 			)
 		);
 	}
 
-	private static List<Control> createControls() {
-		Member managingMember = new Member(
-			new Id(0),
-			new FirstName("Citanimal"),
-			new LastName("Asso"),
-			new MemberCity("Valenciennes"),
+	private static AdopterViewModel createAdopterViewModel() {
+		return new AdopterViewModel(
+			"Alvin",
+			"Hamaide",
+			"Valenciennes",
+			"alvin.hamaide@mail-ecv.fr"
+		);
+	}
+
+	private static AnimalViewModel createAnimalViewModel() {
+		return new AnimalViewModel(
+			"Oslo",
+			"chat",
+			3,
+			"id1",
+			"2024-03-08",
+			true
+		);
+	}
+
+	private static MemberViewModel createMemberViewModel() {
+		return new MemberViewModel(
+			0,
+			"Citanimal",
+			"Asso",
+			"Valenciennes",
 			"citanimal@gmail.com",
 			"06XXXXXXXX"
 		);
+	}
 
-		Animal animal = new Animal(
-			new Id(0),
-			"Oslo",
-			new AnimalType("chat"),
-			3,
-			new VideoId("id1"),
-			managingMember,
-			LocalDate.of(2024, 3, 8),
-			true
+	private static List<Control> createControls() {
+		return List.of(
+			new Control(
+				createAdoption().get(0),
+				LocalDate.of(2024, 8, 29)
+			),
+			new Control(
+				createAdoption().get(1),
+				LocalDate.of(2024, 9, 14)
+			)
 		);
+	}
 
-		Adopter adopter = new Adopter(
+	private static List<Adoption> createAdoption() {
+		return List.of(
+			new Adoption(
+				createAnimal(),
+				createAdopter(),
+				LocalDate.of(2024, 2, 29)
+			),
+			new Adoption(
+				createAnimal(),
+				createAdopter(),
+				LocalDate.of(2024, 3, 14)
+			)
+		);
+	}
+
+	private static Adopter createAdopter() {
+		return new Adopter(
 			new Id(0),
 			new FirstName("Alvin"),
 			new LastName("Hamaide"),
 			"Valenciennes",
 			"alvin.hamaide@mail-ecv.fr"
 		);
+	}
 
-		Adoption adoption1 = new Adoption(
-			animal,
-			adopter,
-			LocalDate.of(2024, 2, 29)
+	private static Animal createAnimal() {
+		return new Animal(
+			new Id(0),
+			"Oslo",
+			new AnimalType("chat"),
+			3,
+			new VideoId("id1"),
+			createMember(),
+			LocalDate.of(2024, 3, 8),
+			true
 		);
+	}
 
-		Adoption adoption2 = new Adoption(
-			animal,
-			adopter,
-			LocalDate.of(2024, 3, 14)
-		);
-
-		return List.of(
-			new Control(
-				adoption1,
-				LocalDate.of(2024, 8, 29)
-			),
-			new Control(
-				adoption2,
-				LocalDate.of(2024, 9, 14)
-			)
+	private static Member createMember() {
+		return new Member(
+			new Id(0),
+			new FirstName("Citanimal"),
+			new LastName("Asso"),
+			new MemberCity("Valenciennes"),
+			"citanimal@gmail.com",
+			"06XXXXXXXX"
 		);
 	}
 

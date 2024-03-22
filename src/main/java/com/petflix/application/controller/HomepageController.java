@@ -70,7 +70,7 @@ public class HomepageController {
 		Set<VideoId> presentationVideoIds = presentationVideos.stream().map(PresentationVideo::id).collect(toSet());
 		Map<VideoId, List<AnimalType>> animalTypesByPresentationVideoIds = this.getAnimalTypesByPresentationVideoIds.execute(presentationVideoIds);
 
-		List<PresentationVideoAndAnimalTypesViewModel> presentationVideoAndAnimalTypesViewModels = this.presentationVideoAndAnimalTypesPresentationMapper.mapAllToViewModel(presentationVideos, animalTypesByPresentationVideoIds);
+		List<PresentationVideoAndAnimalTypesViewModel> presentationVideoAndAnimalTypesViewModels = this.presentationVideoAndAnimalTypesPresentationMapper.mapAllToViewModels(presentationVideos, animalTypesByPresentationVideoIds);
 
 		return this.presentationVideoAndAnimalTypesPresenter.presentAll(presentationVideoAndAnimalTypesViewModels);
 	}

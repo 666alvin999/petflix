@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ControlPresentationMapperTest {
+class ControlMapperTest {
 
 	private ControlMapper controlMapper;
 

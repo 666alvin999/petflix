@@ -1,13 +1,11 @@
 package com.petflix.application.mapper;
 
-import com.petflix.application.dto.AdopterViewModel;
-import com.petflix.application.dto.AnimalViewModel;
 import com.petflix.application.dto.ControlViewModel;
-import com.petflix.application.dto.MemberViewModel;
 import com.petflix.domain.bean.Adopter;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.Control;
 import com.petflix.domain.bean.Member;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
@@ -18,40 +16,32 @@ public class ControlPresentationMapper {
 
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+	private final AdopterPresentationMapper adopterPresentationMapper;
+	private final AnimalPresentationMapper animalPresentationMapper;
+	private final MemberPresentationMapper memberPresentationMapper;
+
+	@Autowired
+	public ControlPresentationMapper(AdopterPresentationMapper adopterPresentationMapper, AnimalPresentationMapper animalPresentationMapper, MemberPresentationMapper memberPresentationMapper) {
+		this.adopterPresentationMapper = adopterPresentationMapper;
+		this.animalPresentationMapper = animalPresentationMapper;
+		this.memberPresentationMapper = memberPresentationMapper;
+	}
+
 	public ControlViewModel mapToViewModel(Control control) {
 		Animal animal = control.adoption().animal();
 		Member member = control.adoption().animal().managingMember();
 		Adopter adopter = control.adoption().adopter();
 
 		return new ControlViewModel(
-			new AnimalViewModel(
-				animal.name(),
-				animal.type().value(),
-				animal.age(),
-				animal.videoId().value(),
-				this.dateFormatter.format(animal.arrivalDate()),
-				animal.adopted()
-			),
-			new MemberViewModel(
-				member.id().value(),
-				member.firstName().value(),
-				member.lastName().value(),
-				member.city().value(),
-				member.mail(),
-				member.phone()
-			),
-			new AdopterViewModel(
-				adopter.firstName().value(),
-				adopter.lastName().value(),
-				adopter.address(),
-				adopter.mail()
-			),
+			this.animalPresentationMapper.mapToViewModel(animal),
+			this.memberPresentationMapper.mapToViewModel(member),
+			this.adopterPresentationMapper.mapToViewModel(adopter),
 			this.dateFormatter.format(control.adoption().date()),
 			this.dateFormatter.format(control.date())
 		);
 	}
 
-	public List<ControlViewModel> mapAllToViewModel(List<Control> controls) {
+	public List<ControlViewModel> mapAllToViewModels(List<Control> controls) {
 		return controls.stream().map(this::mapToViewModel).toList();
 	}
 

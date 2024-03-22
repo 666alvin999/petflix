@@ -34,7 +34,7 @@ class MemberPresentationMapperTest {
 	}
 
 	@Test
-	public void shouldMapAllToViewModels() {
+	public void shouldmapAllToViewModels() {
 		// Act
 		List<MemberViewModel> actualMemberViewModels = this.memberPresentationMapper.mapAllToViewModels(createMembers());
 
@@ -42,6 +42,17 @@ class MemberPresentationMapperTest {
 		List<MemberViewModel> expectedMemberViewModels = createMemberViewModels();
 
 		assertThat(actualMemberViewModels).isEqualTo(expectedMemberViewModels);
+	}
+
+	@Test
+	public void shouldMapToDomain() {
+		// Act
+		Member actualMember = this.memberPresentationMapper.mapToDomain(createMemberViewModels().get(0));
+
+		// Assert
+		Member expectedMember = createMembers().get(0);
+
+		assertThat(actualMember).isEqualTo(expectedMember);
 	}
 
 	private static List<Member> createMembers() {

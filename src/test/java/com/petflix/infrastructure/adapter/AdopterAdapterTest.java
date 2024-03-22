@@ -36,6 +36,25 @@ class AdopterAdapterTest {
 	}
 
 	@Test
+	public void shouldReturnAllAdopters() {
+		// Arrange
+		List<AdopterDTO> adopterDTOs = createAdopterDTOs();
+
+		List<Adopter> adopters = createAdopters();
+
+		when(this.adopterDao.getAllAdopters()).thenReturn(adopterDTOs);
+		when(this.adopterMapper.mapAllToDomain(adopterDTOs)).thenReturn(adopters);
+
+		// Act
+		List<Adopter> actualAdopters = this.adopterAdapter.getAllAdopters();
+
+		// Assert
+		List<Adopter> expectedAdopters = createAdopters();
+
+		assertThat(actualAdopters).isEqualTo(expectedAdopters);
+	}
+
+	@Test
 	public void shouldReturnAdoptersByIds() {
 		// Arrange
 		List<AdopterDTO> adopterDTOs = createAdopterDTOs();

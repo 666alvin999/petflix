@@ -1,34 +1,33 @@
 package com.petflix.application.mapper;
 
 import com.petflix.application.dto.PresentationVideoAndAnimalTypesViewModel;
-import com.petflix.application.dto.PresentationVideoViewModel;
 import com.petflix.domain.bean.PresentationVideo;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.presentationvideofields.VideoId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class PresentationVideoAndAnimalTypesPresentationMapper {
 
-	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	private final PresentationVideoPresentationMapper presentationVideoPresentationMapper;
+
+	@Autowired
+	public PresentationVideoAndAnimalTypesPresentationMapper(PresentationVideoPresentationMapper presentationVideoPresentationMapper) {
+		this.presentationVideoPresentationMapper = presentationVideoPresentationMapper;
+	}
 
 	public PresentationVideoAndAnimalTypesViewModel mapToViewModel(PresentationVideo presentationVideo, List<AnimalType> animalTypes) {
 		return new PresentationVideoAndAnimalTypesViewModel(
-			new PresentationVideoViewModel(
-				presentationVideo.id().value(),
-				presentationVideo.title(),
-				presentationVideo.description(),
-				this.dateFormatter.format(presentationVideo.uploadDate())
-			),
+			this.presentationVideoPresentationMapper.mapToViewModel(presentationVideo),
 			animalTypes.stream().map(AnimalType::value).toList()
 		);
 	}
 
-	public List<PresentationVideoAndAnimalTypesViewModel> mapAllToViewModel(List<PresentationVideo> presentationVideos, Map<VideoId, List<AnimalType>> animalTypesByPresentationVideoIds) {
+	public List<PresentationVideoAndAnimalTypesViewModel> mapAllToViewModels(List<PresentationVideo> presentationVideos, Map<VideoId, List<AnimalType>> animalTypesByPresentationVideoIds) {
 		return presentationVideos
 			.stream()
 			.map(

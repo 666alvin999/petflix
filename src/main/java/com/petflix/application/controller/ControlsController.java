@@ -34,7 +34,7 @@ public class ControlsController {
 	public ResponseEntity<String> getControls() {
 		List<Control> controls = this.getAllControls.execute();
 
-		return this.controlPresenter.presentAll(this.controlPresentationMapper.mapAllToViewModel(controls));
+		return this.controlPresenter.presentAll(this.controlPresentationMapper.mapAllToViewModels(controls));
 	}
 
 }
