@@ -26,4 +26,14 @@ public class AdopterMapper {
 		return adopterDTOs.stream().map(this::mapToDomain).toList();
 	}
 
+	public AdopterDTO mapToDTO(Adopter adopter) {
+		return new AdopterDTO(
+			adopter.id().value(),
+			adopter.firstName().value(),
+			adopter.lastName().value(),
+			adopter.address(),
+			adopter.mail()
+		);
+	}
+
 }

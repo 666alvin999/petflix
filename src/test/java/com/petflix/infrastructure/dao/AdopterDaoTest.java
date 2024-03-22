@@ -1,5 +1,6 @@
 package com.petflix.infrastructure.dao;
 
+import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.infrastructure.dto.AdopterDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
@@ -60,6 +61,26 @@ class AdopterDaoTest {
 		List<AdopterDTO> expectedAdopters = createAdopters();
 
 		assertThat(actualAdopters).isEqualTo(expectedAdopters);
+	}
+
+	@Test
+	public void shouldCreateAdopter() {
+	    // Arrange
+		AdopterDTO adopter = new AdopterDTO(
+			3,
+			"test",
+			"test",
+			"test",
+			"test"
+		);
+
+	    // Act
+		ActionSuccess actualActionSuccess = this.adopterDao.createAdopter(adopter);
+
+	    // Assert
+	    ActionSuccess expectedActionSuccess = new ActionSuccess(true);
+
+		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
 	private static List<AdopterDTO> createAdopters() {

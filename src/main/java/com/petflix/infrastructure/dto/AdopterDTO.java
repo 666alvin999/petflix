@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 public class AdopterDTO {
 
-	private int id;
+	private Integer id;
 	private String firstName;
 	private String lastName;
 	private String address;

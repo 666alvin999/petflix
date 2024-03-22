@@ -72,4 +72,6 @@ public class PresentationVideoDetailController {
 		return this.adopterPresenter.presentAll(adopterViewModels);
 	}
 
+
+
 }
