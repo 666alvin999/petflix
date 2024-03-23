@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 public class AdopterViewModel {
 
+	private Integer id;
 	private String firstName;
 	private String lastName;
 	private String address;

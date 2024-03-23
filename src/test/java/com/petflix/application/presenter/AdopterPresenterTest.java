@@ -30,18 +30,20 @@ class AdopterPresenterTest {
 	}
 
 	private static String createAllPresented() {
-		return "[{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},{\"firstName\":\"Martin\",\"lastName\":\"Matin\",\"address\":\"Lille\",\"mail\":\"martin.matin.@mail-ecv.fr\"}]";
+		return "[{\"id\":0,\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},{\"id\":1,\"firstName\":\"Martin\",\"lastName\":\"Matin\",\"address\":\"Lille\",\"mail\":\"martin.matin.@mail-ecv.fr\"}]";
 	}
 
 	private static List<AdopterViewModel> createViewModels() {
 		return List.of(
 			new AdopterViewModel(
+				0,
 				"Alvin",
 				"Hamaide",
 				"Valenciennes",
 				"alvin.hamaide@mail-ecv.fr"
 			),
 			new AdopterViewModel(
+				1,
 				"Martin",
 				"Matin",
 				"Lille",

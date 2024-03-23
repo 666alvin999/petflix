@@ -104,6 +104,7 @@ class ControlPresentationMapperTest {
 
 	private static AdopterViewModel createAdopterViewModel() {
 		return new AdopterViewModel(
+			0,
 			"Alvin",
 			"Hamaide",
 			"Valenciennes",

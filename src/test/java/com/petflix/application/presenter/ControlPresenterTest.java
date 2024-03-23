@@ -33,7 +33,7 @@ class ControlPresenterTest {
 	}
 
 	private static String createAllPresented() {
-		return "[{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"id\":0,\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-02-29\",\"controlDate\":\"2024-08-29\"},{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"id\":0,\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-03-14\",\"controlDate\":\"20224-09-14\"}]";
+		return "[{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"id\":0,\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"id\":0,\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-02-29\",\"controlDate\":\"2024-08-29\"},{\"animal\":{\"name\":\"Oslo\",\"type\":\"chat\",\"age\":3,\"presentationVideoId\":\"id1\",\"arrivalDate\":\"2024-03-08\",\"adopted\":true},\"member\":{\"id\":0,\"firstName\":\"Citanimal\",\"lastName\":\"Asso\",\"city\":\"Valenciennes\",\"mail\":\"citanimal@gmail.com\",\"phone\":\"06XXXXXXXX\"},\"adopter\":{\"id\":0,\"firstName\":\"Alvin\",\"lastName\":\"Hamaide\",\"address\":\"Valenciennes\",\"mail\":\"alvin.hamaide@mail-ecv.fr\"},\"adoptionDate\":\"2024-03-14\",\"controlDate\":\"20224-09-14\"}]";
 	}
 
 	private static List<ControlViewModel> createViewModels() {
@@ -56,6 +56,7 @@ class ControlPresenterTest {
 		);
 
 		AdopterViewModel adopter = new AdopterViewModel(
+			0,
 			"Alvin",
 			"Hamaide",
 			"Valenciennes",

@@ -11,6 +11,7 @@ public class AdopterPresentationMapper {
 
 	public AdopterViewModel mapToViewModel(Adopter adopter) {
 		return new AdopterViewModel(
+			adopter.id().value(),
 			adopter.firstName().value(),
 			adopter.lastName().value(),
 			adopter.address(),
