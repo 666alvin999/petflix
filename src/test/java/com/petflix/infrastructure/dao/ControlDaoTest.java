@@ -1,5 +1,6 @@
 package com.petflix.infrastructure.dao;
 
+import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.infrastructure.dto.ControlDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
@@ -51,6 +52,20 @@ class ControlDaoTest {
 		);
 
 		assertThat(actualControlDTOs).isEqualTo(expectedControlDTOs);
+	}
+
+	@Test
+	public void shouldCreateControl() {
+	    // Arrange
+	    ControlDTO controlDTO = new ControlDTO(2, "2024-03-22");
+
+	    // Act
+		ActionSuccess actualActionSuccess = this.controlDao.createControl(controlDTO);
+
+	    // Assert
+		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
+
+		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
 	@SneakyThrows

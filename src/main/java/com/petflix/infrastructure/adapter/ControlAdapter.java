@@ -1,5 +1,6 @@
 package com.petflix.infrastructure.adapter;
 
+import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.Adoption;
 import com.petflix.domain.bean.Control;
 import com.petflix.domain.port.ControlPort;
@@ -36,6 +37,13 @@ public class ControlAdapter implements ControlPort {
 		List<Adoption> adoptions = this.adoptionAdapter.getAdoptionsByIds(adoptionIds);
 
 		return this.controlMapper.mapAllToDomain(controlDTOs, adoptions);
+	}
+
+	@Override
+	public ActionSuccess createControl(Control control) {
+		ControlDTO controlDTO = this.controlMapper.mapToDTO(control);
+
+		return this.controlDao.createControl(controlDTO);
 	}
 
 }

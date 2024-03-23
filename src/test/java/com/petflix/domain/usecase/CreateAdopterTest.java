@@ -25,7 +25,7 @@ class CreateAdopterTest {
 
 	@BeforeEach
 	public void setUp() {
-		this.createAdopter = new CreateAdopter(adopterPort);
+		this.createAdopter = new CreateAdopter(this.adopterPort);
 	}
 
 	@Test

@@ -1,5 +1,6 @@
 package com.petflix.infrastructure.dao;
 
+import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.infrastructure.dto.AdoptionDTO;
 import com.petflix.utils.BasicDatabaseExtension;
 import com.petflix.utils.EzDatabase;
@@ -49,6 +50,20 @@ class AdoptionDaoTest {
 		List<AdoptionDTO> expectedAdoptionDTOs = createAdoptionDTOs();
 
 		assertThat(actualAdoptionDTOs).isEqualTo(expectedAdoptionDTOs);
+	}
+
+	@Test
+	public void shouldCreateAdoption() {
+	    // Arrange
+		AdoptionDTO adoptionDTO = new AdoptionDTO(2, 2, "2024-22-09");
+
+	    // Act
+		ActionSuccess actualActionSuccess = this.adoptionDao.createAdoption(adoptionDTO);
+
+	    // Assert
+		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
+
+		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
 	private static List<AdoptionDTO> createAdoptionDTOs() {

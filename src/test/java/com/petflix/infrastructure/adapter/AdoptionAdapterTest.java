@@ -1,9 +1,6 @@
 package com.petflix.infrastructure.adapter;
 
-import com.petflix.domain.bean.Adopter;
-import com.petflix.domain.bean.Adoption;
-import com.petflix.domain.bean.Animal;
-import com.petflix.domain.bean.Member;
+import com.petflix.domain.bean.*;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.FirstName;
 import com.petflix.domain.bean.generalfields.Id;
@@ -69,6 +66,24 @@ class AdoptionAdapterTest {
 		List<Adoption> expectedAdoptions = createAdoptions();
 
 		assertThat(actualAdoptions).isEqualTo(expectedAdoptions);
+	}
+
+	@Test
+	public void shouldCreateAdoption() {
+	    // Arrange
+		AdoptionDTO adoptionDTO = createAdoptionDTOs().get(0);
+		Adoption adoption = createAdoptions().get(0);
+
+		when(this.adoptionMapper.mapToDTO(adoption)).thenReturn(adoptionDTO);
+		when(this.adoptionDao.createAdoption(adoptionDTO)).thenReturn(new ActionSuccess(true));
+
+	    // Act
+		ActionSuccess actualActionSuccess = this.adoptionAdapter.createAdoption(adoption);
+
+	    // Assert
+		ActionSuccess expectedActionSuccess = new ActionSuccess(true);
+
+		assertThat(actualActionSuccess).isEqualTo(expectedActionSuccess);
 	}
 
 	private static List<Adoption> createAdoptions() {

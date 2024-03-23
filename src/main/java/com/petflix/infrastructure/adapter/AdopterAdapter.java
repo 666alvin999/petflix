@@ -24,6 +24,7 @@ public class AdopterAdapter implements AdopterPort {
 		this.adopterMapper = adopterMapper;
 	}
 
+	@Override
 	public List<Adopter> getAllAdopters() {
 		List<AdopterDTO> adopterDTOs = this.adopterDao.getAllAdopters();
 
@@ -36,6 +37,7 @@ public class AdopterAdapter implements AdopterPort {
 		return this.adopterMapper.mapAllToDomain(adopterDTOs);
 	}
 
+	@Override
 	public ActionSuccess createAdopter(Adopter adopter) {
 		AdopterDTO adopterDTO = this.adopterMapper.mapToDTO(adopter);
 

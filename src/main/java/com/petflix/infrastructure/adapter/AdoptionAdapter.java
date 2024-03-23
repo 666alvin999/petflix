@@ -1,8 +1,10 @@
 package com.petflix.infrastructure.adapter;
 
+import com.petflix.domain.bean.ActionSuccess;
 import com.petflix.domain.bean.Adopter;
 import com.petflix.domain.bean.Adoption;
 import com.petflix.domain.bean.Animal;
+import com.petflix.domain.port.AdoptionPort;
 import com.petflix.infrastructure.dao.AdoptionDao;
 import com.petflix.infrastructure.dto.AdoptionDTO;
 import com.petflix.infrastructure.mapper.AdoptionMapper;
@@ -15,7 +17,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 @Repository
-public class AdoptionAdapter {
+public class AdoptionAdapter implements AdoptionPort {
 
 	private final AdoptionDao adoptionDao;
 	private final AnimalAdapter animalAdapter;
@@ -40,6 +42,13 @@ public class AdoptionAdapter {
 		List<Adopter> adopters = this.adopterAdapter.getAdoptersByIds(adoptersIds);
 
 		return this.adoptionMapper.mapAllToDomain(adoptionDTOs, adopters, animals);
+	}
+
+	@Override
+	public ActionSuccess createAdoption(Adoption adoption) {
+		AdoptionDTO adoptionDTO = this.adoptionMapper.mapToDTO(adoption);
+
+		return this.adoptionDao.createAdoption(adoptionDTO);
 	}
 
 }
