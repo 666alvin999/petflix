@@ -2,7 +2,6 @@ package com.petflix.application.mapper;
 
 import com.petflix.application.dto.AnimalViewModel;
 import com.petflix.application.dto.MemberViewModel;
-import com.petflix.application.dto.PresentationVideoViewModel;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.animalfields.AnimalType;
 import com.petflix.domain.bean.generalfields.Id;
@@ -41,21 +40,21 @@ public class AnimalPresentationMapper {
 		return animals.stream().map(this::mapToViewModel).toList();
 	}
 
-	public Animal mapToDomain(AnimalViewModel animalViewModel, MemberViewModel memberViewModel, PresentationVideoViewModel presentationVideoViewModel) {
+	public Animal mapToDomain(AnimalViewModel animalViewModel, MemberViewModel memberViewModel) {
 		return new Animal(
 			new Id(null),
 			animalViewModel.getName(),
 			new AnimalType(animalViewModel.getType()),
 			animalViewModel.getAge(),
-			new VideoId(presentationVideoViewModel.getId()),
+			new VideoId(animalViewModel.getPresentationVideoId()),
 			this.memberPresentationMapper.mapToDomain(memberViewModel),
 			LocalDate.parse(animalViewModel.getArrivalDate(), this.dateFormatter),
 			false
 		);
 	}
 
-	public List<Animal> mapAllToDomain(List<AnimalViewModel> animals, MemberViewModel member, PresentationVideoViewModel presentationVideo) {
-		return animals.stream().map(animal -> this.mapToDomain(animal, member, presentationVideo)).toList();
+	public List<Animal> mapAllToDomain(List<AnimalViewModel> animals, MemberViewModel member) {
+		return animals.stream().map(animal -> this.mapToDomain(animal, member)).toList();
 	}
 
 }

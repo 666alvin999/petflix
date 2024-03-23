@@ -10,8 +10,8 @@ import lombok.*;
 @ToString
 public class AdoptionDTO {
 
-	private int animalId;
-	private int adopterId;
+	private Integer animalId;
+	private Integer adopterId;
 	private String adoptionDate;
 
 }

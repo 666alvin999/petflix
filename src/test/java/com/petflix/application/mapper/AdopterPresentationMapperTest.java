@@ -33,7 +33,7 @@ class AdopterPresentationMapperTest {
 	}
 
 	@Test
-	public void shouldmapAllToViewModels() {
+	public void shouldMapAllToViewModels() {
 		// Act
 		List<AdopterViewModel> actualAdopterViewModels = this.adopterPresentationMapper.mapAllToViewModels(List.of(createAdopter()));
 
@@ -41,6 +41,17 @@ class AdopterPresentationMapperTest {
 		List<AdopterViewModel> expectedAdopterViewModels = List.of(createAdopterViewModel());
 
 		assertThat(actualAdopterViewModels).isEqualTo(expectedAdopterViewModels);
+	}
+
+	@Test
+	public void shouldMapToDomain() {
+		// Act
+		Adopter actualAdopter = this.adopterPresentationMapper.mapToDomain(createAdopterViewModel());
+
+		// Assert
+		Adopter expectedAdopter = createAdopter();
+
+		assertThat(actualAdopter).isEqualTo(expectedAdopter);
 	}
 
 	private static AdopterViewModel createAdopterViewModel() {

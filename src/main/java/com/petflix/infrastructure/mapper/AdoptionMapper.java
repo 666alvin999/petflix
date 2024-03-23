@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @Component
 public class AdoptionMapper {
 
@@ -33,8 +35,9 @@ public class AdoptionMapper {
 	}
 
 	public AdoptionDTO mapToDTO(Adoption adoption) {
+
 		return new AdoptionDTO(
-			adoption.animal().id().value(),
+			nonNull(adoption.animal().id()) ? adoption.animal().id().value() : null,
 			adoption.adopter().id().value(),
 			this.dateFormatter.format(adoption.date())
 		);

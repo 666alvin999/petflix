@@ -62,8 +62,7 @@ public class PresentationVideoSubmitController {
 	public ResponseEntity<String> submit(@RequestBody PresentationVideoAndAnimalsAndMemberViewModel responseViewModel) {
 		List<Animal> animals = this.animalPresentationMapper.mapAllToDomain(
 			responseViewModel.getAnimals(),
-			responseViewModel.getMember(),
-			responseViewModel.getPresentationVideo()
+			responseViewModel.getMember()
 		);
 
 		PresentationVideo presentationVideo = this.presentationVideoPresentationMapper.mapToDomain(responseViewModel.getPresentationVideo());

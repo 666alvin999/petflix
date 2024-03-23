@@ -2,7 +2,6 @@ package com.petflix.application.mapper;
 
 import com.petflix.application.dto.AnimalViewModel;
 import com.petflix.application.dto.MemberViewModel;
-import com.petflix.application.dto.PresentationVideoViewModel;
 import com.petflix.domain.bean.Animal;
 import com.petflix.domain.bean.Member;
 import com.petflix.domain.bean.animalfields.AnimalType;
@@ -64,7 +63,7 @@ class AnimalPresentationMapperTest {
 		when(this.memberPresentationMapper.mapToDomain(createMemberViewModel())).thenReturn(createMember());
 
 	    // Act
-		Animal actualAnimal = this.animalPresentationMapper.mapToDomain(createAnimalViewModels().get(0), createMemberViewModel(), createPresentationVideoViewModel());
+		Animal actualAnimal = this.animalPresentationMapper.mapToDomain(createAnimalViewModels().get(0), createMemberViewModel());
 
 	    // Assert
 	    Animal expectedAnimal = createAnimals().get(0);
@@ -78,7 +77,7 @@ class AnimalPresentationMapperTest {
 		when(this.memberPresentationMapper.mapToDomain(createMemberViewModel())).thenReturn(createMember());
 
 		// Act
-		List<Animal> actualAnimals = this.animalPresentationMapper.mapAllToDomain(createAnimalViewModels(), createMemberViewModel(), createPresentationVideoViewModel());
+		List<Animal> actualAnimals = this.animalPresentationMapper.mapAllToDomain(createAnimalViewModels(), createMemberViewModel());
 
 		// Assert
 		List<Animal> expectedAnimals = createAnimals();
@@ -140,10 +139,6 @@ class AnimalPresentationMapperTest {
 			"alvin.hamaide@mail-ecv.fr",
 			"06XXXXXXXX"
 		);
-	}
-
-	private static PresentationVideoViewModel createPresentationVideoViewModel() {
-		return new PresentationVideoViewModel("id1", "title", "description", "2024-03-11");
 	}
 
 }
